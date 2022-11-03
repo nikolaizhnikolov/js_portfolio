@@ -3,19 +3,31 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    
+    margin: 0 100px;
+}
+
+.text {    
     font-family: "Roboto";
     font-size: 24px;
     font-weight: bold;
 }
 
-button {
+.intro {
+    text-align: center;
+    font-family: "Roboto";
+}
+
+.intro p {
+    font-size: 20px;
+}
+
+.buttons button {
     background: white;
     border: thick solid;
     margin: 16px;
 }
 
-button img {    
+.buttons button img {    
     width: 128px;
 }
 
@@ -30,4 +42,15 @@ button img {
     border-bottom: solid black;
     text-align: center;
     padding: 8px;
+}
+
+.newGameButton {
+    background: white;
+    border: 2px solid;
+    padding: 16px;
+    margin: 16px;
+    
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: bold;
 }

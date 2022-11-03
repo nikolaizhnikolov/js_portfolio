@@ -12,15 +12,22 @@ const GUESSES_MAP = {
 
 const RESULT_MAP = {
     0 : 'Draw',
-    1 : 'You win this round!',
-    2 : 'Computer wins this round!',
-    3 : 'You won, congratulations!!!',
-    4 : 'You lose, game over XXX'
+    1 : 'You win this round, pure luck!',
+    2 : 'Haha, I won, my skill is immense!',
+    3 : 'What, you won, impossible!!!',
+    4 : 'You lose, just as I planned!'
 }
 
 const playerScoreElement = document.querySelector('.result_player_value');
 const computerScoreElement = document.querySelector('.result_computer_value');
 const lastRoundElement = document.querySelector('.lastRound');
+
+const body = document.querySelector('body');
+const newGameButton = document.createElement('button');
+newGameButton.textContent = 'NEW GAME'
+newGameButton.classList.add('newGameButton')
+newGameButton.classList.add('text')
+newGameButton.addEventListener('click', resetGame)
 
 function updateScores() {
     playerScoreElement.textContent = playerScore;
@@ -28,16 +35,21 @@ function updateScores() {
 }
 
 function updateResult(resultValue) {
-    if(resultValue >= GAME_OVER_TRESHOLD)
-        gameOver = true
-    lastRoundElement.textContent = RESULT_MAP[resultValue]
+    if(resultValue >= GAME_OVER_TRESHOLD) {
+        gameOver = true;
+        body.append(newGameButton);
+    }
+
+    lastRoundElement.textContent = RESULT_MAP[resultValue];
 }
 
 function resetGame() {
-    playerScore = 0
-    computerScore = 0
     gameOver = false;
-    updateScores()
+    playerScore = 0;
+    computerScore = 0;
+    lastRoundElement.textContent = '';
+    body.removeChild(newGameButton);
+    updateScores();
 }
 
 function isGuessValid(playerGuess) {

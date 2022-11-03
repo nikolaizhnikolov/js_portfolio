@@ -10,22 +10,32 @@
     <script defer src="./rockPaperScissors.js"></script>
 </head>
 <body>
-    <div class="buttons">
-        <button onclick="playRound('rock')"><img src="../images/rock.jpg" alt="Rock"></button>    
-        <button onclick="playRound('paper')"><img src="../images/paper.jpg" alt="Paper"></button>
-        <button onclick="playRound('scissors')"><img src="../images/scissors.jpg" alt="scissors"></button>    
+    <div class="intro">
+        <h1>Rock Paper Scissors</h1>
+        <p>Should you dare to compete against my immense computational knowledge, we shall play to 5 points!</p>
     </div>
-    <div class="result">
+    <div class="buttons">
+        <button onclick="playRound('rock')">
+            <img src="../images/rock.jpg" alt="Rock">
+        </button>    
+        <button onclick="playRound('paper')">
+            <img src="../images/paper.jpg" alt="Paper">
+        </button>
+        <button onclick="playRound('scissors')">
+            <img src="../images/scissors.jpg" alt="Scissors">
+        </button>    
+    </div>
+    <div class="result text">
+        <div class="result_computer">
+            <span class="result_computer_label">Me:</span>
+            <span class="result_computer_value">0</span>
+        </div>
         <div class="result_player">
             <span class="result_player_label">You:</span>
             <span class="result_player_value">0</span>
         </div>
-        <div class="result_computer">
-            <span class="result_computer_label">PC:</span>
-            <span class="result_computer_value">0</span>
-        </div>
     </div>
-    <div class="lastRound">
+    <div class="lastRound text">
 
     </div>
 </body>
