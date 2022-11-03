@@ -3,6 +3,10 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: bold;
 }
 
 button {
@@ -18,8 +22,6 @@ button img {
 .result {
     display: flex;
     gap: 50px;
-    font-size: 24px;
-    font-weight: bold;
 }
 
 .lastRound {
