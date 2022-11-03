@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    background: white;
+    border: thick solid;
+    margin: 16px;
+}
+
+button img {    
+    width: 128px;
+}
+
+.result {
+    display: flex;
+    gap: 50px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.lastRound {
+    width: 50%;
+    border-top: solid black;
+    border-bottom: solid black;
+    text-align: center;
+    padding: 8px;
+}
