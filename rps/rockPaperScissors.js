@@ -18,16 +18,35 @@ const RESULT_MAP = {
     4 : 'You lose, just as I planned!'
 }
 
+const TURQUOISE = 'turquoise'
+const WHITE = 'white'
+const ORANGE = 'orange'
+
 const playerScoreElement = document.querySelector('.result_player_value');
 const computerScoreElement = document.querySelector('.result_computer_value');
 const lastRoundElement = document.querySelector('.lastRound');
 
-const body = document.querySelector('body');
+const playerScoreBlock = document.querySelector('.playerScoreBlock');
+const computerScoreBlock = document.querySelector('.computerScoreBlock');
+
+const content = document.querySelector('.content');
 const newGameButton = document.createElement('button');
 newGameButton.textContent = 'NEW GAME'
 newGameButton.classList.add('newGameButton')
 newGameButton.classList.add('text')
 newGameButton.addEventListener('click', resetGame)
+
+function updateScoreBlock() {
+    playerScoreBlock.children[value].style['background'] = TURQUOISE
+    computerScoreBlock.children[value].style['background'] = ORANGE
+}
+
+function resetScoreBlock() {
+    for(let i = 0; i < 5; i++) {
+        playerScoreBlock.children[i].style['background'] = WHITE
+        computerScoreBlock.children[i].style['background'] = WHITE
+    }
+}
 
 function updateScores() {
     playerScoreElement.textContent = playerScore;
@@ -37,7 +56,7 @@ function updateScores() {
 function updateResult(resultValue) {
     if(resultValue >= GAME_OVER_TRESHOLD) {
         gameOver = true;
-        body.append(newGameButton);
+        content.append(newGameButton);
     }
 
     lastRoundElement.textContent = RESULT_MAP[resultValue];
@@ -48,10 +67,15 @@ function resetGame() {
     playerScore = 0;
     computerScore = 0;
     lastRoundElement.textContent = '';
-    body.removeChild(newGameButton);
+    content.removeChild(newGameButton);
     updateScores();
+    resetScoreBlock();
 }
 
+/**
+ * Checks whether player input is valid.
+ * Technically not needed after using GUI
+ */
 function isGuessValid(playerGuess) {
     if( typeof playerGuess === 'string' && 
         playerGuess !== undefined &&
@@ -65,8 +89,34 @@ function isGuessValid(playerGuess) {
  * Generates a random number between 0 and 2 representing
  * rock, paper or scissors.
  */
-function generateComputerGuess() {
+function generateGuess() {
     return Math.floor(Math.random() * 3);
+}
+
+function incrementPlayerScore() {
+    playerScore++
+}
+
+function incrementComputerScore() {
+    computerScore++
+}
+
+function drawRound() {
+    updateResult(0)
+}
+
+function winRound() {
+    incrementPlayerScore();
+
+    if(playerScore === 5) updateResult(3)
+    else updateResult(1)
+}
+
+function loseRound() {
+    incrementComputerScore();
+
+    if(computerScore === 5) updateResult(4)
+    else updateResult(2)
 }
 
 /**
@@ -94,22 +144,19 @@ function playRound(playerGuess) {
     }
 
     // Generate random computer guess for this round
-    let computerGuess = generateComputerGuess(); 
+    let computerGuess = generateGuess(); 
     
     // Use numbers and calculate difference,
     // instead of comparing values individually as strings.
-    let diff = playerGuess - computerGuess
+    const difference = playerGuess - computerGuess
 
-    if(diff == 0){
-        updateResult(0)
-    } else if (diff == 1 || diff == -2) {
-        playerScore++
-        if(playerScore === 5) updateResult(3)
-        else updateResult(1)
+    // Increment scores and update GUI accordingly
+    if(difference == 0){
+        drawRound()
+    } else if (difference == 1 || difference == -2) {
+        winRound()
     } else {
-        computerScore++
-        if(computerScore === 5) updateResult(4)
-        else updateResult(2)
+        loseRound()
     }
 
     updateScores();
