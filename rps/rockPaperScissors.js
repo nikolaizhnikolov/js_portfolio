@@ -1,4 +1,4 @@
-// const visual = require('./visual_updates');
+// const visual = require("./visual_updates");
 
 let playerScore = 0;
 let computerScore = 0;
@@ -7,15 +7,15 @@ let gameOver = false;
 const GAME_OVER_TRESHOLD = 5;
 
 const GUESSES_MAP = {
-    'rock' : 0,
-    'paper' : 1,
-    'scissors' : 2
+    "rock" : 0,
+    "paper" : 1,
+    "scissors" : 2
 }
 
 function resetGame() {
-    gameOver = false;
     playerScore = 0;
     computerScore = 0;
+    gameOver = false;
 }
 
 /**
@@ -23,11 +23,12 @@ function resetGame() {
  * Technically not needed after using GUI
  */
 function isGuessValid(playerGuess) {
-    if( typeof playerGuess === 'string' && 
+    if( typeof playerGuess === "string" &&
         playerGuess !== undefined &&
-        playerGuess.toLowerCase() in GUESSES_MAP )
+        playerGuess.toLowerCase() in GUESSES_MAP ){
             return true;
-    
+        }
+
     return false;
 }
 
@@ -40,55 +41,58 @@ function generateGuess() {
 }
 
 function incrementPlayerScore() {
-    playerScore++
+    playerScore++;
 }
 
 function incrementComputerScore() {
-    computerScore++
+    computerScore++;
 }
 
 function drawRound() {
     // updateResult(0)
-    console.log('Draw')
+    console.log("Draw");
 }
 
 function winRound() {
     incrementPlayerScore();
-    console.log('win')
+    console.log("win");
 }
 
 function loseRound() {
     incrementComputerScore();
-    console.log('lose')
+    console.log("lose");
 }
 
-function evaluateResult() {
-    if(playerScore === GAME_OVER_TRESHOLD)
+function evaluteGameState() {
+    if(playerScore === GAME_OVER_TRESHOLD) {
         // Update visual elements
         gameOver = true;
-    else if(computerScore === GAME_OVER_TRESHOLD)
+    }
+    else if(computerScore === GAME_OVER_TRESHOLD) {
         // Update visual elements
         gameOver = true;
+    }
 }
 
 /**
  * Simulates a played round of RPS using numbers.
- * Logic: if the difference is 1 or -2, then the player has picked the stronger item. 
- * 
+ * Logic: if the difference is 1 or -2,
+ * then the player has picked the stronger item.
+ *
  *      Rock = 0, Paper = 1, Scissors = 2
- * 
+ *
  *      Paper - Rock = 1
  *      Scissors - Paper = 1
  *      Rock - Scissors = -2
- * 
+ *
  */
 function playRound(playerGuess) {
-    // Don't play if somebody has already won
+    // Don"t play if somebody has already won
     if (gameOver) return;
 
     // Check validity
     if ( ! isGuessValid(playerGuess)) {
-        console.log('Invalid guess! Please only use \'Rock\', \'Paper\' or \'Scissors\'.')
+        console.log("Invalid guess! Please only use \"Rock\", \"Paper\" or \"Scissors\".")
         return;
     } else {
         // Else set guess to numerical value
@@ -96,8 +100,8 @@ function playRound(playerGuess) {
     }
 
     // Generate random computer guess for this round
-    let computerGuess = generateGuess(); 
-    
+    const computerGuess = generateGuess();
+
     // Use numbers and calculate difference,
     // instead of comparing values individually as strings.
     const difference = playerGuess - computerGuess;
@@ -110,7 +114,6 @@ function playRound(playerGuess) {
     } else {
         loseRound();
     }
-    console.log(playerScore + " " + computerScore)
 
-    evaluateResult();
+    evaluteGameState();
 }
