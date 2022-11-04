@@ -1,8 +1,10 @@
+// const visual = require('./visual_updates');
+
 let playerScore = 0;
 let computerScore = 0;
 let gameOver = false;
 
-const GAME_OVER_TRESHOLD = 3;
+const GAME_OVER_TRESHOLD = 5;
 
 const GUESSES_MAP = {
     'rock' : 0,
@@ -10,66 +12,10 @@ const GUESSES_MAP = {
     'scissors' : 2
 }
 
-const RESULT_MAP = {
-    0 : 'Draw',
-    1 : 'You win this round, pure luck!',
-    2 : 'Haha, I won, my skill is immense!',
-    3 : 'What, you won, impossible!!!',
-    4 : 'You lose, just as I planned!'
-}
-
-const TURQUOISE = 'turquoise'
-const WHITE = 'white'
-const ORANGE = 'orange'
-
-const playerScoreElement = document.querySelector('.result_player_value');
-const computerScoreElement = document.querySelector('.result_computer_value');
-const lastRoundElement = document.querySelector('.lastRound');
-
-const playerScoreBlock = document.querySelector('.playerScoreBlock');
-const computerScoreBlock = document.querySelector('.computerScoreBlock');
-
-const content = document.querySelector('.content');
-const newGameButton = document.createElement('button');
-newGameButton.textContent = 'NEW GAME'
-newGameButton.classList.add('newGameButton')
-newGameButton.classList.add('text')
-newGameButton.addEventListener('click', resetGame)
-
-function updateScoreBlock() {
-    playerScoreBlock.children[value].style['background'] = TURQUOISE
-    computerScoreBlock.children[value].style['background'] = ORANGE
-}
-
-function resetScoreBlock() {
-    for(let i = 0; i < 5; i++) {
-        playerScoreBlock.children[i].style['background'] = WHITE
-        computerScoreBlock.children[i].style['background'] = WHITE
-    }
-}
-
-function updateScores() {
-    playerScoreElement.textContent = playerScore;
-    computerScoreElement.textContent = computerScore;
-}
-
-function updateResult(resultValue) {
-    if(resultValue >= GAME_OVER_TRESHOLD) {
-        gameOver = true;
-        content.append(newGameButton);
-    }
-
-    lastRoundElement.textContent = RESULT_MAP[resultValue];
-}
-
 function resetGame() {
     gameOver = false;
     playerScore = 0;
     computerScore = 0;
-    lastRoundElement.textContent = '';
-    content.removeChild(newGameButton);
-    updateScores();
-    resetScoreBlock();
 }
 
 /**
@@ -102,21 +48,27 @@ function incrementComputerScore() {
 }
 
 function drawRound() {
-    updateResult(0)
+    // updateResult(0)
+    console.log('Draw')
 }
 
 function winRound() {
     incrementPlayerScore();
-
-    if(playerScore === 5) updateResult(3)
-    else updateResult(1)
+    console.log('win')
 }
 
 function loseRound() {
     incrementComputerScore();
+    console.log('lose')
+}
 
-    if(computerScore === 5) updateResult(4)
-    else updateResult(2)
+function evaluateResult() {
+    if(playerScore === GAME_OVER_TRESHOLD)
+        // Update visual elements
+        gameOver = true;
+    else if(computerScore === GAME_OVER_TRESHOLD)
+        // Update visual elements
+        gameOver = true;
 }
 
 /**
@@ -148,16 +100,17 @@ function playRound(playerGuess) {
     
     // Use numbers and calculate difference,
     // instead of comparing values individually as strings.
-    const difference = playerGuess - computerGuess
+    const difference = playerGuess - computerGuess;
 
     // Increment scores and update GUI accordingly
     if(difference == 0){
-        drawRound()
+        drawRound();
     } else if (difference == 1 || difference == -2) {
-        winRound()
+        winRound();
     } else {
-        loseRound()
+        loseRound();
     }
+    console.log(playerScore + " " + computerScore)
 
-    updateScores();
+    evaluateResult();
 }
