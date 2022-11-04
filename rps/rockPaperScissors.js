@@ -1,5 +1,3 @@
-// const visual = require("./visual_updates");
-
 let playerScore = 0;
 let computerScore = 0;
 let gameOver = false;
@@ -16,6 +14,7 @@ function resetGame() {
     playerScore = 0;
     computerScore = 0;
     gameOver = false;
+    resetVisualElements();
 }
 
 /**
@@ -49,23 +48,21 @@ function incrementComputerScore() {
 }
 
 function drawRound() {
-    // updateResult(0)
-    console.log("Draw");
+    updateVisualElements("draw");
 }
 
 function winRound() {
     incrementPlayerScore();
-    console.log("win");
+    updateVisualElements("player");
 }
 
 function loseRound() {
     incrementComputerScore();
-    console.log("lose");
+    updateVisualElements("computer");
 }
 
 function evaluteGameState() {
     if(playerScore === GAME_OVER_TRESHOLD) {
-        // Update visual elements
         gameOver = true;
     }
     else if(computerScore === GAME_OVER_TRESHOLD) {
