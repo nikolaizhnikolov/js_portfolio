@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+/* USING GRID*/
+.content {
+    display: grid;
+    grid-template-columns: repeat(16, 4%);
+    grid-template-rows: repeat(16, 4%);
+    gap: 5px 5px;
+
+    justify-content: space-around;
+}
+
+.block {
+    
+    box-sizing: border-box;
+    border: solid thin black;
+
+    text-align: center;
+
+    /* USING FLOAT/INLINE-BLOCK*/ 
+    /* width: 4%;
+    height: 40px;
+    margin: 1.125%; */
+
+    /* USING FLOAT */   
+    /* float: left; */
+    
+    /* USING INLINE-BLOCK */
+    /* display: inline-block; */
+
+    /* USING FLEX */
+    /* I didnt like it */
+}
