@@ -3,8 +3,18 @@ body {
     padding: 0;
 }
 
+.content {
+    border: solid black;
+}
+
 .block {
     display: inline-block;
+    width: 6%;
+    height: 30px;
+    margin: 0.125%;
+
+    text-align: center;
+    /* display: inline-block;
     width: 5%;
     height: auto;
     margin: 0.625%;
@@ -12,7 +22,7 @@ body {
     box-sizing: border-box;
     border: solid thin black;
 
-    text-align: center;
+    text-align: center; */
 }
 
 .block__hover {
