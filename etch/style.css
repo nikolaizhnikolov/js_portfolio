@@ -7,28 +7,32 @@ body {
     padding: 20px;
 }
 
+.resizeButton {
+    background-color: turquoise;
+    font-size: 20px;
+    font-weight: bold;
+    
+    margin: 8px;
+    padding: 16px;
+    
+    border: solid black;
+    border-radius: 10px;
+}
+
 .content {
     width: 640px;
-    height: 640px;
+    height: 480px;
     border: solid black;
 }
 
 .block {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: 0.125%;
+    width: 20px;
+    height: 20px;
 
     text-align: center;
-    /* display: inline-block;
-    width: 5%;
-    height: auto;
-    margin: 0.625%;
-    
-    box-sizing: border-box;
-    border: solid thin black;
-
-    text-align: center; */
+    background-color: black;
+    opacity: 0.0;
 }
 
 .block__hover {
