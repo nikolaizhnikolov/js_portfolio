@@ -1,5 +1,4 @@
 const content = document.querySelector(".content");
-const resizeButton = document.querySelector(".resizeButton");
 
 const DEFAULT_GRID_SIZE = 16; 
 
@@ -10,9 +9,21 @@ const OPACITY_STEP = 0.2;
 
 const PX = "px";
 
-resizeButton.addEventListener('click', () => {
-    resizeGrid(prompt("New Grid Size:"));
-})
+let mousePressed = false;
+
+function init(){ 
+    const resizeButton = document.querySelector(".resizeButton");    
+    resizeButton.addEventListener('click', () => {
+        resizeGrid(prompt("New Grid Size:"));
+    })
+
+    const body = document.querySelector("body");
+    body.addEventListener('mousedown', () => mousePressed = true);
+    body.addEventListener('mouseup', () => mousePressed = false);
+
+    resizeGrid(DEFAULT_GRID_SIZE);
+}
+init();
 
 function resizeGrid(gridSize) {
     if(gridSize === null) return;
@@ -34,8 +45,10 @@ function createBlock(gridSize) {
     div.classList.add("block");
     div.style.width = CONTENT_WIDTH / gridSize + PX;
     div.style.height = CONTENT_HEIGHT / gridSize + PX;
-    div.addEventListener('mouseenter', () => {
-        div.style.opacity = Number(div.style.opacity) + OPACITY_STEP;
+    div.addEventListener('mouseover', () => {
+        if(mousePressed) {
+            div.style.opacity = Number(div.style.opacity) + OPACITY_STEP;
+        }        
     });
     return div;
 }
@@ -45,5 +58,3 @@ function removeBlocks() {
         content.removeChild(content.lastChild);
     }
 }
-
-resizeGrid(DEFAULT_GRID_SIZE);
