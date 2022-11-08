@@ -27,14 +27,7 @@ body {
 
 .block {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-
     text-align: center;
     background-color: black;
     opacity: 0.0;
-}
-
-.block__hover {
-    background-color: turquoise;
 }
