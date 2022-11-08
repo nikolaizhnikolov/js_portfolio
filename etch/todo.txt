@@ -1,0 +1,9 @@
+Change header to slider
+Add erase and LGBTQ mode :D
+Style it better.
+ - Change content border to shadow-throwing background instead.
+Something else?
+
+Icon:
+increase white space;
+Space out corners;
