@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">    
     <script src="./etch.js" defer></script>
 </head>
-<body>
-    <button class="resizeButton">Change Grid Size</button>
-    <p>Default: 16x16</p>
+<body onload="init()">
+    <div class="menu">
+        <button class="resizeButton">Grid Size</button>
+        <div class="slider">
+            <input type="range" min="1" max="100" value="16" class="slider_input"/>
+            <p class="slider_label">16x16</p>
+        </div>
+    </div>
     <div class="content">
 
     </div>
