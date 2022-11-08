@@ -14,3 +14,7 @@ body {
 
     text-align: center;
 }
+
+.block__hover {
+    background-color: turquoise;
+}
