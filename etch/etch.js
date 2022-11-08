@@ -1,20 +1,40 @@
 const content = document.querySelector(".content");
-const GRID_SIZE = 16;
+const resizeButton = document.querySelector(".resizeButton");
+
+resizeButton.addEventListener('click', () => {
+    resizeGrid(prompt("New Grid Size:"));
+})
 
 function paint(event) {
     console.log(event.srcElement.classList.add("block__hover"));
 }
 
-function createBlocks() {
+function removeBlocks() {
+    while(content.childElementCount > 0) {
+        content.removeChild(content.lastChild);
+    }
+}
 
-    for (let i = 0; i < GRID_SIZE; i++) {
-        for (let j = 0; j < GRID_SIZE; j++) {
-            const div = document.createElement("div");
-            div.classList.add("block");
-            div.addEventListener('mouseenter', paint);
-            content.appendChild(div);
+function createBlock() {
+    const div = document.createElement("div");
+    div.classList.add("block");
+    div.addEventListener('mouseenter', paint);
+    return div;
+}
+
+function createBlocks(gridSize) {
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            content.appendChild(createBlock());
         }
     }
 }
 
-createBlocks();
+function resizeGrid(gridSize) {
+    if(gridSize === null) return;
+
+    removeBlocks();
+    createBlocks(gridSize);    
+}
+
+resizeGrid(16);
