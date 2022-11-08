@@ -1,6 +1,8 @@
 const content = document.querySelector(".content");
 const resizeButton = document.querySelector(".resizeButton");
 
+const DEFAULT_GRID_SIZE = 16; 
+
 const CONTENT_WIDTH = 640;
 const CONTENT_HEIGHT = 480;
 
@@ -44,4 +46,4 @@ function removeBlocks() {
     }
 }
 
-resizeGrid(4);
+resizeGrid(DEFAULT_GRID_SIZE);
