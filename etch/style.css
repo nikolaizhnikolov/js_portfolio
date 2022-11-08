@@ -26,7 +26,7 @@ body {
 }
 
 .block {
-    display: inline-block;
+    float: left;
     text-align: center;
     background-color: black;
     opacity: 0.0;
