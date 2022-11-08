@@ -1,5 +1,10 @@
-Change header to slider
-Add erase and Rainbow Mode
+Add modes
+ - color pick mode
+ - eraser mode (maybe add on right click?)
+ - rainbow mode
+ - mode strength (opacity)
+
 Style it better.
+ - Add body color
  - Change content border to shadow-throwing background instead.
-Something else?
+ - add footer.
