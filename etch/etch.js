@@ -44,4 +44,4 @@ function removeBlocks() {
     }
 }
 
-resizeGrid(2);
+resizeGrid(4);
