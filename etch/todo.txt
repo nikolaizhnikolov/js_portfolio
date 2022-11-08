@@ -8,3 +8,7 @@ Style it better.
  - Add body color
  - Change content border to shadow-throwing background instead.
  - add footer.
+
+Add Indexing to Main TOP_Projects page
+ - Make it public.
+ - Push it to github pages.
