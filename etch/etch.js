@@ -14,8 +14,8 @@ function init(){
     body.addEventListener('mousedown', () => mousePressed = true);
     body.addEventListener('mouseup', () => mousePressed = false);
 
-    const slider = document.querySelector(".slider_input");  
-    const label = document.querySelector(".slider_label");
+    const slider = document.querySelector(".slider__input");  
+    const label = document.querySelector(".slider__label");
 
     slider.addEventListener('input', () => {
         label.innerHTML = `${slider.value}x${slider.value}`;
@@ -40,8 +40,8 @@ function createBlocks(gridSize) {
     }
 }
 
-function increaseElementOpacity() {
-    this.style.opacity = Number(this.style.opacity) + OPACITY_STEP;
+function paint(element) {
+    element.style.opacity = Number(element.style.opacity) + OPACITY_STEP;
 }
 
 function createBlock(gridSize) {
@@ -50,9 +50,9 @@ function createBlock(gridSize) {
     div.style.width = CONTENT_WIDTH / gridSize + PX;
     div.style.height = CONTENT_HEIGHT / gridSize + PX;
 
-    div.addEventListener('mousedown', () => increaseElementOpacity);
+    div.addEventListener('mousedown', () => paint(div));
     div.addEventListener('mouseover', () => {
-        if(mousePressed) div.style.opacity = Number(div.style.opacity) + OPACITY_STEP;
+        if(mousePressed) paint(div)
     });
 
     return div;

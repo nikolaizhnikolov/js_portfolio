@@ -16,7 +16,25 @@ body {
     align-items: center;
 }
 
-.resizeButton {
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings__opacity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* .resizeButton {
     background-color: turquoise;
     font-size: 20px;
     font-weight: bold;
@@ -26,7 +44,7 @@ body {
     
     border: solid black;
     border-radius: 10px;
-}
+} */
 
 .slider {
     display: flex;

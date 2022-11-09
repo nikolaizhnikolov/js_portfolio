@@ -1,8 +1,7 @@
-Add modes
- - color pick mode
- - eraser mode (maybe add on right click?)
- - rainbow mode
+Style modes
+ - Circle color picker instead of default one.
  - mode strength (opacity)
+ - Brush, Eraser and Rainbow instead of mode names.
 
 Style it better.
  - Add body color

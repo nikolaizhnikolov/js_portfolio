@@ -12,10 +12,21 @@
 </head>
 <body onload="init()">
     <div class="menu">
-        <button class="resizeButton">Grid Size</button>
+        <div class="settings">
+            <input class="settings__color" type="color" value="#000000">
+            <div class="settings__opacity">
+                <button class="settings__opacity__increment">+</button>
+                <button class="settings__opacity__decrement">-</button>
+            </div>
+        </div>
+        <div class="modes">
+            <button class="modes__brush">Brush</button>
+            <button class="modes__eraser">Eraser</button>
+            <button class="modes__rainbow">Rainbow</button>
+        </div>
         <div class="slider">
-            <input type="range" min="1" max="100" value="16" class="slider_input"/>
-            <p class="slider_label">16x16</p>
+            <input type="range" min="1" max="100" value="16" class="slider__input"/>
+            <p class="slider__label">16x16</p>
         </div>
     </div>
     <div class="content">
