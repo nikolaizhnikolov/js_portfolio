@@ -19,7 +19,7 @@ function init(){
     const colorPicker = document.querySelector(".settings__color");
     colorPicker.addEventListener('change', () => color = colorPicker.value);
 
-    const slider = document.querySelector(".slider__input");
+    const slider = document.querySelector(".slider__value");
     const label = document.querySelector(".slider__label");
     slider.addEventListener("input", () => {
         label.innerHTML = `${slider.value}x${slider.value}`;
