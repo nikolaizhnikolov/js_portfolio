@@ -6,6 +6,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 20px;
+    background-color: paleturquoise;
 
     font-family: 'Roboto';
 }
@@ -22,18 +23,24 @@ body {
     align-items: center;
 }
 
-.settings__color{    
+
+.settings__colorWrapper {
     width: 50px;
     height: 50px;
-    border: none;
-    background: none;
+    border-radius: 25px;
+    background-color: black;
+    cursor: pointer;
+}
+
+.settings__color{    
+    opacity: 0;
 }
 
 .settings__opacity {
     height: 30px;
 }
 
-.settings__opacity_slider {
+.settings__opacity {
     appearance: none; /* Override default look */
     background-image: linear-gradient(to right, white, black);
     height: 10px;
@@ -41,15 +48,15 @@ body {
 }
 
 /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
-.settings__opacity_slider::-webkit-slider-thumb {
+.settings__opacity::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
 
     width: 20px;
     height: 20px; 
-    background: black;
-
     border-radius: 10px;
+
+    background: black;
     cursor: pointer;
   }
 
@@ -80,6 +87,7 @@ body {
 .content {
     width: 640px;
     height: 480px;
+    background-color: white;
     border: solid black;
 }
 

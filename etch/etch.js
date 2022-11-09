@@ -19,10 +19,12 @@ function init(){
     body.addEventListener("mousedown", () => mousePressed = true);
     body.addEventListener("mouseup", () => mousePressed = false);
 
+    const colorWrapper = document.querySelector(".settings__colorWrapper");
     const colorPicker = document.querySelector(".settings__color");
-    const opacitySlider = document.querySelector(".settings__opacity_slider");
+    const opacitySlider = document.querySelector(".settings__opacity");
     colorPicker.addEventListener("input", () => {
         color = colorPicker.value;
+        colorWrapper.style.backgroundColor = color;
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
 
