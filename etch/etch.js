@@ -1,22 +1,26 @@
 const content = document.querySelector(".content");
 
 const DEFAULT_GRID_SIZE = 16;
+const OPACITY_STEP = 0.2;
+
 const CONTENT_WIDTH = 640;
 const CONTENT_HEIGHT = 480;
-const OPACITY_STEP = 0.2;
 
 const PX = "px";
 
 let mousePressed = false;
+let color = "#000000";
 
 function init(){
     const body = document.querySelector("body");
     body.addEventListener("mousedown", () => mousePressed = true);
     body.addEventListener("mouseup", () => mousePressed = false);
 
+    const colorPicker = document.querySelector(".settings__color");
+    colorPicker.addEventListener('change', () => color = colorPicker.value);
+
     const slider = document.querySelector(".slider__input");
     const label = document.querySelector(".slider__label");
-
     slider.addEventListener("input", () => {
         label.innerHTML = `${slider.value}x${slider.value}`;
     });
@@ -43,6 +47,7 @@ function createBlocks(gridSize) {
 }
 
 function paint(element) {
+    element.style.backgroundColor = color;
     element.style.opacity = Number(element.style.opacity) + OPACITY_STEP;
 }
 
