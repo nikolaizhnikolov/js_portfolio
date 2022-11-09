@@ -23,9 +23,10 @@ body {
 }
 
 .settings__opacity {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* writing-mode: bt-lr;  IE */
+    /* -webkit-appearance: slider-vertical; Chromium */
+    /* appearance: auto; */ 
+    transform: rotate(270deg);
 }
 
 .modes {
