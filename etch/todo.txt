@@ -1,6 +1,8 @@
 Style modes
  - Circle color picker instead of default one.
- - mode strength (opacity)
+ - Have opacity slider gradient the current chosen color.
+ -- Dot in the middle should be the color with the chosen opacity.
+ -- Slider should be vertical.
  - Brush, Eraser and Rainbow instead of mode names.
 
 Style it better.
