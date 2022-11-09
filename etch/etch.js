@@ -1,6 +1,6 @@
 const content = document.querySelector(".content");
 
-const DEFAULT_GRID_SIZE = 16; 
+const DEFAULT_GRID_SIZE = 16;
 const CONTENT_WIDTH = 640;
 const CONTENT_HEIGHT = 480;
 const OPACITY_STEP = 0.2;
@@ -9,32 +9,34 @@ const PX = "px";
 
 let mousePressed = false;
 
-function init(){ 
+function init(){
     const body = document.querySelector("body");
-    body.addEventListener('mousedown', () => mousePressed = true);
-    body.addEventListener('mouseup', () => mousePressed = false);
+    body.addEventListener("mousedown", () => mousePressed = true);
+    body.addEventListener("mouseup", () => mousePressed = false);
 
-    const slider = document.querySelector(".slider__input");  
+    const slider = document.querySelector(".slider__input");
     const label = document.querySelector(".slider__label");
 
-    slider.addEventListener('input', () => {
+    slider.addEventListener("input", () => {
         label.innerHTML = `${slider.value}x${slider.value}`;
     });
-    slider.addEventListener('change', () => resizeGrid(slider.value));
+    slider.addEventListener("change", () => resizeGrid(slider.value));
 
     resizeGrid(DEFAULT_GRID_SIZE);
 }
 
 function resizeGrid(gridSize) {
-    if(gridSize === null) return;
+    if(gridSize === null) {
+        return;
+    }
 
     removeBlocks();
-    createBlocks(gridSize);    
+    createBlocks(gridSize);
 }
 
 function createBlocks(gridSize) {
-    for (let i = 0; i < gridSize; i++) {
-        for (let j = 0; j < gridSize; j++) {
+    for (let i = 0; i < gridSize; i+=1) {
+        for (let j = 0; j < gridSize; j+=1) {
             content.appendChild(createBlock(gridSize));
         }
     }
@@ -50,8 +52,8 @@ function createBlock(gridSize) {
     div.style.width = CONTENT_WIDTH / gridSize + PX;
     div.style.height = CONTENT_HEIGHT / gridSize + PX;
 
-    div.addEventListener('mousedown', () => paint(div));
-    div.addEventListener('mouseover', () => {
+    div.addEventListener("mousedown", () => paint(div));
+    div.addEventListener("mouseover", () => {
         if(mousePressed) paint(div)
     });
 
