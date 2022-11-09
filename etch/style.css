@@ -30,11 +30,28 @@ body {
 }
 
 .settings__opacity {
-    appearance: none;
+    height: 30px;
+}
+
+.settings__opacity_slider {
+    appearance: none; /* Override default look */
     background-image: linear-gradient(to right, white, black);
     height: 10px;
     border-radius: 5px;
 }
+
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+.settings__opacity_slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+
+    width: 20px;
+    height: 20px; 
+    background: black;
+
+    border-radius: 10px;
+    cursor: pointer;
+  }
 
 .modes {
     display: flex;

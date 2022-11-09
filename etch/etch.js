@@ -7,6 +7,9 @@ const CONTENT_WIDTH = 640;
 const CONTENT_HEIGHT = 480;
 
 const PX = "px";
+const linearGradient = function(c) {
+    return `linear-gradient(to right, white, ${c})`;
+};
 
 let mousePressed = false;
 let color = "#000000";
@@ -17,7 +20,11 @@ function init(){
     body.addEventListener("mouseup", () => mousePressed = false);
 
     const colorPicker = document.querySelector(".settings__color");
-    colorPicker.addEventListener('change', () => color = colorPicker.value);
+    const opacitySlider = document.querySelector(".settings__opacity_slider");
+    colorPicker.addEventListener("input", () => {
+        color = colorPicker.value;
+        opacitySlider.style.backgroundImage = linearGradient(color);
+    });
 
     const slider = document.querySelector(".slider__value");
     const label = document.querySelector(".slider__label");
