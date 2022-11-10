@@ -36,6 +36,12 @@ body {
     opacity: 0;
 }
 
+.settings__opacityWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .settings__opacity {
     height: 30px;
 }

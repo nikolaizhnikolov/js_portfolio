@@ -1,7 +1,6 @@
 const content = document.querySelector(".content");
 
 const DEFAULT_GRID_SIZE = 16;
-const OPACITY_STEP = 0.2;
 
 const CONTENT_WIDTH = 640;
 const CONTENT_HEIGHT = 480;
@@ -13,6 +12,7 @@ const linearGradient = function(c) {
 
 let mousePressed = false;
 let color = "#000000";
+let opacity = 1.0;
 
 function init(){
     const body = document.querySelector("body");
@@ -27,13 +27,14 @@ function init(){
         colorWrapper.style.backgroundColor = color;
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
+    opacitySlider.addEventListener("change", () => opacity = opacitySlider.value);
 
-    const slider = document.querySelector(".slider__value");
-    const label = document.querySelector(".slider__label");
-    slider.addEventListener("input", () => {
-        label.innerHTML = `${slider.value}x${slider.value}`;
+    const gridSizeSlider = document.querySelector(".slider__value");
+    const gridSizeLabel = document.querySelector(".slider__label");
+    gridSizeSlider.addEventListener("input", () => {
+        gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
     });
-    slider.addEventListener("change", () => resizeGrid(slider.value));
+    gridSizeSlider.addEventListener("change", () => resizeGrid(gridSizeSlider.value));
 
     resizeGrid(DEFAULT_GRID_SIZE);
 }
@@ -57,7 +58,7 @@ function createBlocks(gridSize) {
 
 function paint(element) {
     element.style.backgroundColor = color;
-    element.style.opacity = Number(element.style.opacity) + OPACITY_STEP;
+    element.style.opacity = opacity;
 }
 
 function createBlock(gridSize) {
