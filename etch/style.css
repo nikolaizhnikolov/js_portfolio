@@ -66,14 +66,14 @@ body {
     cursor: pointer;
   }
 
-.modes {
+.tools {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
 }
 
-.modes__button {
+.tools__button {
     width: 100px;
     height: 32px;
     
@@ -84,7 +84,7 @@ body {
     cursor: pointer;
 }
 
-.modes__image {
+.tools__image {
     width: 32px;
 }
 
