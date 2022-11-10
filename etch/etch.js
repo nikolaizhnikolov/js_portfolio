@@ -13,17 +13,31 @@ const linearGradient = function (c) {
     return `linear-gradient(to right, white, ${c})`;
 };
 
+let useTool = paint;
 let mousePressed = false;
 let color = "#000000";
 let opacity = 1.0;
 
 function init() {
     // Set mouse events to only paint when mouse is clicked/held.
+    initMouseControls();
+    // Visual changes on color/opacity sliders for reactivity and tactile feedback.
+    initColorControls();
+    // Tool change logic
+    initTools();
+    // Grid size slider logic.
+    initGridChange();
+    // Finally make the initial grid.
+    resizeGrid(DEFAULT_GRID_SIZE);
+}
+
+function initMouseControls() {
     const body = document.querySelector("body");
     body.addEventListener("mousedown", () => mousePressed = true);
     body.addEventListener("mouseup", () => mousePressed = false);
+}
 
-    // Visual changes on color/opacity sliders for reactivity and tactile feedback.
+function initColorControls() {
     const colorWrapper = document.querySelector(".settings__colorWrapper");
     const colorPicker = document.querySelector(".settings__color");
     const opacitySlider = document.querySelector(".settings__opacity");
@@ -33,28 +47,9 @@ function init() {
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
     opacitySlider.addEventListener("change", () => opacity = opacitySlider.value);
-    body.addEventListener("keydown", (e) => changeOpacityOnKeyDown(e, opacitySlider))
 
-    // Tool change logic
-    const paintTool = document.querySelector(".tools__brush");
-    const eraserTool = document.querySelector(".tools__eraser");
-    const bucketFillTool = document.querySelector(".tools__bucketFill");
-    const rainbowTool = document.querySelector(".tools__rainbow");
-    paintTool.addEventListener("click", () => useTool = paint);
-    eraserTool.addEventListener("click", () => useTool = erase);
-    bucketFillTool.addEventListener("click", () => useTool = bucketFill);
-    rainbowTool.addEventListener("click", () => useTool = rainbow);
-
-    // Grid size slider logic.
-    const gridSizeSlider = document.querySelector(".gridSizeSlider__value");
-    const gridSizeLabel = document.querySelector(".gridSizeSlider__label");
-    gridSizeSlider.addEventListener("input", () => {
-        gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
-    });
-    gridSizeSlider.addEventListener("change", () => resizeGrid(gridSizeSlider.value));
-
-    // Finally make the initial grid.
-    resizeGrid(DEFAULT_GRID_SIZE);
+    const body = document.querySelector("body");
+    body.addEventListener("keydown", (e) => changeOpacityOnKeyDown(e, opacitySlider));
 }
 
 function changeOpacityOnKeyDown(e, opacitySlider) {
@@ -69,6 +64,26 @@ function changeOpacityOnKeyDown(e, opacitySlider) {
         opacitySlider.value = Number(opacitySlider.value) + opacityChange;
         opacity = opacitySlider.value;
     }
+}
+
+function initTools() {
+    const paintTool = document.querySelector(".tools__brush");
+    const eraserTool = document.querySelector(".tools__eraser");
+    const bucketFillTool = document.querySelector(".tools__bucketFill");
+    const rainbowTool = document.querySelector(".tools__rainbow");
+    paintTool.addEventListener("click", () => useTool = paint);
+    eraserTool.addEventListener("click", () => useTool = erase);
+    bucketFillTool.addEventListener("click", () => useTool = bucketFill);
+    rainbowTool.addEventListener("click", () => useTool = rainbow);
+}
+
+function initGridChange() {
+    const gridSizeSlider = document.querySelector(".gridSizeSlider__value");
+    const gridSizeLabel = document.querySelector(".gridSizeSlider__label");
+    gridSizeSlider.addEventListener("input", () => {
+        gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
+    });
+    gridSizeSlider.addEventListener("change", () => resizeGrid(gridSizeSlider.value));
 }
 
 function clamp(n, min, max) {
@@ -93,11 +108,6 @@ function createBlocks(gridSize) {
         }
     }
 }
-
-/**
- * Sets the current tool to use.
- */
-let useTool = paint;
 
 function createBlock(gridSize) {
     const div = document.createElement("div");
