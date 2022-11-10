@@ -1,3 +1,9 @@
+:root {
+    --primary-light: #FFEBD6;
+    --primary-dark: #292929;
+    --secondary: #BA5A31;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,7 +12,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 20px;
-    background-color: paleturquoise;
+    background-color: var(--primary-light);
 
     font-family: 'Roboto';
 }
@@ -27,15 +33,15 @@ body {
 
 
 .settings__colorWrapper {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: black;
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background-color: var(--primary-dark);
     cursor: pointer;
-    box-shadow: 2px 2px 4px 0px grey;
+    box-shadow: 2px 2px 5px 0 var(--primary-dark);
 }
 
-.settings__color{    
+.settings__color {
     opacity: 0;
 }
 
@@ -46,25 +52,27 @@ body {
 }
 
 .settings__opacity {
-    appearance: none; /* Override default look */
+    appearance: none;
+    /* Override default look */
     height: 12px;
-    background-image: linear-gradient(to right, white, black);
+    background-image: linear-gradient(to right, white, var(--primary-dark));
     border-radius: 5px;
-    box-shadow: 2px 2px 4px 0px grey;
+    box-shadow: 2px 2px 5px 0 var(--primary-dark);
 }
 
 /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
 .settings__opacity::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none;
+    /* Override default look */
     appearance: none;
 
     width: 20px;
-    height: 20px; 
+    height: 20px;
     border-radius: 10px;
 
-    background: black;
+    background: var(--primary-dark);
     cursor: pointer;
-  }
+}
 
 .tools {
     display: flex;
@@ -75,12 +83,10 @@ body {
 
 .tools__button {
     width: 100px;
-    height: 32px;
-    
+    /* height: 32px; */
     background-color: white;
-    border: none;
-    box-shadow: 1px 1px 2px 0px grey;
-
+    border: solid 4px var(--secondary);
+    box-shadow: 2px 2px 5px 0 var(--primary-dark);
     cursor: pointer;
 }
 
@@ -98,12 +104,12 @@ body {
     width: 640px;
     height: 480px;
     background-color: white;
-    border: solid black;
+    border: solid thick var(--secondary);
 }
 
 .block {
     float: left;
     text-align: center;
-    background-color: black;
+    background-color: var(--primary-dark);
     opacity: 0.0;
 }
