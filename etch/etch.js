@@ -35,9 +35,11 @@ function init(){
     // Tool change logic
     const paintTool = document.querySelector(".tools__brush");
     const eraserTool = document.querySelector(".tools__eraser");
+    const bucketFillTool = document.querySelector(".tools__bucketFill");
     const rainbowTool = document.querySelector(".tools__rainbow");
     paintTool.addEventListener("click", () => useTool = paint);
     eraserTool.addEventListener("click", () => useTool = erase);
+    bucketFillTool.addEventListener("click", () => useTool = bucketFill);
     rainbowTool.addEventListener("click", () => useTool = rainbow);
 
     // Grid size slider logic.

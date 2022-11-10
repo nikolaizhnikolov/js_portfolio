@@ -7,6 +7,13 @@ function erase(element) {
     element.style.backgroundColor = WHITE;
 }
 
+function bucketFill() {
+    for(const block of canvas.children) {
+        block.style.backgroundColor = color;
+        block.style.opacity = opacity;
+    }
+}
+
 function generateRandomColor() {
     const R = Math.floor(Math.random()*256);
     const G = Math.floor(Math.random()*256);
