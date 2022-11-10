@@ -2,6 +2,8 @@
     --primary-light: #FFEBD6;
     --primary-dark: #292929;
     --secondary: #BA5A31;
+
+    --canvas-size: 480px;
 }
 
 body {
@@ -114,8 +116,8 @@ body {
 }
 
 .canvas {
-    width: 640px;
-    height: 480px;
+    width: var(--canvas-size);
+    height: var(--canvas-size);
     background-color: white;
     border: solid thick var(--secondary);
 }

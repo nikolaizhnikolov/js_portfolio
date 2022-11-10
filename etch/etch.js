@@ -2,7 +2,7 @@ const canvas = document.querySelector(".canvas");
 
 const DEFAULT_GRID_SIZE = 16;
 
-const CANVAS_WIDTH = 640;
+const CANVAS_WIDTH = 480;
 const CANVAS_HEIGHT = 480;
 
 const WHITE = "white";
