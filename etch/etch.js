@@ -1,9 +1,9 @@
-const content = document.querySelector(".content");
+const canvas = document.querySelector(".canvas");
 
 const DEFAULT_GRID_SIZE = 16;
 
-const CONTENT_WIDTH = 640;
-const CONTENT_HEIGHT = 480;
+const CANVAS_WIDTH = 640;
+const CANVAS_HEIGHT = 480;
 
 const WHITE = "white";
 const PX = "px";
@@ -64,7 +64,7 @@ function resizeGrid(gridSize) {
 function createBlocks(gridSize) {
     for (let i = 0; i < gridSize; i+=1) {
         for (let j = 0; j < gridSize; j+=1) {
-            content.appendChild(createBlock(gridSize));
+            canvas.appendChild(createBlock(gridSize));
         }
     }
 }
@@ -77,8 +77,8 @@ let useTool = paint;
 function createBlock(gridSize) {
     const div = document.createElement("div");
     div.classList.add("block");
-    div.style.width = CONTENT_WIDTH / gridSize + PX;
-    div.style.height = CONTENT_HEIGHT / gridSize + PX;
+    div.style.width = CANVAS_WIDTH / gridSize + PX;
+    div.style.height = CANVAS_HEIGHT / gridSize + PX;
 
     div.addEventListener("mousedown", () => useTool(div));
     div.addEventListener("mouseover", () => {
@@ -89,7 +89,7 @@ function createBlock(gridSize) {
 }
 
 function removeBlocks() {
-    while(content.childElementCount > 0) {
-        content.removeChild(content.lastChild);
+    while(canvas.childElementCount > 0) {
+        canvas.removeChild(canvas.lastChild);
     }
 }
