@@ -12,35 +12,42 @@
     <script src="./etch.js" defer></script>
 </head>
 <body onload="init()">
-    <div class="menu">
-        <div class="settings">
-            <div class="settings__colorWrapper">
-                <input class="settings__color" type="color" value="#000000"/>
-            </div>            
-            <div class="settings__opacityWrapper">
-                <input class="settings__opacity" id="settings__opacity" 
-                    type="range" value="1"
-                    min="0.1" step="0.1" max="1" />
+    <div class="header">
+        
+    </div>
+    <div class="content">
+        <div class="menu">
+            <div class="settings">
+                <div class="settings__colorWrapper">
+                    <input class="settings__color" type="color" value="#000000"/>
+                </div>
+                <div class="settings__opacityWrapper">
+                    <input class="settings__opacity" id="settings__opacity"
+                        type="range" value="1"
+                        min="0.1" step="0.1" max="1" />
+                </div>
+            </div>
+            <div class="tools">
+                <button class="tools__button tools__brush">
+                    <img src="../images/brush.png" alt="Brush" class="tools__image"/>
+                </button>
+                <button class="tools__button tools__eraser">
+                    <img src="../images/eraser.png" alt="Eraser" class="tools__image"/>
+                </button>
+                <button class="tools__button tools__rainbow">
+                    <img src="../images/rainbow.png" alt="Rainbow" class="tools__image"/>
+                </button>
+            </div>
+            <div class="slider">
+                <input type="range" min="1" max="100" value="16" class="slider__value"/>
+                <p class="slider__label">16x16</p>
             </div>
         </div>
-        <div class="tools">
-            <button class="tools__button tools__brush">
-                <img src="../images/brush.png" alt="Brush" class="tools__image"/>
-            </button>
-            <button class="tools__button tools__eraser">
-                <img src="../images/eraser.png" alt="Eraser" class="tools__image"/>
-            </button>
-            <button class="tools__button tools__rainbow">
-                <img src="../images/rainbow.png" alt="Rainbow" class="tools__image"/>
-            </button>
-        </div>
-        <div class="slider">
-            <input type="range" min="1" max="100" value="16" class="slider__value"/>
-            <p class="slider__label">16x16</p>
+        <div class="canvas">
         </div>
     </div>
-    <div class="canvas">
-
+    <div class="footer">
+        
     </div>
 </body>
 </html>
