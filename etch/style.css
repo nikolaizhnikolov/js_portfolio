@@ -14,13 +14,13 @@ body {
     background-color: var(--primary-light);
 
     font-family: 'Roboto';
+    color: var(--primary-dark);
 }
 
 .header__text {
     margin: 0;
     padding: 20px;
     font-size: 72px;
-    color: var(--primary-dark);
 }
 
 .content {
@@ -124,4 +124,20 @@ body {
     text-align: center;
     background-color: var(--primary-dark);
     opacity: 0.0;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image{
+    width: 32px;
 }
