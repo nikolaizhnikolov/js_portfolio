@@ -1,14 +1,14 @@
-Style modes
- - Circle color picker instead of default one.
- - Have opacity slider gradient the current chosen color.
- -- Dot in the middle should be the color with the chosen opacity.
- -- Finish styling the slider.
- - Brush, Eraser and Rainbow instead of mode names.
-
-Style it better.
- - Add body color
- - Change content border to shadow-throwing background instead.
+Design
+ - Maybe figure out a different design for the buttons.
+ - Try to find a better background.
+ --- Honestly maybe just do some design research.
+ - Style grid size slider.
+ - Find a way to make it obvious that opacity applies to Rainbow Mode as well.
  - add footer.
+ - add title.
+ - add hover styling on buttons to have a more 'responsive' design.
+ - add a gap bettween the menu and the canvas.
+ - rename content to canvas.
 
 Add Indexing to Main TOP_Projects page
  - Make it public.
