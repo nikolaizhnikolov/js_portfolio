@@ -9,7 +9,7 @@ const CANVAS_HEIGHT = 480;
 
 const WHITE = "white";
 const PX = "px";
-const linearGradient = function(c) {
+const linearGradient = function (c) {
     return `linear-gradient(to right, white, ${c})`;
 };
 
@@ -17,7 +17,7 @@ let mousePressed = false;
 let color = "#000000";
 let opacity = 1.0;
 
-function init(){
+function init() {
     // Set mouse events to only paint when mouse is clicked/held.
     const body = document.querySelector("body");
     body.addEventListener("mousedown", () => mousePressed = true);
@@ -33,6 +33,7 @@ function init(){
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
     opacitySlider.addEventListener("change", () => opacity = opacitySlider.value);
+    body.addEventListener("keydown", (e) => changeOpacityOnKeyDown(e, opacitySlider))
 
     // Tool change logic
     const paintTool = document.querySelector(".tools__brush");
@@ -56,24 +57,38 @@ function init(){
     resizeGrid(DEFAULT_GRID_SIZE);
 }
 
-function clampGrid(n) {
-    return Math.max(MIN_GRID_SIZE, Math.min(MAX_GRID_SIZE, n));
+function changeOpacityOnKeyDown(e, opacitySlider) {
+    let opacityChange = 0;
+
+    if (e.code === "KeyA") 
+        opacityChange = -0.1;
+    else if (e.code === "KeyD")
+        opacityChange = 0.1;
+
+    if(opacityChange !== 0) {
+        opacitySlider.value = Number(opacitySlider.value) + opacityChange;
+        opacity = opacitySlider.value;
+    }
+}
+
+function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
 }
 
 function resizeGrid(gridSize) {
-    if(gridSize === null) {
+    if (gridSize === null) {
         return;
     }
 
-    gridSize = clampGrid(gridSize);
+    gridSize = clamp(gridSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
 
     removeBlocks();
     createBlocks(gridSize);
 }
 
 function createBlocks(gridSize) {
-    for (let i = 0; i < gridSize; i+=1) {
-        for (let j = 0; j < gridSize; j+=1) {
+    for (let i = 0; i < gridSize; i += 1) {
+        for (let j = 0; j < gridSize; j += 1) {
             canvas.appendChild(createBlock(gridSize));
         }
     }
@@ -92,14 +107,14 @@ function createBlock(gridSize) {
 
     div.addEventListener("mousedown", () => useTool(div));
     div.addEventListener("mouseover", () => {
-        if(mousePressed) useTool(div)
+        if (mousePressed) useTool(div)
     });
 
     return div;
 }
 
 function removeBlocks() {
-    while(canvas.childElementCount > 0) {
+    while (canvas.childElementCount > 0) {
         canvas.removeChild(canvas.lastChild);
     }
 }
