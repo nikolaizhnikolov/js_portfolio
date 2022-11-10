@@ -30,6 +30,7 @@ body {
     border-radius: 25px;
     background-color: black;
     cursor: pointer;
+    box-shadow: 2px 2px 4px 0px grey;
 }
 
 .settings__color{    
@@ -43,14 +44,11 @@ body {
 }
 
 .settings__opacity {
-    height: 30px;
-}
-
-.settings__opacity {
     appearance: none; /* Override default look */
+    height: 12px;
     background-image: linear-gradient(to right, white, black);
-    height: 10px;
     border-radius: 5px;
+    box-shadow: 2px 2px 4px 0px grey;
 }
 
 /* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
