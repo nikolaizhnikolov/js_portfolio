@@ -1,6 +1,8 @@
 const canvas = document.querySelector(".canvas");
 
+const MIN_GRID_SIZE = 16;
 const DEFAULT_GRID_SIZE = 16;
+const MAX_GRID_SIZE = 64;
 
 const CANVAS_WIDTH = 480;
 const CANVAS_HEIGHT = 480;
@@ -54,10 +56,16 @@ function init(){
     resizeGrid(DEFAULT_GRID_SIZE);
 }
 
+function clampGrid(n) {
+    return Math.max(MIN_GRID_SIZE, Math.min(MAX_GRID_SIZE, n));
+}
+
 function resizeGrid(gridSize) {
     if(gridSize === null) {
         return;
     }
+
+    gridSize = clamp(gridSize);
 
     removeBlocks();
     createBlocks(gridSize);
