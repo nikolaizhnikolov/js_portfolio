@@ -73,7 +73,7 @@ body {
     /* Override default look */
     height: 12px;
     background-image: linear-gradient(to right, white, var(--primary-dark));
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 2px 2px 5px 0 var(--primary-dark);
 }
 
@@ -111,10 +111,39 @@ body {
     width: 32px;
 }
 
-.slider {
+.gridSizeSlider {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.gridSizeSlider__label {
+    margin: 0;
+    font-size: 18px;
+}
+
+.gridSizeSlider__value {
+    appearance: none;
+    /* Override default look */
+    height: 12px;
+    background-image: linear-gradient(to right, white, var(--secondary));
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px 0 var(--primary-dark);
+}
+
+/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
+.gridSizeSlider__value::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+
+    background: var(--primary-dark);
+    box-shadow: 1px 1px 1px 0 var(--primary-dark);
+    cursor: pointer;
 }
 
 .canvas {

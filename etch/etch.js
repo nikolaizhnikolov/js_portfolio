@@ -45,8 +45,8 @@ function init(){
     rainbowTool.addEventListener("click", () => useTool = rainbow);
 
     // Grid size slider logic.
-    const gridSizeSlider = document.querySelector(".slider__value");
-    const gridSizeLabel = document.querySelector(".slider__label");
+    const gridSizeSlider = document.querySelector(".gridSizeSlider__value");
+    const gridSizeLabel = document.querySelector(".gridSizeSlider__label");
     gridSizeSlider.addEventListener("input", () => {
         gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
     });
@@ -65,7 +65,7 @@ function resizeGrid(gridSize) {
         return;
     }
 
-    gridSize = clamp(gridSize);
+    gridSize = clampGrid(gridSize);
 
     removeBlocks();
     createBlocks(gridSize);
