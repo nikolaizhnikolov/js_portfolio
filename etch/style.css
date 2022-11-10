@@ -57,6 +57,8 @@ body {
 }
 
 .settings__color {
+    width: 64px;
+    height: 64px;
     opacity: 0;
 }
 
