@@ -10,8 +10,15 @@ const CANVAS_HEIGHT = 480;
 const WHITE = "white";
 const PX = "px";
 const linearGradient = function (c) {
-    return `linear-gradient(to right, white, ${c})`;
+    return `linear-gradient(to right, ${WHITE}, ${c})`;
 };
+
+const rgba = function() {
+    return `rgba(${parseInt(color.slice(1, 3), 16)}, 
+                 ${parseInt(color.slice(3, 5), 16)}, 
+                 ${parseInt(color.slice(5), 16)}, 
+                 ${opacity})`;
+}
 
 let useTool = paint;
 let mousePressed = false;
@@ -43,16 +50,19 @@ function initColorControls() {
     const opacitySlider = document.querySelector(".settings__opacity");
     colorPicker.addEventListener("input", () => {
         color = colorPicker.value;
-        colorWrapper.style.backgroundColor = color;
+        colorWrapper.style.backgroundColor = rgba();
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
-    opacitySlider.addEventListener("change", () => opacity = opacitySlider.value);
+    opacitySlider.addEventListener("input", () => {
+        opacity = opacitySlider.value;
+        colorWrapper.style.backgroundColor = rgba();
+    });
 
     const body = document.querySelector("body");
-    body.addEventListener("keydown", (e) => changeOpacityOnKeyDown(e, opacitySlider));
+    body.addEventListener("keydown", (e) => {changeOpacityOnKeyDown(e)});
 }
 
-function changeOpacityOnKeyDown(e, opacitySlider) {
+function changeOpacityOnKeyDown(e) {
     let opacityChange = 0;
 
     if (e.code === "KeyA") 
@@ -61,8 +71,11 @@ function changeOpacityOnKeyDown(e, opacitySlider) {
         opacityChange = 0.1;
 
     if(opacityChange !== 0) {
+        const colorWrapper = document.querySelector(".settings__colorWrapper");
+        const opacitySlider = document.querySelector(".settings__opacity");
         opacitySlider.value = Number(opacitySlider.value) + opacityChange;
         opacity = opacitySlider.value;
+        colorWrapper.style.backgroundColor = rgba();
     }
 }
 
