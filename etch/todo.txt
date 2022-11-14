@@ -1,7 +1,4 @@
 Priority:
- - Unify menu design - same width, more spacing etc.
- - Try to find a betterw way to fit everything to the footer in one image.
- - Add Colour Grab.
  - Add chosen tool effect.
  - Make some pictures for Github Pages thumbnails.
  - FINISH !!!
@@ -17,3 +14,6 @@ Add Indexing to Main TOP_Projects page
  DONE: 
  - Enable/Disable grid lines
  - Add grid lines
+ - Add Colour Grab.
+ - Try to find a betterw way to fit everything to the footer in one image.
+ - Unify menu design - same width, more spacing etc.

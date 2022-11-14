@@ -12,7 +12,6 @@ body {
     align-items: center;
     height: 100%;
     margin: 0;
-    padding: 20px;
     background-color: var(--primary-light);
 
     font-family: 'Roboto';
@@ -39,7 +38,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    width: 200px;
 }
 
 /* Color and Opacity Settings */
@@ -98,13 +98,14 @@ body {
 /* Tools */
 .tools {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .tools__button {
-    width: 100px;
+    width: 72px;
+    height: 66px;
     background-color: white;
     border: solid 4px var(--secondary);
     box-shadow: 4px 4px 5px -2px var(--primary-dark);
@@ -112,7 +113,7 @@ body {
 }
 
 .tools__image {
-    width: 32px;
+    width: 40px;
 }
 
 /* Grid Size Controls */
@@ -129,6 +130,7 @@ body {
 
 .gridSizeSlider__value {
     appearance: none;
+    width: 150px;
     /* Override default look */
     height: 12px;
     background-image: linear-gradient(to right, white, var(--secondary));
