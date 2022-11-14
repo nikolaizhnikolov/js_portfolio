@@ -163,8 +163,20 @@ body {
 .block {
     float: left;
     text-align: center;
-    background-color: var(--primary-dark);
-    opacity: 0.0;
+    box-sizing: border-box;
+}
+
+.block--defaultgrid {
+    border-left: 1px solid var(--primary-dark);
+    border-top: 1px solid var(--primary-dark);
+}
+
+.block--bottomrow {
+    border-bottom: 1px solid var(--primary-dark);
+}
+
+.block--rightcol {
+    border-right: 1px solid var(--primary-dark);
 }
 
 /* Footer */

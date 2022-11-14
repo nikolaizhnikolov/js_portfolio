@@ -1,7 +1,6 @@
 const canvas = document.querySelector(".canvas");
 
 const MIN_GRID_SIZE = 16;
-const DEFAULT_GRID_SIZE = 16;
 const MAX_GRID_SIZE = 64;
 
 const CANVAS_WIDTH = 480;
@@ -21,7 +20,9 @@ const rgba = function() {
 }
 
 let useTool = paint;
+let gridSize = MIN_GRID_SIZE;
 let mousePressed = false;
+let drawGrid = true;
 let color = "#000000";
 let opacity = 1.0;
 
@@ -35,7 +36,7 @@ function init() {
     // Grid size slider logic.
     initGridChange();
     // Finally make the initial grid.
-    resizeGrid(DEFAULT_GRID_SIZE);
+    resizeGrid(gridSize);
 }
 
 function initMouseControls() {
@@ -84,10 +85,12 @@ function initTools() {
     const eraserTool = document.querySelector(".tools__eraser");
     const bucketFillTool = document.querySelector(".tools__bucketFill");
     const rainbowTool = document.querySelector(".tools__rainbow");
+    const toggleGridTool = document.querySelector(".tools__gridToggle");
     paintTool.addEventListener("click", () => useTool = paint);
     eraserTool.addEventListener("click", () => useTool = erase);
     bucketFillTool.addEventListener("click", () => useTool = bucketFill);
     rainbowTool.addEventListener("click", () => useTool = rainbow);
+    toggleGridTool.addEventListener("click", () => toggleGrid());
 }
 
 function initGridChange() {
@@ -103,30 +106,34 @@ function clamp(n, min, max) {
     return Math.max(min, Math.min(max, n));
 }
 
-function resizeGrid(gridSize) {
-    if (gridSize === null) {
+function resizeGrid(newSize) {
+    if (newSize === null) {
         return;
     }
 
-    gridSize = clamp(gridSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
+    gridSize = clamp(newSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
 
     removeBlocks();
-    createBlocks(gridSize);
+    createBlocks();
 }
 
-function createBlocks(gridSize) {
+function createBlocks() {
     for (let i = 0; i < gridSize; i += 1) {
         for (let j = 0; j < gridSize; j += 1) {
-            canvas.appendChild(createBlock(gridSize));
+            const block = createBlock(gridSize);
+            if(drawGrid) {
+                toggleGridLines(block, i+1, j+1);
+            }
+            canvas.appendChild(block);
         }
     }
 }
 
-function createBlock(gridSize) {
+function createBlock() {
     const div = document.createElement("div");
     div.classList.add("block");
-    div.style.width = CANVAS_WIDTH / gridSize + PX;
-    div.style.height = CANVAS_HEIGHT / gridSize + PX;
+    div.style.width = (CANVAS_WIDTH / gridSize) + PX;
+    div.style.height = (CANVAS_HEIGHT / gridSize) + PX;
 
     div.addEventListener("mousedown", () => useTool(div));
     div.addEventListener("mouseover", () => {
@@ -134,6 +141,16 @@ function createBlock(gridSize) {
     });
 
     return div;
+}
+
+function toggleGridLines(block, row, column) {
+    block.classList.toggle("block--defaultgrid");
+    if(column % gridSize === 0) {
+        block.classList.toggle("block--rightcol");
+    }
+    if(row / gridSize === 1) {
+        block.classList.toggle("block--bottomrow");
+    }
 }
 
 function removeBlocks() {

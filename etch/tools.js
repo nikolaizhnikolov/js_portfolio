@@ -33,3 +33,14 @@ function rainbow(element) {
     element.style.backgroundColor = generateRandomColor();
     element.style.opacity = opacity;
 }
+
+function toggleGrid() {
+    const blocks = canvas.children;
+
+    for (let i = 0; i < gridSize; i += 1) {
+        for (let j = 0; j < gridSize; j += 1) {
+            const block = blocks[(i*gridSize) + j];
+            toggleGridLines(block, i+1, j+1);
+        }
+    }
+}
