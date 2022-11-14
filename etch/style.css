@@ -51,17 +51,17 @@ body {
 }
 
 .settings__colorWrapper {
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
     background-color: var(--primary-dark);
     cursor: pointer;
     box-shadow: 2px 2px 4px -2px var(--primary-dark);
 }
 
 .settings__color {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     opacity: 0;
 }
 
