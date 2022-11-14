@@ -7,6 +7,35 @@ function erase(element) {
     element.style.backgroundColor = WHITE;
 }
 
+/**
+ * Add listeners so that on the next click,
+ * if it is inside the canvas - use the clicked block's element
+ * else - just reset to paint mode
+ */
+function colorGrab() {
+    canvas.style.cursor = "url(../images/colorGrab_cursor.png) 6 24, auto";
+
+    document.querySelector('body').addEventListener("mousedown", (e) => {
+        if(e.target.classList.contains('block')) {
+            // Get color at X, Y of mouse click.
+            const block = document.elementFromPoint(e.x, e.y);
+            color = rgbToHex(window.getComputedStyle(block).backgroundColor);
+
+            // Update color-related elements
+            const colorWrapper = document.querySelector(".settings__colorWrapper");
+            const colorPicker = document.querySelector(".settings__color");
+            const opacitySlider = document.querySelector(".settings__opacity");
+
+            colorPicker.value = color;
+            colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
+            opacitySlider.style.backgroundImage = linearGradient(color);
+        }
+        // Reset tool and cursor
+        useTool = paint;
+        canvas.style.cursor = "auto";
+    }, {once: true}); // Only do it once
+}
+
 function bucketFill() {
     for(const block of canvas.children) {
         block.style.backgroundColor = color;

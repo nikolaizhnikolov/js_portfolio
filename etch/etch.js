@@ -12,11 +12,27 @@ const linearGradient = function (c) {
     return `linear-gradient(to right, ${WHITE}, ${c})`;
 };
 
-const rgba = function() {
-    return `rgba(${parseInt(color.slice(1, 3), 16)}, 
-                 ${parseInt(color.slice(3, 5), 16)}, 
-                 ${parseInt(color.slice(5), 16)}, 
+const decToHex = function(decimal) {
+    let hex = Number(decimal).toString(16);
+    if(hex.length === 1) 
+        hex = "0" + hex;        
+    return hex;
+}
+
+const hexToDec = function(hex) {
+    return parseInt(hex, 16);
+}
+
+const hexToRgba = function(hex, opacity) {
+    return `rgba(${hexToDec(hex.slice(1, 3))}, 
+                 ${hexToDec(hex.slice(3, 5))}, 
+                 ${hexToDec(hex.slice(5))}, 
                  ${opacity})`;
+}
+
+const rgbToHex = function(rgb) {
+    const colors = rgb.match(/[\d]{1,3}/g);
+    return `#${decToHex(colors[0])}${decToHex(colors[1])}${decToHex(colors[2])}`;
 }
 
 let useTool = paint;
@@ -51,12 +67,12 @@ function initColorControls() {
     const opacitySlider = document.querySelector(".settings__opacity");
     colorPicker.addEventListener("input", () => {
         color = colorPicker.value;
-        colorWrapper.style.backgroundColor = rgba();
+        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
         opacitySlider.style.backgroundImage = linearGradient(color);
     });
     opacitySlider.addEventListener("input", () => {
         opacity = opacitySlider.value;
-        colorWrapper.style.backgroundColor = rgba();
+        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
     });
 
     const body = document.querySelector("body");
@@ -76,18 +92,26 @@ function changeOpacityOnKeyDown(e) {
         const opacitySlider = document.querySelector(".settings__opacity");
         opacitySlider.value = Number(opacitySlider.value) + opacityChange;
         opacity = opacitySlider.value;
-        colorWrapper.style.backgroundColor = rgba();
+        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
     }
 }
 
 function initTools() {
     const paintTool = document.querySelector(".tools__brush");
     const eraserTool = document.querySelector(".tools__eraser");
+    const colorGrabTool = document.querySelector(".tools__colorGrab");
     const bucketFillTool = document.querySelector(".tools__bucketFill");
     const rainbowTool = document.querySelector(".tools__rainbow");
     const toggleGridTool = document.querySelector(".tools__gridToggle");
+
     paintTool.addEventListener("click", () => useTool = paint);
     eraserTool.addEventListener("click", () => useTool = erase);
+    colorGrabTool.addEventListener("click", () => {
+        // Invoke color grab, but also set the current tool
+        // to it, to avoid NPE on next click for clor.
+        useTool = colorGrab;
+        colorGrab();
+    });        
     bucketFillTool.addEventListener("click", () => useTool = bucketFill);
     rainbowTool.addEventListener("click", () => useTool = rainbow);
     toggleGridTool.addEventListener("click", () => toggleGrid());

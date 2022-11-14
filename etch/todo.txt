@@ -1,19 +1,19 @@
 Priority:
  - Unify menu design - same width, more spacing etc.
- - Make some pictures for Github Pages thumbnails.
- - Find a way to make it clear that opacity applies to Rainbow Mode as well.
  - Try to find a betterw way to fit everything to the footer in one image.
- - See how a shadow on the canvas will look like.
- - Add grid lines
  - Add Colour Grab.
+ - Add chosen tool effect.
+ - Make some pictures for Github Pages thumbnails.
  - FINISH !!!
 
-
-Design
- - Maybe figure out a different design for the buttons.
- --- Honestly maybe just do some design research.
-
-
+Extras:
+ - Export img with/without grid lines.
+ - Remove
+    
 Add Indexing to Main TOP_Projects page
  - Make it public.
  - Push it to github pages.
+
+ DONE: 
+ - Enable/Disable grid lines
+ - Add grid lines

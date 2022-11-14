@@ -163,6 +163,7 @@ body {
 .block {
     float: left;
     text-align: center;
+    background-color: white;
     box-sizing: border-box;
 }
 
