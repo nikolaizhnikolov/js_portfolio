@@ -1,19 +1,24 @@
 Priority:
- - Add chosen tool effect.
+Change readme to index.html and see if GH pages is fine with it.
+Style it better
+
+Etch Extras:
+ - Modularize
+ - Change all func decl to func expressions.
+ - I don't really need a dependency manager tho.
+ - Have init as a scoped anonymous function.
+
+DONE: 
+ETCH
+ - Remove opacity
  - Make some pictures for Github Pages thumbnails.
- - FINISH !!!
-
-Extras:
- - Export img with/without grid lines.
- - Remove
-    
-Add Indexing to Main TOP_Projects page
- - Make it public.
- - Push it to github pages.
-
- DONE: 
  - Enable/Disable grid lines
  - Add grid lines
  - Add Colour Grab.
  - Try to find a betterw way to fit everything to the footer in one image.
  - Unify menu design - same width, more spacing etc.
+ - Remove opacity from rainbow mode.
+
+Add Indexing to Main TOP_Projects page
+ - Make it public.
+ - Push it to github pages.
