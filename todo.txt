@@ -1,5 +1,8 @@
 Priority:
-Style it
+Style main page.
+Rename JS portfolio to simply portfolio
+Research how to make it more modular OR have more control over it.
+This should transition to a full portfolio not only a JS one.
 
 Etch exercises:
  - Modularize
