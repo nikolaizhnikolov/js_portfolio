@@ -6,6 +6,7 @@ body {
 
 .projects {
     display: flex;
+    gap: 20px;
 }
 
 .project {
@@ -16,6 +17,17 @@ body {
 
 .project__image {
     width: 200px;
+
+    border: solid 2px black;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px -2px;
+    
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.project__image:hover {
+    transform: scale(1.05);
 }
 
 /* Footer */
@@ -33,7 +45,7 @@ body {
 
 .footer__image {
     width: 32px;
-    
+
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
 }
