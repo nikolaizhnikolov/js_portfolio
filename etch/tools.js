@@ -60,7 +60,6 @@ function generateRandomColor() {
 
 function rainbow(element) {
     element.style.backgroundColor = generateRandomColor();
-    element.style.opacity = opacity;
 }
 
 function toggleGrid() {
