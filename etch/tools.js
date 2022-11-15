@@ -69,7 +69,3 @@ function toggleGrid() {
         }
     }
 }
-
-toolSelectors = {
-    
-}
