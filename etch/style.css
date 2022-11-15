@@ -43,7 +43,7 @@ body {
     width: 200px;
 }
 
-/* Color and Opacity Settings */
+/* Color Settings */
 .settings {
     display: flex;
     flex-direction: column;
@@ -64,36 +64,6 @@ body {
     width: 96px;
     height: 96px;
     opacity: 0;
-}
-
-.settings__opacityWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.settings__opacity {
-    appearance: none;
-    /* Override default look */
-    height: 12px;
-    background-image: linear-gradient(to right, white, var(--primary-dark));
-    border-radius: 3px;
-    box-shadow: 2px 2px 5px -2px var(--primary-dark);
-}
-
-/* https://www.w3schools.com/howto/howto_js_rangeslider.asp */
-.settings__opacity::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    /* Override default look */
-    appearance: none;
-
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-
-    background: var(--primary-dark);
-    box-shadow: 2px 2px 5px -2px var(--primary-dark);
-    cursor: pointer;
 }
 
 /* Tools */
@@ -209,7 +179,6 @@ body {
 .tools__button,
 .settings__color,
 .settings__colorWrapper,
-.settings__opacity::-webkit-slider-thumb,
 .gridSizeSlider__value::-webkit-slider-thumb {
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
@@ -217,7 +186,6 @@ body {
 
 .tools__button:hover ,
 .settings__colorWrapper:hover,
-.settings__opacity::-webkit-slider-thumb:hover,
 .gridSizeSlider__value::-webkit-slider-thumb:hover {
     transform: scale(1.10);
 }

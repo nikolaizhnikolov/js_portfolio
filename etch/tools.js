@@ -1,6 +1,5 @@
 function paint(element) {
     element.style.backgroundColor = color;
-    element.style.opacity = opacity;
 }
 
 function erase(element) {
@@ -24,11 +23,9 @@ function colorGrab() {
             // Update color-related elements
             const colorWrapper = document.querySelector(".settings__colorWrapper");
             const colorPicker = document.querySelector(".settings__color");
-            const opacitySlider = document.querySelector(".settings__opacity");
 
             colorPicker.value = color;
-            colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
-            opacitySlider.style.backgroundImage = linearGradient(color);
+            colorWrapper.style.backgroundColor = hexToRgb(color);
         }
         // Reset tool and cursor
         useTool = paint;
@@ -40,7 +37,6 @@ function colorGrab() {
 function bucketFill() {
     for(const block of canvas.children) {
         block.style.backgroundColor = color;
-        block.style.opacity = opacity;
     }
 }
 

@@ -24,11 +24,10 @@ const hexToDec = function(hex) {
     return parseInt(hex, 16);
 }
 
-const hexToRgba = function(hex, opacity) {
-    return `rgba(${hexToDec(hex.slice(1, 3))}, 
+const hexToRgb = function(hex) {
+    return `rgb(${hexToDec(hex.slice(1, 3))}, 
                  ${hexToDec(hex.slice(3, 5))}, 
-                 ${hexToDec(hex.slice(5))}, 
-                 ${opacity})`;
+                 ${hexToDec(hex.slice(5))})`;
 }
 
 const rgbToHex = function(rgb) {
@@ -42,12 +41,11 @@ let gridSize = MIN_GRID_SIZE;
 let mousePressed = false;
 let drawGrid = true;
 let color = "#000000";
-let opacity = 1.0;
 
 function init() {
     // Set mouse events to only paint when mouse is clicked/held.
     initMouseControls();
-    // Visual changes on color/opacity sliders for reactivity and tactile feedback.
+    // Visual changes on color sliders for reactivity and tactile feedback.
     initColorControls();
     // Tool change logic
     initTools();
@@ -66,40 +64,15 @@ function initMouseControls() {
 function initColorControls() {
     const colorWrapper = document.querySelector(".settings__colorWrapper");
     const colorPicker = document.querySelector(".settings__color");
-    const opacitySlider = document.querySelector(".settings__opacity");
     colorPicker.addEventListener("input", () => {
         color = colorPicker.value;
-        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
-        opacitySlider.style.backgroundImage = linearGradient(color);
+        colorWrapper.style.backgroundColor = hexToRgb(color);
     });
-    opacitySlider.addEventListener("input", () => {
-        opacity = opacitySlider.value;
-        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
-    });
-
-    const body = document.querySelector("body");
-    body.addEventListener("keydown", (e) => {changeOpacityOnKeyDown(e)});
-}
-
-function changeOpacityOnKeyDown(e) {
-    let opacityChange = 0;
-
-    if (e.code === "KeyA") 
-        opacityChange = -0.1;
-    else if (e.code === "KeyD")
-        opacityChange = 0.1;
-
-    if(opacityChange !== 0) {
-        const colorWrapper = document.querySelector(".settings__colorWrapper");
-        const opacitySlider = document.querySelector(".settings__opacity");
-        opacitySlider.value = Number(opacitySlider.value) + opacityChange;
-        opacity = opacitySlider.value;
-        colorWrapper.style.backgroundColor = hexToRgba(color, opacity);
-    }
 }
 
 const toggleActiveButton = function(tool) {
-    activeTool.classList.remove("tools__button--active");
+    if(activeTool)
+        activeTool.classList.remove("tools__button--active");
     activeTool = tool;
     activeTool.classList.add("tools__button--active");
 }
@@ -114,12 +87,12 @@ function initTools() {
     const toggleGridTool = document.querySelector(".tools__gridToggle");
 
     // Set active tool and visual change on click
-    activeTool = paintTool;
-
     const toggleTool = function(tool, element) {
         useTool = tool;
         toggleActiveButton(element);
     }
+
+    toggleTool(paint, paintTool);
 
     paintTool.addEventListener("click", () => toggleTool(paint, paintTool));
     eraserTool.addEventListener("click", () => toggleTool(erase, eraserTool));
