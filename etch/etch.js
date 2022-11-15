@@ -8,6 +8,7 @@ const CANVAS_HEIGHT = 480;
 
 const WHITE = "white";
 const PX = "px";
+
 const linearGradient = function (c) {
     return `linear-gradient(to right, ${WHITE}, ${c})`;
 };
@@ -36,6 +37,7 @@ const rgbToHex = function(rgb) {
 }
 
 let useTool = paint;
+let activeTool = '';
 let gridSize = MIN_GRID_SIZE;
 let mousePressed = false;
 let drawGrid = true;
@@ -96,7 +98,14 @@ function changeOpacityOnKeyDown(e) {
     }
 }
 
+const toggleActiveButton = function(tool) {
+    activeTool.classList.remove("tools__button--active");
+    activeTool = tool;
+    activeTool.classList.add("tools__button--active");
+}
+
 function initTools() {
+    // Select all tools
     const paintTool = document.querySelector(".tools__brush");
     const eraserTool = document.querySelector(".tools__eraser");
     const colorGrabTool = document.querySelector(".tools__colorGrab");
@@ -104,17 +113,26 @@ function initTools() {
     const rainbowTool = document.querySelector(".tools__rainbow");
     const toggleGridTool = document.querySelector(".tools__gridToggle");
 
-    paintTool.addEventListener("click", () => useTool = paint);
-    eraserTool.addEventListener("click", () => useTool = erase);
+    // Set active tool and visual change on click
+    activeTool = paintTool;
+
+    const setTool = function(tool, element) {
+        useTool = tool;
+        toggleActiveButton(element);
+    }
+
+    paintTool.addEventListener("click", () => setTool(paint, paintTool));
+    eraserTool.addEventListener("click", () => setTool(erase, eraserTool));
+    bucketFillTool.addEventListener("click", () => setTool(bucketFill, bucketFillTool));
+    rainbowTool.addEventListener("click", () => setTool(rainbow, rainbowTool));
+    toggleGridTool.addEventListener("click", () => setTool(toggleGrid, toggleGridTool));
     colorGrabTool.addEventListener("click", () => {
         // Invoke color grab, but also set the current tool
         // to it, to avoid NPE on next click for clor.
         useTool = colorGrab;
         colorGrab();
+        toggleActiveButton(colorGrabTool);
     });        
-    bucketFillTool.addEventListener("click", () => useTool = bucketFill);
-    rainbowTool.addEventListener("click", () => useTool = rainbow);
-    toggleGridTool.addEventListener("click", () => toggleGrid());
 }
 
 function initGridChange() {

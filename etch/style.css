@@ -112,6 +112,11 @@ body {
     cursor: pointer;
 }
 
+.tools__button--active {
+    background-color: var(--secondary);
+    transform: scale(1.10);
+}
+
 .tools__image {
     width: 40px;
 }
