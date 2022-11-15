@@ -1,7 +1,8 @@
 :root {
     --primary-light: #FFEBD6;
     --primary-dark: #292929;
-    --secondary: #BA5A31;
+    --secondary-dark: #BA5A31;
+    --secondary-light: #FFCE99;
 
     --canvas-size: 480px;
 }
@@ -107,13 +108,13 @@ body {
     width: 72px;
     height: 66px;
     background-color: white;
-    border: solid 4px var(--secondary);
+    border: solid 4px var(--secondary-dark);
     box-shadow: 4px 4px 5px -2px var(--primary-dark);
     cursor: pointer;
 }
 
 .tools__button--active {
-    background-color: var(--secondary);
+    background-color: var(--secondary-light);
     transform: scale(1.10);
 }
 
@@ -138,7 +139,7 @@ body {
     width: 150px;
     /* Override default look */
     height: 12px;
-    background-image: linear-gradient(to right, white, var(--secondary));
+    background-image: linear-gradient(to right, white, var(--secondary-dark));
     border-radius: 3px;
     box-shadow: 2px 2px 5px -2px var(--primary-dark);
 }
@@ -163,7 +164,7 @@ body {
     width: var(--canvas-size);
     height: var(--canvas-size);
     background-color: white;
-    border: solid thick var(--secondary);
+    border: solid thick var(--secondary-dark);
 }
 
 /* Single Drawing Block */
@@ -218,7 +219,15 @@ body {
 .settings__colorWrapper:hover,
 .settings__opacity::-webkit-slider-thumb:hover,
 .gridSizeSlider__value::-webkit-slider-thumb:hover {
-  transform: scale(1.10);
+    transform: scale(1.10);
+}
+
+.tools__gridToggle {
+    transition: background-color 0.15s;
+}
+
+.tools__gridToggle:active {
+    background-color: var(--secondary-light);
 }
 
 .footer__image {

@@ -116,16 +116,16 @@ function initTools() {
     // Set active tool and visual change on click
     activeTool = paintTool;
 
-    const setTool = function(tool, element) {
+    const toggleTool = function(tool, element) {
         useTool = tool;
         toggleActiveButton(element);
     }
 
-    paintTool.addEventListener("click", () => setTool(paint, paintTool));
-    eraserTool.addEventListener("click", () => setTool(erase, eraserTool));
-    bucketFillTool.addEventListener("click", () => setTool(bucketFill, bucketFillTool));
-    rainbowTool.addEventListener("click", () => setTool(rainbow, rainbowTool));
-    toggleGridTool.addEventListener("click", () => setTool(toggleGrid, toggleGridTool));
+    paintTool.addEventListener("click", () => toggleTool(paint, paintTool));
+    eraserTool.addEventListener("click", () => toggleTool(erase, eraserTool));
+    bucketFillTool.addEventListener("click", () => toggleTool(bucketFill, bucketFillTool));
+    rainbowTool.addEventListener("click", () => toggleTool(rainbow, rainbowTool));
+    toggleGridTool.addEventListener("click", () => toggleGrid());
     colorGrabTool.addEventListener("click", () => {
         // Invoke color grab, but also set the current tool
         // to it, to avoid NPE on next click for clor.
