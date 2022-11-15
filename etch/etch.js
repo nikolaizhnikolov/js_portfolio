@@ -1,6 +1,7 @@
 const canvas = document.querySelector(".canvas");
 
-const MIN_GRID_SIZE = 16;
+const MIN_GRID_SIZE = 1;
+const DEFAULT_GRID_SIZE = 16;
 const MAX_GRID_SIZE = 64;
 
 const CANVAS_WIDTH = 480;
@@ -37,7 +38,7 @@ const rgbToHex = function(rgb) {
 
 let useTool = paint;
 let activeTool = '';
-let gridSize = MIN_GRID_SIZE;
+let gridSize = DEFAULT_GRID_SIZE;
 let mousePressed = false;
 let drawGrid = true;
 let color = "#000000";
