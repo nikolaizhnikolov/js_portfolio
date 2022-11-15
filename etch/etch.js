@@ -36,6 +36,13 @@ const rgbToHex = function(rgb) {
     return `#${decToHex(colors[0])}${decToHex(colors[1])}${decToHex(colors[2])}`;
 }
 
+const toggleActiveTool = function(tool) {
+    if(activeTool)
+        activeTool.classList.remove("tools__button--active");
+    activeTool = tool;
+    activeTool.classList.add("tools__button--active");
+}
+
 let useTool = paint;
 let activeTool = '';
 let gridSize = DEFAULT_GRID_SIZE;
@@ -43,86 +50,72 @@ let mousePressed = false;
 let drawGrid = true;
 let color = "#000000";
 
-function init() {
+(function init() {
     // Set mouse events to only paint when mouse is clicked/held.
-    initMouseControls();
+    (function initMouseControls() {
+        const body = document.querySelector("body");
+        body.addEventListener("mousedown", () => mousePressed = true);
+        body.addEventListener("mouseup", () => mousePressed = false);
+    })();
     // Visual changes on color sliders for reactivity and tactile feedback.
-    initColorControls();
+    (function initColorControls() {
+        const colorWrapper = document.querySelector(".settings__colorWrapper");
+        const colorPicker = document.querySelector(".settings__color");
+        colorPicker.addEventListener("input", () => {
+            color = colorPicker.value;
+            colorWrapper.style.backgroundColor = hexToRgb(color);
+        });
+    })();
     // Tool change logic
-    initTools();
+    (function initTools() {
+        // Select all tools
+        const paintTool = document.querySelector(".tools__brush");
+        const eraserTool = document.querySelector(".tools__eraser");
+        const colorGrabTool = document.querySelector(".tools__colorGrab");
+        const bucketFillTool = document.querySelector(".tools__bucketFill");
+        const rainbowTool = document.querySelector(".tools__rainbow");
+        const toggleGridTool = document.querySelector(".tools__gridToggle");
+    
+        // Set active tool and visual change on click
+        const toggleTool = function(tool, element) {
+            useTool = tool;
+            toggleActiveTool(element);
+        }
+    
+        toggleTool(paint, paintTool);
+    
+        paintTool.addEventListener("click", () => toggleTool(paint, paintTool));
+        eraserTool.addEventListener("click", () => toggleTool(erase, eraserTool));
+        bucketFillTool.addEventListener("click", () => toggleTool(bucketFill, bucketFillTool));
+        rainbowTool.addEventListener("click", () => toggleTool(rainbow, rainbowTool));
+        toggleGridTool.addEventListener("click", () => toggleGrid());
+        colorGrabTool.addEventListener("click", () => {
+            // Invoke color grab, but also set the current tool
+            // to it, to avoid NPE on next click for clor.
+            useTool = colorGrab;
+            colorGrab();
+            toggleActiveTool(colorGrabTool);
+        });        
+    })();
     // Grid size slider logic.
-    initGridChange();
+    (function initGridChange() {
+        const gridSizeSlider = document.querySelector(".gridSizeSlider__value");
+        const gridSizeLabel = document.querySelector(".gridSizeSlider__label");
+        gridSizeSlider.addEventListener("input", () => {
+            gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
+        });
+        gridSizeSlider.addEventListener("change", () => resizeGrid(gridSizeSlider.value));
+    })();
     // Finally make the initial grid.
     resizeGrid(gridSize);
-}
+})();
 
-function initMouseControls() {
-    const body = document.querySelector("body");
-    body.addEventListener("mousedown", () => mousePressed = true);
-    body.addEventListener("mouseup", () => mousePressed = false);
-}
 
-function initColorControls() {
-    const colorWrapper = document.querySelector(".settings__colorWrapper");
-    const colorPicker = document.querySelector(".settings__color");
-    colorPicker.addEventListener("input", () => {
-        color = colorPicker.value;
-        colorWrapper.style.backgroundColor = hexToRgb(color);
-    });
-}
-
-const toggleActiveButton = function(tool) {
-    if(activeTool)
-        activeTool.classList.remove("tools__button--active");
-    activeTool = tool;
-    activeTool.classList.add("tools__button--active");
-}
-
-function initTools() {
-    // Select all tools
-    const paintTool = document.querySelector(".tools__brush");
-    const eraserTool = document.querySelector(".tools__eraser");
-    const colorGrabTool = document.querySelector(".tools__colorGrab");
-    const bucketFillTool = document.querySelector(".tools__bucketFill");
-    const rainbowTool = document.querySelector(".tools__rainbow");
-    const toggleGridTool = document.querySelector(".tools__gridToggle");
-
-    // Set active tool and visual change on click
-    const toggleTool = function(tool, element) {
-        useTool = tool;
-        toggleActiveButton(element);
-    }
-
-    toggleTool(paint, paintTool);
-
-    paintTool.addEventListener("click", () => toggleTool(paint, paintTool));
-    eraserTool.addEventListener("click", () => toggleTool(erase, eraserTool));
-    bucketFillTool.addEventListener("click", () => toggleTool(bucketFill, bucketFillTool));
-    rainbowTool.addEventListener("click", () => toggleTool(rainbow, rainbowTool));
-    toggleGridTool.addEventListener("click", () => toggleGrid());
-    colorGrabTool.addEventListener("click", () => {
-        // Invoke color grab, but also set the current tool
-        // to it, to avoid NPE on next click for clor.
-        useTool = colorGrab;
-        colorGrab();
-        toggleActiveButton(colorGrabTool);
-    });        
-}
-
-function initGridChange() {
-    const gridSizeSlider = document.querySelector(".gridSizeSlider__value");
-    const gridSizeLabel = document.querySelector(".gridSizeSlider__label");
-    gridSizeSlider.addEventListener("input", () => {
-        gridSizeLabel.innerHTML = `${gridSizeSlider.value}x${gridSizeSlider.value}`;
-    });
-    gridSizeSlider.addEventListener("change", () => resizeGrid(gridSizeSlider.value));
-}
-
-function clamp(n, min, max) {
+const clamp = function (n, min, max) {
     return Math.max(min, Math.min(max, n));
 }
 
-function resizeGrid(newSize) {
+const resizeGrid = function (newSize) {
     if (newSize === null) {
         return;
     }
@@ -133,7 +126,7 @@ function resizeGrid(newSize) {
     createBlocks();
 }
 
-function createBlocks() {
+const createBlocks = function () {
     for (let i = 0; i < gridSize; i += 1) {
         for (let j = 0; j < gridSize; j += 1) {
             const block = createBlock(gridSize);
@@ -145,7 +138,7 @@ function createBlocks() {
     }
 }
 
-function createBlock() {
+const createBlock = function () {
     const div = document.createElement("div");
     div.classList.add("block");
     div.style.width = (CANVAS_WIDTH / gridSize) + PX;

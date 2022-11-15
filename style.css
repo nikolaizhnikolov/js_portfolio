@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projects {
+    display: flex;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project__image {
+    width: 200px;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image {
+    width: 32px;
+    
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.footer__image:hover {
+    transform: rotate(360deg) scale(1.2);
+}
