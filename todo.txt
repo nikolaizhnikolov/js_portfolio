@@ -1,8 +1,7 @@
 Priority:
 Style main page.
-Rename JS portfolio to simply portfolio
 Research how to make it more modular OR have more control over it.
-This should transition to a full portfolio not only a JS one.
+This could transition to a full portfolio not only a JS one.
 
 Etch exercises:
  - Modularize
@@ -10,9 +9,8 @@ Etch exercises:
  - I don't really need a dependency manager tho.
  - Have init as a scoped anonymous function.
 
-DONE: 
-
-Add Indexing to Main TOP_Projects page
- - Make it public.
- - Push it to github pages.
-Change readme to index.html and see if GH pages is fine with it.
+ In the future:
+ Redo this whole thing with Node.js and React
+ Host it yourself
+ Add Navigation to projects instead of the current layout.
+ 
