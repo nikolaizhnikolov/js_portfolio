@@ -37,17 +37,30 @@ let result = "";
     const displayHistory = document.querySelector(".display__history");
     const displayResult = document.querySelector(".display__result");
 
-    const updateResult = function() {
+    const updateResult = (value) => {
+        result += value;
         displayResult.textContent = result;
     }
 
+    const clearResult = () => {
+        result = "";
+        displayResult.textContent = result;
+    }
+
+    const clear = document.querySelector(".clear");
+    clear.addEventListener("click", () => clearResult());
+
     const numbers = document.querySelectorAll(".number");
-    console.log(numbers);
     numbers.forEach((n) => {
         n.addEventListener("click", () => {
-            result += n.dataset.value;
-            updateResult();
+            updateResult(n.dataset.value);
         })
     });
+
+    // const decimalPoint ...
+
+    // const clear ...
+
+    // const operators ... one-by-one.
 
 })();
