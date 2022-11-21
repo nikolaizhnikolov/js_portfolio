@@ -45,7 +45,7 @@ let result = "";
     console.log(numbers);
     numbers.forEach((n) => {
         n.addEventListener("click", () => {
-            result += n.textContent;
+            result += n.dataset.value;
             updateResult();
         })
     });
