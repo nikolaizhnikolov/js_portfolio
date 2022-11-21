@@ -1,6 +1,12 @@
+:root{
+    --screen: 400px;
+    --border: 1px;
+}
+
 .content,
 .content *{
-    border: solid thin black;
+    border: solid var(--border) black;
+    box-sizing: border-box;
 }
 
 body {
@@ -10,7 +16,7 @@ body {
 }
 
 .content {
-    width: 400px;
+    width: min-content;
     padding: 16px;
     
     display: flex;
@@ -19,7 +25,7 @@ body {
 }
 
 .display {
-    width: 100%;
+    width: var(--screen);
     text-align: right;
 }
 
@@ -28,36 +34,16 @@ body {
     padding: 2px 8px 2px 0;
 }
 
-.utility {
-    width: 100%;
-    padding: 4px;
-}
-
 .numbers {
-    width: 65%;
-    padding: 4px;
-
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.number {
-    width: 30%;
-    text-align: center;
-}
-
-.arithmetic {
-    padding: 4px;
-    width: 30%;
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .button {
+    width: calc(var(--screen) / 4 - var(--border));
+    height: 40px;
+    padding: 0;
+    
     background: none;
     cursor: pointer;
 }
