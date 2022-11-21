@@ -1,0 +1,71 @@
+.content,
+.content *{
+    border: solid thin black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.content {
+    width: 400px;
+    padding: 16px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.display {
+    width: 100%;
+    text-align: right;
+}
+
+.display__history,
+.display__active {
+    padding: 2px 8px 2px 0;
+}
+
+.utility {
+    width: 100%;
+    padding: 4px;
+}
+
+.numbers {
+    width: 65%;
+    padding: 4px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.number {
+    width: 30%;
+    text-align: center;
+}
+
+.arithmetic {
+    padding: 4px;
+    width: 30%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.button {
+    background: none;
+    cursor: pointer;
+}
+
+.button:hover {
+     background-color: lightgray;   
+}
+
+.button:active {
+    background-color: gray;
+}
