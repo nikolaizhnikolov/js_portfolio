@@ -29,3 +29,25 @@ const operate = function (operator, a, b) {
     
     return OPERATORS[operator](a, b);
 }
+
+let history = "";
+let result = "";
+
+(function() {
+    const displayHistory = document.querySelector(".display__history");
+    const displayResult = document.querySelector(".display__result");
+
+    const updateResult = function() {
+        displayResult.textContent = result;
+    }
+
+    const numbers = document.querySelectorAll(".number");
+    console.log(numbers);
+    numbers.forEach((n) => {
+        n.addEventListener("click", () => {
+            result += n.textContent;
+            updateResult();
+        })
+    });
+
+})();
