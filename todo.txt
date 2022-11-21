@@ -14,3 +14,8 @@ Etch exercises:
  Host it yourself
  Add Navigation to projects instead of the current layout.
  
+ Calculator:
+    Decide on a design before continuing forward.
+    Lay it out on a UX wireframe
+    Choose a color scheme
+    Proceed...
