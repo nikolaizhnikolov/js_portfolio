@@ -24,6 +24,8 @@ const clear = () => {
     setResult(ZERO);
 }
 
+const clearEntry = () => setResult(ZERO);
+
 const deleteLastSymbol = () => {
     history.pop().pop();
     updateHistory();
@@ -64,18 +66,12 @@ const evaluate = () => {
 }
 
 (function() {
-    document.querySelector(".clear").addEventListener("click", () => {
-        setHistory(0);
-        setResult(0);
-    });
-
-    document.querySelector(".clearEntry").addEventListener("click", () => {
-        setResult(0);
-    });
-
-    document.querySelector(".backspace").addEventListener("click", () => {
-        deleteLastSymbol();
-    });
+    document.querySelector(".clear")
+        .addEventListener("click", () => clear());
+    document.querySelector(".clearEntry")
+        .addEventListener("click", () => clearEntry());
+    document.querySelector(".backspace")
+        .addEventListener("click", () => deleteLastSymbol());
 
     document.querySelectorAll(".number").forEach((n) => {
         n.addEventListener(("click"), appendNumber(n.dataset.value));
