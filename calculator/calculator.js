@@ -3,14 +3,15 @@ const displayResult = document.querySelector(".display__result");
 
 const ZERO = "0";
 
-let history = [[ZERO]];
+let history = ZERO;
+let entry = ZERO;
 let result = ZERO;
 
 const updateHistory = () => displayHistory.textContent = history;
 const updateResult = () => displayResult.textContent = result;
 
 const setHistory = (value) => {
-    history = [[value]];
+    history = String(value);
     updateHistory();
 }
 
@@ -26,8 +27,12 @@ const clear = () => {
 
 const clearEntry = () => setResult(ZERO);
 
-const deleteLastSymbol = () => {
-    history.pop().pop();
+const deleteLast = () => {
+    if(history.length === 1)
+        setHistory(ZERO);
+    else
+        history = history.slice(0, history.length - 1);
+
     updateHistory();
 }
 
@@ -71,7 +76,7 @@ const evaluate = () => {
     document.querySelector(".clearEntry")
         .addEventListener("click", () => clearEntry());
     document.querySelector(".backspace")
-        .addEventListener("click", () => deleteLastSymbol());
+        .addEventListener("click", () => deleteLast());
 
     document.querySelectorAll(".number").forEach((n) => {
         n.addEventListener(("click"), appendNumber(n.dataset.value));
