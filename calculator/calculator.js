@@ -1,19 +1,27 @@
 const displayHistory = document.querySelector(".display__history");
 const displayResult = document.querySelector(".display__result");
 
-let history = [["0"]];
-let result = "0";
+const ZERO = "0";
+
+let history = [[ZERO]];
+let result = ZERO;
 
 const updateHistory = () => displayHistory.textContent = history;
+const updateResult = () => displayResult.textContent = result;
 
 const setHistory = (value) => {
-    history = [String(value)];
-    displayHistory.textContent = history;
+    history = [[value]];
+    updateHistory();
 }
 
 const setResult = (value) => {
     result = String(value);
-    displayResult.textContent = result;
+    updateResult();
+}
+
+const clear = () => {
+    setHistory(ZERO);
+    setResult(ZERO);
 }
 
 const deleteLastSymbol = () => {
@@ -34,16 +42,21 @@ const appendNumber = (n) => {
     // calculate result
 }
 
-const appendZero = () => {} 
+const appendZero = () => {
+    // dont forget to push the popped element first.
+    // calculate result
+} 
 
-const appendDecimalPoint = () => {}
+const appendDecimalPoint = () => {
+    // dont forget to push the popped element first.
+}
 
 const appendOperator = (o) => {
-    // append logic
 }
 
 const negate = () => {
-
+    // dont forget to push the popped element first.
+    // calculate result
 }
 
 const evaluate = () => {
@@ -65,7 +78,7 @@ const evaluate = () => {
     });
 
     document.querySelectorAll(".number").forEach((n) => {
-        appendNumber(n.dataset.value);
+        n.addEventListener(("click"), appendNumber(n.dataset.value));
     });
 
     document.querySelector(".decimalPoint").addEventListener("click", () => {
@@ -73,14 +86,14 @@ const evaluate = () => {
     });
 
     document.querySelectorAll(".operator").forEach((n) => {
-        appendOperator(n.dataset.value);
+        n.addEventListener(("click"), appendOperator(n.dataset.value));
     });
 
-    document.querySelectorAll(".negate").forEach((n) => {
+    document.querySelector(".negate").addEventListener("click", () => {
         negate();
     });
 
-    document.querySelectorAll(".equals").forEach((n) => {
+    document.querySelector(".evaluate").addEventListener("click", () => {
         evaluate();
     });
 })();
