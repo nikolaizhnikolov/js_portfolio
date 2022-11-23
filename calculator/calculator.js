@@ -3,15 +3,14 @@ const displayResult = document.querySelector(".display__result");
 
 const ZERO = "0";
 
-let history = ZERO;
-let entry = ZERO;
+let history = [ZERO];
 let result = ZERO;
 
 const updateHistory = () => displayHistory.textContent = history;
 const updateResult = () => displayResult.textContent = result;
 
 const setHistory = (value) => {
-    history = String(value);
+    history = [String(value)];
     updateHistory();
 }
 
@@ -28,10 +27,16 @@ const clear = () => {
 const clearEntry = () => setResult(ZERO);
 
 const deleteLast = () => {
-    if(history.length === 1)
-        setHistory(ZERO);
+    let entry = history[history.length - 1];
+    entry = entry.slice(0, entry.length - 1);
+
+    if(entry.length === 0)
+        history.pop();
     else
-        history = history.slice(0, history.length - 1);
+        history[history.length - 1] = entry;
+
+    if(history.length === 0)
+        setHistory(ZERO);
 
     updateHistory();
 }
