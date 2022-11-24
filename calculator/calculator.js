@@ -54,10 +54,13 @@ const appendNumber = (num) => {
 
     let entry = history[LAST_ENTRY()];
     if(!isNaN(entry)) {
-        if(entry === ZERO)
+        if(entry === ZERO) {
             entry = num;
-        else
+        } else {
             entry += num;
+            entry = String(util.clamp(entry, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER));
+        }
+
         history[LAST_ENTRY()] = entry;
     } else {
         history.push(String(num));
