@@ -15,19 +15,6 @@ Etch exercises:
  Add Navigation to projects instead of the current layout.
  
  Calculator:
-   JS Logic:
-      Append Number
-         Append Zero
-      Append DecimalPoint
-      Append Operator
-
-      Clear
-      ClearEntry
-      Backspace
-
-      Negate
-      Evaluate
-
 
     Choose a color scheme
     Proceed...
