@@ -46,6 +46,7 @@ const deleteLast = () => {
         setHistory(ZERO);
 
     updateHistory();
+    evaluate();
 }
 
 const appendNumber = (num) => {
@@ -90,7 +91,9 @@ const negate = () => {
     if(!isNaN(entry) && Number(entry) !== 0) {
         history[LAST_ENTRY()] = String(-entry);
     }
+    
     updateHistory();
+    evaluate();
 }
 
 const evaluate = () => {
