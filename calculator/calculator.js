@@ -5,7 +5,7 @@ const ZERO          = "0";
 const WHITESPACE    = " ";
 const DASH          = "-";
 const DECIMAL_POINT = ".";
-const DIVISION      = "/";
+const DIVIDE      = "/";
 
 let history = [ZERO];
 let result = ZERO;
@@ -112,13 +112,13 @@ const evaluate = () => {
         const entry = Number(history[i]);
         const operator = history[i-1];
 
-        if(entry === 0 && operator === DIVISION) {
+        if(entry === 0 && operator === DIVIDE) {
             setHistory(ZERO);
             setResult("Cannot divide by zero!");
             return;
         }
 
-        base = operate(operator, base, entry);
+        base = operations.operate(operator, base, entry);
     }
 
     setResult(base);
