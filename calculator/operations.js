@@ -4,18 +4,18 @@ const multiply  = (a, b) => a * b;
 const divide    = (a, b) => a / b;
 const remainder = (a, b) => a % b;
 
-const ADD = 0;
-const SUBTRACT = 1;
-const MULTIPLY = 2;
-const DIVIDE = 3;
-const REMAINDER = 4;
+const ADD = "+";
+const SUBTRACT = "-";
+const MULTIPLY = "*";
+const DIVIDE = "/";
+const REMAINDER = "%";
 
 const OPERATORS =  {
-    0 : add,
-    1 : subtract,
-    2 : multiply,
-    3 : divide,
-    4 : remainder
+    "+" : add,
+    "-" : subtract,
+    "*" : multiply,
+    "/" : divide,
+    "%" : remainder
 }
 
 const operate = function (operator, a, b) {
@@ -23,7 +23,10 @@ const operate = function (operator, a, b) {
         throw TypeError("No such operator exists!");
     }
 
-    if (typeof a !== "number" || typeof b !== "number") {
+    a = Number(a);
+    b = Number(b);
+
+    if (isNaN(a) || isNaN(b)) {
         throw TypeError("Operation Arguments Must be Numeric!");
     }
     

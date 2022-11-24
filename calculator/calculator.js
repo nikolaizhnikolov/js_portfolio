@@ -5,6 +5,7 @@ const ZERO          = "0";
 const WHITESPACE    = " ";
 const DASH          = "-";
 const DECIMAL_POINT = ".";
+const DIVISION      = "/";
 
 let history = [ZERO];
 let result = ZERO;
@@ -93,7 +94,31 @@ const negate = () => {
 }
 
 const evaluate = () => {
+    if(history.length < 3) {
+        setResult(history[0]);
+        return;
+    }
 
+    if(isNaN(history[LAST_ENTRY()])) {
+        delete history[LAST_ENTRY()];
+        return;
+    }
+
+    let base = Number(history[0]);
+    for(let i = 2; i < history.length; i+= 2) {
+        const entry = Number(history[i]);
+        const operator = history[i-1];
+
+        if(entry === 0 && operator === DIVISION) {
+            setHistory(ZERO);
+            setResult("Cannot divide by zero!");
+            return;
+        }
+
+        base = operate(operator, base, entry);
+    }
+
+    setResult(base);
 }
 
 (function() {
@@ -118,5 +143,8 @@ const evaluate = () => {
     document.querySelector(".negate")
         .addEventListener("click", negate);
     document.querySelector(".evaluate")
-        .addEventListener("click", evaluate);
+        .addEventListener("click", () => {
+            evaluate();
+            setHistory(ZERO);
+        });
 })();
