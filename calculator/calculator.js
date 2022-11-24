@@ -30,7 +30,7 @@ const deleteLast = () => {
     let entry = history[history.length - 1];
     entry = entry.slice(0, entry.length - 1);
 
-    if(entry.length === 0)
+    if(entry.length === 0 || entry === "-")
         history.pop();
     else
         history[history.length - 1] = entry;
@@ -67,8 +67,11 @@ const appendOperator = (o) => {
 }
 
 const negate = () => {
-    // dont forget to push the popped element first.
-    // calculate result
+    const last = Number(history[history.length - 1]);
+    if(last !== NaN && last !== "0") {
+        history[history.length - 1] = String(-last);
+    }
+    updateHistory();
 }
 
 const evaluate = () => {
