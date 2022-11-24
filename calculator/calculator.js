@@ -2,10 +2,12 @@ const displayHistory = document.querySelector(".display__history");
 const displayResult = document.querySelector(".display__result");
 
 const ZERO = "0";
+const DECIMAL_POINT = ".";
 
 let history = [ZERO];
 let result = ZERO;
 
+const LAST_ENTRY = () => history.length - 1;
 const updateHistory = () => displayHistory.textContent = history;
 const updateResult = () => displayResult.textContent = result;
 
@@ -27,13 +29,13 @@ const clear = () => {
 const clearEntry = () => setResult(ZERO);
 
 const deleteLast = () => {
-    let entry = history[history.length - 1];
+    let entry = history[LAST_ENTRY()];
     entry = entry.slice(0, entry.length - 1);
 
     if(entry.length === 0 || entry === "-")
         history.pop();
     else
-        history[history.length - 1] = entry;
+        history[LAST_ENTRY()] = entry;
 
     if(history.length === 0)
         setHistory(ZERO);
@@ -43,33 +45,38 @@ const deleteLast = () => {
 
 const appendNumber = (n) => {
     if(Number(n) === NaN) { throw TypeError("Can only append numbers!"); }
-    if(n === 0) { appendZero(); return; }
 
-    // pop last symbol 
-    // if number
-    //  if zero pop another one to see whether to push or replace
-    // else push 
+    let entry = history[LAST_ENTRY()];
+    if(Number(entry) !== NaN) {
+        if(entry === ZERO)
+            entry = n;
+        else
+            entry += n;
+        history[LAST_ENTRY()] = entry;
+    } else {
+        history.push(String(n));
+    }
 
-    // dont forget to push the popped element first.
-    // calculate result
+    updateHistory();
+    evaluate();
 }
 
-const appendZero = () => {
-    // dont forget to push the popped element first.
-    // calculate result
-} 
-
 const appendDecimalPoint = () => {
-    // dont forget to push the popped element first.
+    const entry = history[LAST_ENTRY()];
+    if(Number(entry) !== NaN && !(entry.includes(DECIMAL_POINT))){
+        history[LAST_ENTRY()] = entry + DECIMAL_POINT;
+    }
+
+    updateHistory();    
 }
 
 const appendOperator = (o) => {
 }
 
 const negate = () => {
-    const last = Number(history[history.length - 1]);
-    if(last !== NaN && last !== "0") {
-        history[history.length - 1] = String(-last);
+    const entry = Number(history[LAST_ENTRY()]);
+    if(entry !== NaN && entry !== ZERO) {
+        history[LAST_ENTRY()] = String(-entry);
     }
     updateHistory();
 }
@@ -80,29 +87,25 @@ const evaluate = () => {
 
 (function() {
     document.querySelector(".clear")
-        .addEventListener("click", () => clear());
+        .addEventListener("click", clear);
     document.querySelector(".clearEntry")
-        .addEventListener("click", () => clearEntry());
+        .addEventListener("click", clearEntry);
     document.querySelector(".backspace")
-        .addEventListener("click", () => deleteLast());
+        .addEventListener("click", deleteLast);
 
     document.querySelectorAll(".number").forEach((n) => {
-        n.addEventListener(("click"), appendNumber(n.dataset.value));
+        n.addEventListener("click", () => appendNumber(n.dataset.value));
     });
 
-    document.querySelector(".decimalPoint").addEventListener("click", () => {
-        appendDecimalPoint();
-    });
+    document.querySelector(".decimalPoint")
+        .addEventListener("click", appendDecimalPoint);
 
     document.querySelectorAll(".operator").forEach((n) => {
-        n.addEventListener(("click"), appendOperator(n.dataset.value));
+        n.addEventListener("click", () => appendOperator(n.dataset.value));
     });
 
-    document.querySelector(".negate").addEventListener("click", () => {
-        negate();
-    });
-
-    document.querySelector(".evaluate").addEventListener("click", () => {
-        evaluate();
-    });
+    document.querySelector(".negate")
+        .addEventListener("click", negate);
+    document.querySelector(".evaluate")
+        .addEventListener("click", evaluate);
 })();
