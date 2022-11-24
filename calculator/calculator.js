@@ -2,14 +2,18 @@ const displayHistory = document.querySelector(".display__history");
 const displayResult = document.querySelector(".display__result");
 
 const ZERO          = "0";
+const WHITESPACE    = " ";
+const DASH          = "-";
 const DECIMAL_POINT = ".";
 
 let history = [ZERO];
 let result = ZERO;
 
-const LAST_ENTRY = ()       =>  history.length - 1;
-const updateHistory = ()    =>  displayHistory.textContent = history;
-const updateResult = ()     =>  displayResult.textContent = result;
+const LAST_ENTRY =      () =>  history.length - 1;
+const updateResult =    () =>  displayResult.textContent = result;
+const updateHistory =   () =>  displayHistory.textContent = history.reduce(
+    (text, entry) => text + WHITESPACE + entry,
+    "");
 
 const setHistory = (value) => {
     history = [String(value)];
@@ -32,7 +36,7 @@ const deleteLast = () => {
     let entry = history[LAST_ENTRY()];
     entry = entry.slice(0, entry.length - 1);
 
-    if(entry.length === 0 || entry === "-")
+    if(entry.length === 0 || entry === DASH)
         history.pop();
     else
         history[LAST_ENTRY()] = entry;
@@ -67,7 +71,7 @@ const appendDecimalPoint = () => {
         history[LAST_ENTRY()] = entry + DECIMAL_POINT;
     }
 
-    updateHistory();    
+    updateHistory();
 }
 
 const appendOperator = (op) => {
