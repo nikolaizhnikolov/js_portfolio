@@ -110,17 +110,12 @@ let color = "#000000";
     resizeGrid(gridSize);
 })();
 
-
-const clamp = function (n, min, max) {
-    return Math.max(min, Math.min(max, n));
-}
-
 const resizeGrid = function (newSize) {
     if (newSize === null) {
         return;
     }
 
-    gridSize = clamp(newSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
+    gridSize = util.clamp(newSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
 
     removeBlocks();
     createBlocks();
