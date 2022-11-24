@@ -1,15 +1,15 @@
 const displayHistory = document.querySelector(".display__history");
 const displayResult = document.querySelector(".display__result");
 
-const ZERO = "0";
+const ZERO          = "0";
 const DECIMAL_POINT = ".";
 
 let history = [ZERO];
 let result = ZERO;
 
-const LAST_ENTRY = () => history.length - 1;
-const updateHistory = () => displayHistory.textContent = history;
-const updateResult = () => displayResult.textContent = result;
+const LAST_ENTRY = ()       =>  history.length - 1;
+const updateHistory = ()    =>  displayHistory.textContent = history;
+const updateResult = ()     =>  displayResult.textContent = result;
 
 const setHistory = (value) => {
     history = [String(value)];
@@ -43,18 +43,18 @@ const deleteLast = () => {
     updateHistory();
 }
 
-const appendNumber = (n) => {
-    if(Number(n) === NaN) { throw TypeError("Can only append numbers!"); }
+const appendNumber = (num) => {
+    if(isNaN(num)) { throw TypeError("Can only append numbers!"); }
 
     let entry = history[LAST_ENTRY()];
-    if(Number(entry) !== NaN) {
+    if(!isNaN(entry)) {
         if(entry === ZERO)
-            entry = n;
+            entry = num;
         else
-            entry += n;
+            entry += num;
         history[LAST_ENTRY()] = entry;
     } else {
-        history.push(String(n));
+        history.push(String(num));
     }
 
     updateHistory();
@@ -63,19 +63,26 @@ const appendNumber = (n) => {
 
 const appendDecimalPoint = () => {
     const entry = history[LAST_ENTRY()];
-    if(Number(entry) !== NaN && !(entry.includes(DECIMAL_POINT))){
+    if(!isNaN(entry) && !(entry.includes(DECIMAL_POINT))){
         history[LAST_ENTRY()] = entry + DECIMAL_POINT;
     }
 
     updateHistory();    
 }
 
-const appendOperator = (o) => {
+const appendOperator = (op) => {
+    const entry = history[LAST_ENTRY()];
+    if(isNaN(entry))
+        history[LAST_ENTRY()] = op;
+    else
+        history.push(op);
+
+    updateHistory();
 }
 
 const negate = () => {
     const entry = Number(history[LAST_ENTRY()]);
-    if(entry !== NaN && entry !== ZERO) {
+    if(!isNaN(entry) && Number(entry) !== 0) {
         history[LAST_ENTRY()] = String(-entry);
     }
     updateHistory();
