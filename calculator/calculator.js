@@ -123,7 +123,7 @@ const evaluate = () => {
     setResult(base);
 }
 
-(function() {
+(function init() {
     (function initDefaultEvents() {
         document.querySelector(".clear")
             .addEventListener("click", clear);
