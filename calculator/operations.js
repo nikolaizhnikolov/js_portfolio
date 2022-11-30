@@ -9,14 +9,14 @@ const operations = (function() {
     const OP_SUBTRACT   = "-";
     const OP_MULTIPLY   = "*";
     const OP_DIVIDE     = "/";
-    const OP_REMAINDER  = "*";
+    const OP_REMAINDER  = "%";
     
     const OPERATORS =  {
-        OP_ADD :        add,
-        OP_SUBTRACT :   subtract,
-        OP_MULTIPLY :   multiply,
-        OP_DIVIDE :     divide,
-        OP_REMAINDER :  remainder
+        [OP_ADD] :        add,
+        [OP_SUBTRACT] :   subtract,
+        [OP_MULTIPLY] :   multiply,
+        [OP_DIVIDE] :     divide,
+        [OP_REMAINDER] :  remainder
     }
     
     const operate = function (operator, a, b) {
@@ -36,6 +36,10 @@ const operations = (function() {
 
     return {
         operate,
-        operators
+        PLUS:        OP_ADD,
+        MINUS:   OP_SUBTRACT,
+        MULTIPLIER:   OP_MULTIPLY,
+        DIVIDER:     OP_DIVIDE,
+        REMAINDER:  OP_REMAINDER
     }
 })();
