@@ -15,6 +15,11 @@ body {
     transition: transform 0.2s;
 }
 
+/* Transition Animations */
+.home__image:hover {
+    transform: scale(1.20);
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -42,6 +47,17 @@ body {
     background: white;
     border: thick solid;
     margin: 16px;
+
+    transition: transform 0.4s;
+    transition-delay: 0.1s;
+}
+
+.buttons button:hover {
+    transform: scale(1.10);
+}
+
+.buttons button:active {
+    background-color: gray;
 }
 
 .buttons button img {    
@@ -88,3 +104,11 @@ body {
     height: 20px;
     border: solid black;
 }
+
+/* 
+Icon credit:
+
+https://www.flaticon.com/free-icon/stone_5461437
+https://www.flaticon.com/free-icon/copy_2099182
+https://www.flaticon.com/free-icon/scissors_639219
+*/
