@@ -101,3 +101,18 @@ body {
 .key:active {
     background-color: gray;
 }
+.home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.home__image {
+    width: 50px;
+    transition: transform 0.2s;
+}
+
+/* Transition Animations */
+.home__image:hover {
+    transform: scale(1.20);
+}
