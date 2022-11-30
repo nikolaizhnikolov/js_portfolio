@@ -150,8 +150,7 @@ const evaluate = () => {
 
     function initKeyboardEvents() {    
         document.addEventListener("keydown", (e) => {
-            // console.log(e.code);
-            // console.log(e.shiftKey);
+            console.log(e.code);
             const shiftHeld = e.shiftKey;
             const code = e.code.toLowerCase();
             switch (true) {
@@ -160,29 +159,34 @@ const evaluate = () => {
                 case /backspace/.test(code):
                     deleteLast(); break;
 
+                case /enter/.test(code):
+                case /numpadenter/.test(code):
+                    evaluate(); 
+                    setHistory(ZERO); break;
+                    
+                case /equal/.test(code) && shiftHeld:
+                case /numpadadd/.test(code):
+                    appendOperator(operations.PLUS); break;
+
+                case /minus/.test(code) && shiftHeld:
+                case /numpadsubtract/.test(code):
+                    appendOperator(operations.MINUS); break;
+
+                case /digit8/.test(code) && shiftHeld:
+                case /numpadmultiply/.test(code):
+                    appendOperator(operations.MULTIPLIER); break;
+
+                case /slash/.test(code):
+                case /numpaddivide/.test(code):
+                    appendOperator(operations.DIVIDER); break;
+                    
+                case /digit5/.test(code) && shiftHeld:
+                    appendOperator(operations.REMAINDER); break;
+
                 case /digit|numpad\d/.test(code):
                     appendNumber(code.match(/\d/)[0]); break;
                 case /period/.test(code):
                     appendDecimalPoint(); break;
-
-                case /enter/.test(code):
-                    evaluate(); 
-                    setHistory(ZERO); break;
-
-                case /slash/.test(code):
-                    appendOperator(operations.DIVIDER); break;
-                    
-                case shiftHeld:
-                    switch (true) {
-                        case /equal/.test(code):
-                            appendOperator(operations.PLUS); break;
-                        case /minus/.test(code):
-                            appendOperator(operations.MINUS); break;
-                        case /digit8/.test(code):
-                            appendOperator(operations.MULTIPLIER); break;
-                        case /digit5/.test(code):
-                            appendOperator(operations.REMAINDER); break;
-                    }
             }
         });
     
