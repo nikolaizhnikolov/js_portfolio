@@ -20,15 +20,9 @@ body {
 }
 
 .home {
-    align-self: flex-start;
-    padding: 20px;
-    position: fixed;
-}
-
-.home {
-    background: none;
-    border: none;
-    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .home__image {
