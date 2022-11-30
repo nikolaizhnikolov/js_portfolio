@@ -153,7 +153,6 @@ const evaluate = () => {
 
     (function initKeyboardEvents() {    
         document.addEventListener("keydown", (e) => {
-            console.log(e.code);
             const shiftHeld = e.shiftKey;
             const code = e.code.toLowerCase();
             switch (true) {
