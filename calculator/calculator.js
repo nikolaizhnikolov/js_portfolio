@@ -3,9 +3,7 @@ const displayResult = document.querySelector(".display__result");
 
 const ZERO          = "0";
 const WHITESPACE    = " ";
-const DASH          = "-";
 const DECIMAL_POINT = ".";
-const DIVIDE      = "/";
 
 let history = [ZERO];
 let result = ZERO;
@@ -37,7 +35,7 @@ const deleteLast = () => {
     let entry = history[LAST_ENTRY()];
     entry = entry.slice(0, entry.length - 1);
 
-    if(entry.length === 0 || entry === DASH)
+    if(entry.length === 0 || entry === operations.MINUS)
         history.pop();
     else
         history[LAST_ENTRY()] = entry;
@@ -105,17 +103,12 @@ const evaluate = () => {
         return;
     }
 
-    if(isNaN(history[LAST_ENTRY()])) {
-        delete history[LAST_ENTRY()];
-        return;
-    }
-
     let base = Number(history[0]);
     for(let i = 2; i < history.length; i+= 2) {
         const entry = Number(history[i]);
         const operator = history[i-1];
 
-        if(entry === 0 && operator === DIVIDE) {
+        if(entry === 0 && operator === operations.DIVIDER) {
             setHistory(ZERO);
             setResult("Cannot divide by zero!");
             return;
@@ -128,29 +121,86 @@ const evaluate = () => {
 }
 
 (function() {
-    document.querySelector(".clear")
-        .addEventListener("click", clear);
-    document.querySelector(".clearEntry")
-        .addEventListener("click", clearEntry);
-    document.querySelector(".backspace")
-        .addEventListener("click", deleteLast);
-
-    document.querySelectorAll(".number").forEach((n) => {
-        n.addEventListener("click", () => appendNumber(n.dataset.value));
-    });
-
-    document.querySelector(".decimalPoint")
-        .addEventListener("click", appendDecimalPoint);
-
-    document.querySelectorAll(".operator").forEach((n) => {
-        n.addEventListener("click", () => appendOperator(n.dataset.value));
-    });
-
-    document.querySelector(".negate")
-        .addEventListener("click", negate);
-    document.querySelector(".evaluate")
-        .addEventListener("click", () => {
-            evaluate();
-            setHistory(ZERO);
+    function initDefaultEvents() {
+        document.querySelector(".clear")
+            .addEventListener("click", clear);
+        document.querySelector(".clearEntry")
+            .addEventListener("click", clearEntry);
+        document.querySelector(".backspace")
+            .addEventListener("click", deleteLast);
+    
+        document.querySelectorAll(".number").forEach((n) => {
+            n.addEventListener("click", () => appendNumber(n.dataset.value));
         });
+        document.querySelector(".decimalPoint")
+            .addEventListener("click", appendDecimalPoint);
+    
+        document.querySelectorAll(".operator").forEach((n) => {
+            n.addEventListener("click", () => appendOperator(n.dataset.value));
+        });
+        document.querySelector(".negate")
+            .addEventListener("click", negate);
+
+        document.querySelector(".evaluate")
+            .addEventListener("click", () => {
+                evaluate();
+                setHistory(ZERO);
+        });
+    }
+
+    function initKeyboardEvents() {    
+        document.addEventListener("keydown", (e) => {
+            // console.log(e.code);
+            // console.log(e.shiftKey);
+            const shiftHeld = e.shiftKey;
+            const code = e.code.toLowerCase();
+            switch (true) {
+                case /escape/.test(code): 
+                    clear(); break;
+                case /backspace/.test(code):
+                    deleteLast(); break;
+
+                case /digit|numpad\d/.test(code):
+                    appendNumber(code.match(/\d/)[0]); break;
+                case /period/.test(code):
+                    appendDecimalPoint(); break;
+
+                case /enter/.test(code):
+                    evaluate(); 
+                    setHistory(ZERO); break;
+
+                case /slash/.test(code):
+                    appendOperator(operations.DIVIDER); break;
+                    
+                case shiftHeld:
+                    switch (true) {
+                        case /equal/.test(code):
+                            appendOperator(operations.PLUS); break;
+                        case /minus/.test(code):
+                            appendOperator(operations.MINUS); break;
+                        case /digit8/.test(code):
+                            appendOperator(operations.MULTIPLIER); break;
+                        case /digit5/.test(code):
+                            appendOperator(operations.REMAINDER); break;
+                    }
+            }
+        });
+    
+    
+        document.querySelectorAll(".operator").forEach((n) => {
+            n.addEventListener("click", () => appendOperator(n.dataset.value));
+        });
+    
+        document.querySelector(".negate")
+            .addEventListener("click", negate);
+        document.querySelector(".evaluate")
+            .addEventListener("click", () => {
+                evaluate();
+                setHistory(ZERO);
+            });
+
+    }
+
+    initDefaultEvents();
+    initKeyboardEvents();
 })();
