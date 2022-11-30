@@ -121,7 +121,7 @@ const evaluate = () => {
 }
 
 (function() {
-    function initDefaultEvents() {
+    (function initDefaultEvents() {
         document.querySelector(".clear")
             .addEventListener("click", clear);
         document.querySelector(".clearEntry")
@@ -146,9 +146,9 @@ const evaluate = () => {
                 evaluate();
                 setHistory(ZERO);
         });
-    }
+    })();
 
-    function initKeyboardEvents() {    
+    (function initKeyboardEvents() {    
         document.addEventListener("keydown", (e) => {
             console.log(e.code);
             const shiftHeld = e.shiftKey;
@@ -179,7 +179,7 @@ const evaluate = () => {
                 case /slash/.test(code):
                 case /numpaddivide/.test(code):
                     appendOperator(operations.DIVIDER); break;
-                    
+
                 case /digit5/.test(code) && shiftHeld:
                     appendOperator(operations.REMAINDER); break;
 
@@ -203,8 +203,5 @@ const evaluate = () => {
                 setHistory(ZERO);
             });
 
-    }
-
-    initDefaultEvents();
-    initKeyboardEvents();
+    })();
 })();
