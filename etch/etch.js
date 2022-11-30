@@ -50,6 +50,60 @@ let mousePressed = false;
 let drawGrid = true;
 let color = "#000000";
 
+const resizeGrid = function (newSize) {
+    if (newSize === null) {
+        return;
+    }
+
+    gridSize = util.clamp(newSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
+
+    removeBlocks();
+    createBlocks();
+}
+
+const createBlocks = function () {
+    for (let i = 0; i < gridSize; i += 1) {
+        for (let j = 0; j < gridSize; j += 1) {
+            const block = createBlock(gridSize);
+            if(drawGrid) {
+                toggleGridLines(block, i+1, j+1);
+            }
+            canvas.appendChild(block);
+        }
+    }
+}
+
+const createBlock = function () {
+    const div = document.createElement("div");
+    div.classList.add("block");
+    div.style.width = (CANVAS_WIDTH / gridSize) + PX;
+    div.style.height = (CANVAS_HEIGHT / gridSize) + PX;
+
+    div.addEventListener("mousedown", () => useTool(div));
+    div.addEventListener("mouseover", () => {
+        if (mousePressed) useTool(div)
+    });
+
+    return div;
+}
+
+function toggleGridLines(block, row, column) {
+    block.classList.toggle("block--defaultgrid");
+    if(column % gridSize === 0) {
+        block.classList.toggle("block--rightcol");
+    }
+    if(row / gridSize === 1) {
+        block.classList.toggle("block--bottomrow");
+    }
+}
+
+function removeBlocks() {
+    while (canvas.childElementCount > 0) {
+        canvas.removeChild(canvas.lastChild);
+    }
+}
+
+
 (function init() {
     // Set mouse events to only paint when mouse is clicked/held.
     (function initMouseControls() {
@@ -109,56 +163,3 @@ let color = "#000000";
     // Finally make the initial grid.
     resizeGrid(gridSize);
 })();
-
-const resizeGrid = function (newSize) {
-    if (newSize === null) {
-        return;
-    }
-
-    gridSize = util.clamp(newSize, MIN_GRID_SIZE, MAX_GRID_SIZE);
-
-    removeBlocks();
-    createBlocks();
-}
-
-const createBlocks = function () {
-    for (let i = 0; i < gridSize; i += 1) {
-        for (let j = 0; j < gridSize; j += 1) {
-            const block = createBlock(gridSize);
-            if(drawGrid) {
-                toggleGridLines(block, i+1, j+1);
-            }
-            canvas.appendChild(block);
-        }
-    }
-}
-
-const createBlock = function () {
-    const div = document.createElement("div");
-    div.classList.add("block");
-    div.style.width = (CANVAS_WIDTH / gridSize) + PX;
-    div.style.height = (CANVAS_HEIGHT / gridSize) + PX;
-
-    div.addEventListener("mousedown", () => useTool(div));
-    div.addEventListener("mouseover", () => {
-        if (mousePressed) useTool(div)
-    });
-
-    return div;
-}
-
-function toggleGridLines(block, row, column) {
-    block.classList.toggle("block--defaultgrid");
-    if(column % gridSize === 0) {
-        block.classList.toggle("block--rightcol");
-    }
-    if(row / gridSize === 1) {
-        block.classList.toggle("block--bottomrow");
-    }
-}
-
-function removeBlocks() {
-    while (canvas.childElementCount > 0) {
-        canvas.removeChild(canvas.lastChild);
-    }
-}
