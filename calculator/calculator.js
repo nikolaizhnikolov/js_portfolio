@@ -78,6 +78,9 @@ const appendDecimalPoint = () => {
 }
 
 const appendOperator = (op) => {
+    if(history.length === 1 && history[0] === ZERO)
+        setHistory(result);
+
     const entry = history[LAST_ENTRY()];
     if(isNaN(entry))
         history[LAST_ENTRY()] = op;
