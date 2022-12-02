@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root{
     --screen: 360px;
     --border: 1px;
     --padding: 10px;
+
+    --primary: #FF731D;
+    --secondary: #FFF7E9;
+    --ternary: #5F9DF7;
+    --quarternary: #1746A2;
 }
 
 .content,
@@ -16,6 +23,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-family: "Roboto", sans-serif;
 }
 
 .content {
@@ -29,6 +38,7 @@ body {
     gap: calc(var(--padding));
 
     box-shadow: 5px 5px;
+    background-color: var(--secondary);
 }
 
 .misc,
@@ -45,6 +55,9 @@ body {
 
 .misc__name {
     margin: 0 2px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 8px;
 }
 
 .misc__panels {
@@ -57,6 +70,7 @@ body {
     height: 16px;
     margin: 0 2px;
     border: solid var(--border) black;
+    background-color: var(--primary);
 }
 
 .display {
@@ -66,13 +80,12 @@ body {
     align-items: center;
     gap: var(--padding);
     margin-bottom: var(--padding);
+    background-color: var(--ternary);
 }
 
 .display__history,
 .display__result {
     width: calc(var(--screen) - var(--padding));
-    /* padding: 5px 29px; */
-    /*     height: 32px; */
 }
 
 .backspace {
@@ -92,14 +105,24 @@ body {
     
     background: none;
     cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.number {
+    background-color: var(--ternary);
+}
+
+.key:not(.number) {
+    background-color: var(--ternary);  
 }
 
 .key:hover {
-     background-color: lightgray;   
+     background-color: var(--quarternary);   
 }
 
 .key:active {
-    background-color: gray;
+    background-color: var(--quarternary);
 }
 .home {
     position: absolute;

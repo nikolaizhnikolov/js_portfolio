@@ -112,7 +112,6 @@ const evaluate = () => {
         const operator = history[i-1];
 
         if(entry === 0 && operator === operations.DIVIDER) {
-            setHistory(ZERO);
             setResult("Cannot divide by zero!");
             return;
         }
