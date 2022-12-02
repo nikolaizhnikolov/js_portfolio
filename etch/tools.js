@@ -30,7 +30,7 @@ function colorGrab() {
         // Reset tool and cursor
         useTool = paint;
         canvas.style.cursor = "auto";
-        toggleActiveButton(document.querySelector(".tools__brush"));
+        toggleActiveTool(document.querySelector(".tools__brush"));
     }, {once: true}); // Only do it once
 }
 
