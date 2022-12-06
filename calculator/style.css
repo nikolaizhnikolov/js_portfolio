@@ -27,6 +27,13 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+/* =========== START CSS-DOODLE CODE ============= */
+css-doodle {
+    position: absolute;
+    z-index: -1;
+}
+/* ================ END ====================== */
+
 .content {
     width: min-content;
     height: min-content;
