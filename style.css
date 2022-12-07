@@ -32,10 +32,8 @@ body {
     font-size: 20px;
 }
 
-.project__image {
-    width: 200px;
-
-    border: solid 2px black;
+.project > a {
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px -2px;
     
@@ -43,7 +41,11 @@ body {
     cursor: pointer;
 }
 
-.project__image:hover {
+.project__image {
+    width: 200px;
+}
+
+.project > a:hover {
     transform: scale(1.05);
 }
 
@@ -53,7 +55,8 @@ body {
     align-items: center;
     gap: 12px;
     font-size: 20px;
-    min-height: calc(100vh - 100px);
+    position: relative;
+    top:100px;
 }
 
 .footer__text {
