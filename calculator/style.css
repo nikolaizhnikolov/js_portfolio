@@ -8,12 +8,12 @@
     --primary: #FF731D;
     --secondary: #FFF7E9;
     --ternary: #5F9DF7;
+    --ternary-light: #B1CFFB;
     --quarternary: #1746A2;
 }
 
 .content,
-.display,
-.key {
+.display{
     border: solid var(--border) black;
     box-sizing: border-box;
 }
@@ -74,7 +74,7 @@ css-doodle {
 
 .misc__panel {
     width: 16px;
-    height: 16px;
+    height: 18px;
     margin: 0 2px;
     border: solid var(--border) black;
     background-color: var(--primary);
@@ -87,7 +87,7 @@ css-doodle {
     align-items: center;
     gap: var(--padding);
     margin-bottom: var(--padding);
-    background-color: var(--ternary);
+    background-color: var(--ternary-light);
 }
 
 .display__history,
@@ -110,27 +110,29 @@ css-doodle {
     width: calc(var(--screen) / 4 - var(--padding));
     height: 40px;
     
-    background: none;
+    border: none;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
-}
+    font-size: 18px;
 
-.number {
     background-color: var(--ternary);
+    box-shadow: 0px 1px 1px var(--quarternary), 
+        1px 0px 1px var(--quarternary), 
+        1px 2px 1px var(--quarternary),
+        2px 2px 1px var(--quarternary), 
+        2px 3px 1px var(--quarternary), 
+        3px 3px 1px var(--quarternary)
 }
 
-.key:not(.number) {
-    background-color: var(--ternary);  
+.key:active{
+    position: relative;
+    top: 2px;
+    left: 2px;
+    box-shadow: 0px 1px 1px var(--quarternary), 
+        1px 0px 1px var(--quarternary), 
+        1px 2px 1px var(--quarternary)
 }
 
-.key:hover {
-     background-color: var(--quarternary);   
-}
-
-.key:active {
-    background-color: var(--quarternary);
-}
 .home {
     position: absolute;
     top: 20px;
