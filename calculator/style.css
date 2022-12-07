@@ -133,6 +133,13 @@ css-doodle {
         1px 2px 1px var(--quarternary)
 }
 
+.operator:not([data-value="%"]),
+.negate,
+.evaluate,
+.decimalPoint {
+    font-size: 22px;
+}
+
 .home {
     position: absolute;
     top: 20px;
