@@ -7,13 +7,12 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://unpkg.com/css-doodle@0.30.10/css-doodle.min.js" defer></script>
-    <script src="./doodle.js" defer></script>
     <script src="../util.js" defer></script>
     <script src="./operations.js" defer></script>
     <script src="./calculator.js" defer></script>
 </head>
 <body>
-    <css-doodle grid="20">
+    <!-- <css-doodle grid="20">
         :doodle {
             grid-gap: 2px;
             width: 90%;
@@ -28,13 +27,14 @@
             :after {
             }
         } 
-    </css-doodle>
+    </css-doodle> -->
     <div class="home">
         <a href="../index.html" class="home__button">
             <img class="home__image" src="../images/home.svg" alt="home">
         </a>
     </div>
     <div class="content">
+
         <div class="misc">
             <div class="misc__name">JASIO</div>
             <div class="misc__panels">
@@ -55,11 +55,11 @@
             <button class="key clear">C</button>
             <button class="key clearEntry">CE</button>
             <button class="key operator" data-value="%">%</button>
-            <button class="key operator" data-value="/">/</button>
+            <button class="key operator" data-value="/">÷</button>
             <button class="key number" data-value="7">7</button>
             <button class="key number" data-value="8">8</button>
             <button class="key number" data-value="9">9</button>
-            <button class="key operator" data-value="*">*</button>
+            <button class="key operator" data-value="*">×</button>
             <button class="key number" data-value="4">4</button>
             <button class="key number" data-value="5">5</button>
             <button class="key number" data-value="6">6</button>
@@ -68,7 +68,7 @@
             <button class="key number" data-value="2">2</button>
             <button class="key number" data-value="3">3</button>
             <button class="key operator" data-value="+">+</button>
-            <button class="key negate">+-</button> 
+            <button class="key negate">±</button> 
             <button class="key number" data-value="0">0</button>
             <button class="key decimalPoint" data-value=".">.</button>
             <button class="key evaluate" data-value="equal">=</button>
