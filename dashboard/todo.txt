@@ -1,0 +1,18 @@
+THEME - Git/Tech/Gaming
+
+sidebar - logo (project title)
+sidebar - navigation
+sidebar - branding
+
+header - search bar
+header - notifications
+header - profile logo & name
+header - buttons
+
+content - projects - Wannabe game projects
+content - announcements/news - GOTY
+content - trending
+
+color theme
+font - roboto
+icons - material

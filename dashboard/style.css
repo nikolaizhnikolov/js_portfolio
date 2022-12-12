@@ -1,0 +1,25 @@
+*:not(html) {
+    border: solid thin black;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template: 100px 1fr / 1fr 4fr;
+}
+
+.sidebar {
+    grid-row: 1 / span 2;
+}
+
+.header {
+    grid-column: 2;
+}
+
+.content {
+    grid-area: 2 / 2;
+}
