@@ -72,13 +72,30 @@ body {
     grid-column: 2;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    column-gap: 50px;
     align-items: center;
 }
 
 .searchform {
     display: grid;
-    grid-template-columns: var(--icon-size) 1fr;
-    column-gap: 20px
+    grid-template-columns: var(--icon-size) minmax(100px, 1fr);
+    column-gap: 10px;
+    align-items: center;
+    justify-items: center;
+
+    margin-left: 10px;
+}
+
+.searchform > input {
+    width: 100%;
+    height: 32px;
+    border: solid thin black;
+    border-radius: 10px;
+}
+
+.searchform > input:hover,
+.searchform > input:focus{
+    background-color: lightgray;
 }
 
 .profileInfo {
