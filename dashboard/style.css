@@ -11,6 +11,7 @@
     font-weight: bold;
 
     --img-size: 36px;
+    --icon-size: 48px;
 }
 
 body {
@@ -31,6 +32,23 @@ body {
 
 .icon {
     width: var(--img-size);
+}
+
+.iconButton {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-cotent: center;
+}
+
+.iconButton:hover {
+    cursor: pointer;
+    background: lightgray;
+    border-radius: calc(var(--icon-size)/2)
 }
 
 .sidebar__header,
@@ -57,13 +75,13 @@ body {
 
 .searchform {
     display: grid;
-    grid-template-columns: var(--img-size) 1fr;
+    grid-template-columns: var(--icon-size) 1fr;
     column-gap: 20px
 }
 
 .profileInfo {
     display: grid;
-    grid-template-columns: 36px 36px 1fr;
+    grid-template-columns: repeat(2, var(--icon-size)) 1fr;
     column-gap: 5px;
     align-items: center;
 }

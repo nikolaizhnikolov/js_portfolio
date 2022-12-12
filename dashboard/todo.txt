@@ -1,4 +1,4 @@
-THEME - Git/Tech/Gaming
+THEME - Gribbly Studios Custom Git Page for projects
 
 sidebar - logo (project title)
 sidebar - navigation
@@ -7,7 +7,6 @@ sidebar - branding
 header - search bar
 header - notifications
 header - profile logo & name
-header - buttons
 
 content - projects - Wannabe game projects
 content - announcements/news - GOTY
