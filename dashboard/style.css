@@ -1,5 +1,6 @@
-*:not(html):not(p):not(img) {
+*:not(html):not(p):not(.icon) {
     border: solid thin black;
+    box-sizing: border-box;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -8,6 +9,8 @@
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
+
+    --img-size: 36px;
 }
 
 body {
@@ -26,10 +29,8 @@ body {
     row-gap: 20px;
 }
 
-.sidebar__header > img,
-.navigation__element > img,
-.sidebar__settings > img {
-    width: 48px;
+.icon {
+    width: var(--img-size);
 }
 
 .sidebar__header,
@@ -43,12 +44,28 @@ body {
 
 .sidebar__header > p,
 .navigation__element > p,
-.settings__element > p{
-    padding: 0 20px;
+.settings__element > p {
+    padding: 0 12px;
 }
 
 .header {
     grid-column: 2;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+}
+
+.searchform {
+    display: grid;
+    grid-template-columns: var(--img-size) 1fr;
+    column-gap: 20px
+}
+
+.profileInfo {
+    display: grid;
+    grid-template-columns: 36px 36px 1fr;
+    column-gap: 5px;
+    align-items: center;
 }
 
 .content {
