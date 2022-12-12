@@ -2,6 +2,14 @@
     border: solid thin black;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
 body {
     height: 100vh;
     width: 100vw;
@@ -36,7 +44,7 @@ body {
 .sidebar__header > p,
 .navigation__element > p,
 .settings__element > p{
-    padding-left: 20px;
+    padding: 0 20px;
 }
 
 .header {
