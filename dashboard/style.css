@@ -1,12 +1,10 @@
-*:not(html) {
+*:not(html):not(p):not(img) {
     border: solid thin black;
 }
 
 body {
     height: 100vh;
     width: 100vw;
-    margin: 0;
-    padding: 0;
 
     display: grid;
     grid-template: 100px 1fr / 1fr 4fr;
@@ -14,6 +12,31 @@ body {
 
 .sidebar {
     grid-row: 1 / span 2;
+
+    display: grid;
+    grid-template-rows: 1fr 3fr 3fr;
+    row-gap: 20px;
+}
+
+.sidebar__header > img,
+.navigation__element > img,
+.sidebar__settings > img {
+    width: 48px;
+}
+
+.sidebar__header,
+.navigation__element,
+.settings__element {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebar__header > p,
+.navigation__element > p,
+.settings__element > p{
+    padding-left: 20px;
 }
 
 .header {
