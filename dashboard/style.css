@@ -1,4 +1,4 @@
-.sidebar,
+.navigation,
 .header,
 .content {
     border: solid thin black;
@@ -12,8 +12,8 @@
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 
-    --img-size: 36px;
-    --icon-size: 48px;
+    --img-size: 24px;
+    --icon-size: 36px;
 }
 
 body {
@@ -21,15 +21,7 @@ body {
     width: 100vw;
 
     display: grid;
-    grid-template: 100px 1fr / 1fr 4fr;
-}
-
-.sidebar {
-    grid-row: 1 / span 2;
-
-    display: grid;
-    grid-template-rows: 100px 3fr 3fr;
-    row-gap: 20px;
+    grid-template: 100px 4fr / minmax(200px, 1fr) 4fr;
 }
 
 .icon {
@@ -53,25 +45,41 @@ body {
     border-radius: calc(var(--icon-size)/2)
 }
 
-.sidebar__header,
-.navigation__element,
-.settings__element {
+.navigation{
+    grid-row: 1 / span 2;
+
     display: grid;
-    grid-template-columns: 48px 1fr;
+    grid-template-rows: 100px 1fr 1fr;
     align-items: center;
-    cursor: pointer;
+
+    padding-left: 10px;    
 }
 
-.sidebar__header > p,
-.navigation__element > p,
-.settings__element > p {
+.navigation__main {
+    align-self: start;
+}
+
+.navigation__additional {
+    align-self: end;
+    margin-bottom: 20px;
+}
+
+.navElement {
+    display: grid;
+    grid-template-columns: var(--icon-size) 1fr;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.navElement > p{
     padding: 0 12px;
 }
 
 .header {
     grid-column: 2;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr minmax(200px, 300px);
     column-gap: 50px;
     align-items: center;
 }
@@ -91,6 +99,8 @@ body {
     height: 32px;
     border: solid thin black;
     border-radius: 10px;
+    padding-left: 20px;
+    box-sizing: border-box;
 }
 
 .searchform > input:hover,
