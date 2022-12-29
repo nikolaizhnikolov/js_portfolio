@@ -3,9 +3,11 @@
 :root {
     --darkgray: #202020;
 }
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    height: 100vh;
 }
 
 header {
@@ -63,4 +65,32 @@ header {
 
 .book__pages::after {
     content: ' p.';
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image {
+    width: 32px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.footer__image:hover {
+    transform: rotate(360deg) scale(1.2);
 }
