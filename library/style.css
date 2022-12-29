@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --darkgray: #202020;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+header {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px;
+    color: var(--darkgray);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo > img {
+    width: 48px;
+    position: relative;
+    bottom: 11px;
+    padding-right: 11px;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    
+    padding: 20px;
+}
+
+.book,
+.addBookButton {
+    border: solid 2px var(--darkgray);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.book.read {
+    background-color: #cefad0;
+}
+
+.book__title,
+.book__author,
+.book__pages {
+    padding: 5px;
+}
+
+.book__title {
+    margin: 8px 0;
+    font-size: 24px;
+}
+
+.book__author {
+    color: var(--darkgray);
+}
+
+.book__pages::after {
+    content: ' p.';
+}
