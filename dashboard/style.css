@@ -1,0 +1,121 @@
+.navigation,
+.header,
+.content {
+    border: solid thin black;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+
+    --img-size: 24px;
+    --icon-size: 36px;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    grid-template: 100px 4fr / minmax(200px, 1fr) 4fr;
+}
+
+.icon {
+    width: var(--img-size);
+}
+
+.iconButton {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconButton:hover {
+    cursor: pointer;
+    background: lightgray;
+    border-radius: calc(var(--icon-size)/2)
+}
+
+.navigation{
+    grid-row: 1 / span 2;
+
+    display: grid;
+    grid-template-rows: 100px 1fr 1fr;
+    align-items: center;
+
+    padding-left: 10px;    
+}
+
+.navigation__main {
+    align-self: start;
+}
+
+.navigation__additional {
+    align-self: end;
+    margin-bottom: 20px;
+}
+
+.navElement {
+    display: grid;
+    grid-template-columns: var(--icon-size) 1fr;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.navElement > p{
+    padding: 0 12px;
+}
+
+.header {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 2fr minmax(200px, 300px);
+    column-gap: 50px;
+    align-items: center;
+}
+
+.searchform {
+    display: grid;
+    grid-template-columns: var(--icon-size) minmax(100px, 1fr);
+    column-gap: 10px;
+    align-items: center;
+    justify-items: center;
+
+    margin-left: 10px;
+}
+
+.searchform > input {
+    width: 100%;
+    height: 32px;
+    border: solid thin black;
+    border-radius: 10px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.searchform > input:hover,
+.searchform > input:focus{
+    background-color: lightgray;
+}
+
+.profileInfo {
+    display: grid;
+    grid-template-columns: repeat(2, var(--icon-size)) 1fr;
+    column-gap: 5px;
+    align-items: center;
+    justify-items: center;
+}
+
+.content {
+    grid-area: 2 / 2;
+}

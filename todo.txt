@@ -1,33 +1,10 @@
-Priority:
-Style main page.
-Research how to make it more modular OR have more control over it.
-This could transition to a full portfolio not only a JS one.
-
 Etch exercises:
  - Modularize
  - Change all func decl to func expressions.
- - I don't really need a dependency manager tho.
- - Have init as a scoped anonymous function.
 
  In the future:
  Redo this whole thing with Node.js and React
  Host it yourself
  Add Navigation to projects instead of the current layout.
+ Add SASS to play around with.
  
- Calculator:
-   Add Keyboard support
-   0-9
-   <=
-   +-/*%
-   .
-   ENTER
-
-   Styling:
-   Find a better font.
-   Make number biggers.
-   Add some colors
-   Change some operators to pictures for more clarity.
-
-   Choose a color scheme
-   
-   Add to main projects page

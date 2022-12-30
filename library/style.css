@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --darkgray: #202020;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 100vh;
+
+    display: grid;
+    grid-template-rows: 100px 1fr 50px;
+}
+
+header {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 30px 20px 20px 20px;
+    color: var(--darkgray);
+    box-shadow: 0 2px 2px  lightgrey;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo > img {
+    width: 48px;
+    position: relative;
+    bottom: 11px;
+    padding-right: 11px;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    
+    padding: 20px;
+}
+
+.book {
+    padding: 5px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 1px lightgray;
+    height: 200px;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 50px;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.book__title,
+.book__author,
+.book__pages {
+    padding: 2px;
+    text-align: center;
+}
+
+.book__title {
+    margin: 8px 0;
+    font-size: 24px;
+}
+
+.book__author {
+    color: var(--darkgray);
+}
+
+.book__pages::after {
+    content: ' p.';
+}
+
+.addBookButton {
+    border: none;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 1px lightgray;
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    height: 200px;
+}
+
+.removeBookButton {
+    width: 100px;
+    height: 32px;
+    border: none;
+    box-shadow: 0px 1px 2px 0 gray;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.addBookButton:hover,
+.removeBookButton:hover {
+    background: #eee;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay.visible {
+    display: block;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    text-align: center;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease-in-out;
+}
+
+.modal.visible { 
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modalForm {
+    display: grid;
+    grid-template: 40px repeat(5, 40px) / 1fr 20px;
+    gap: 10px 0px;
+    background-color: white;
+    padding: 24px;
+}
+
+.modalForm > * {
+    grid-column: 1 / span 2;
+}
+
+.modalForm > label {
+    grid-column: 1 / span 1;
+    text-align: left;
+    align-self: center;
+}
+
+.modalForm > input[type="checkbox"] {
+    grid-column: 2 / span 1;
+}
+
+.modalForm h3 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modalForm {
+    font-size: 18px;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image {
+    width: 32px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.footer__image:hover {
+    transform: rotate(360deg) scale(1.2);
+}

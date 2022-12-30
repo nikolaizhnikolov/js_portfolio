@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="../meyer.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="../images/openBook.png">
+    <script src="./library.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/openBook.png" alt="Open Book">
+            Library
+        </div>
+    </header>
+    <div class="content">
+        <div class="books">
+            <div class="book">
+                <div class="book__title"> Title </div>
+                <div class="book__author"> Author </div>
+                <div class="book__pages"> 250 </div>
+                <button class="removeBookButton">
+                    Remove
+                </button>
+            </div>
+            <button class="addBookButton">
+                +add
+            </button>
+        </div>
+        <div class="modal">
+            <form class="modalForm" action="#" method="get">
+                <h3>Add new book:</h3>
+                <input class="form__title" name="title" type="text" required placeholder="Title">
+                <input class="form__author" name="author" type="text" required placeholder="Author">
+                <input class="form__pages" name="pages" type="number" required placeholder="Pages">
+                <label for="read">Has been read: </label>
+                <input class="form__read" name="read" type="checkbox">
+                <button class="modalSubmit" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="overlay"></div>
+    </div>
+    <footer class="footer">
+        <p class="footer__text">Copyright © 2022 nikolaizhnikolov</p>
+        <a href="https://github.com/nikolaizhnikolov">
+            <img class="footer__image" src="../images/github.png" alt="Github">
+        </a>
+    </footer>
+</body>
+</html>
