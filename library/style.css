@@ -15,6 +15,7 @@ header {
     font-weight: bold;
     padding: 20px;
     color: var(--darkgray);
+    box-shadow: 0 2px 2px  lightgrey;
 }
 
 .logo {
@@ -42,6 +43,10 @@ header {
     border: solid 2px var(--darkgray);
     border-radius: 8px;
     padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .book.read {
@@ -51,7 +56,7 @@ header {
 .book__title,
 .book__author,
 .book__pages {
-    padding: 5px;
+    padding: 2px;
 }
 
 .book__title {
@@ -65,6 +70,20 @@ header {
 
 .book__pages::after {
     content: ' p.';
+}
+
+.removeBookButton {
+    width: 100px;
+    height: 32px;
+    margin: 15px 0 5px 0px;
+    border: solid thin black;
+    border-radius: 2px;
+    background: none;
+    cursor: pointer;
+}
+
+.removeBookButton:hover {
+    background: lightgray;
 }
 
 /* Footer */
