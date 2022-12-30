@@ -8,6 +8,9 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     height: 100vh;
+
+    display: grid;
+    grid-template-rows: 100px 1fr 50px;
 }
 
 header {
@@ -38,25 +41,24 @@ header {
     padding: 20px;
 }
 
-.book,
-.addBookButton {
-    border: solid 2px var(--darkgray);
-    border-radius: 8px;
+.book {
     padding: 5px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 1px lightgray;
+    height: 200px;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 50px;
+    grid-template-columns: 1fr;
     align-items: center;
-}
-
-.book.read {
-    background-color: #cefad0;
+    justify-items: center;
 }
 
 .book__title,
 .book__author,
 .book__pages {
     padding: 2px;
+    text-align: center;
 }
 
 .book__title {
@@ -72,26 +74,33 @@ header {
     content: ' p.';
 }
 
+.addBookButton {
+    border: none;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 1px lightgray;
+    cursor: pointer;
+    font-size: 24px;
+    background: none;
+    height: 200px;
+}
+
 .removeBookButton {
     width: 100px;
     height: 32px;
-    margin: 15px 0 5px 0px;
-    border: solid thin black;
-    border-radius: 2px;
+    border: none;
+    box-shadow: 0px 1px 2px 0 gray;
     background: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
+.addBookButton:hover,
 .removeBookButton:hover {
-    background: lightgray;
+    background: #eee;
 }
 
 /* Footer */
 .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     align-items: center;
     gap: 12px;
