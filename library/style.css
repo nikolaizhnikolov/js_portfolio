@@ -16,7 +16,7 @@ body {
 header {
     font-size: 32px;
     font-weight: bold;
-    padding: 20px;
+    padding: 30px 20px 20px 20px;
     color: var(--darkgray);
     box-shadow: 0 2px 2px  lightgrey;
 }
@@ -36,7 +36,7 @@ header {
 .books {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    gap: 24px;
     
     padding: 20px;
 }
@@ -97,6 +97,66 @@ header {
 .addBookButton:hover,
 .removeBookButton:hover {
     background: #eee;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay.visible {
+    display: block;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    text-align: center;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease-in-out;
+}
+
+.modal.visible { 
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modalForm {
+    display: grid;
+    grid-template: 40px repeat(5, 40px) / 1fr 20px;
+    gap: 10px 0px;
+    background-color: white;
+    padding: 24px;
+}
+
+.modalForm > * {
+    grid-column: 1 / span 2;
+}
+
+.modalForm > label {
+    grid-column: 1 / span 1;
+    text-align: left;
+    align-self: center;
+}
+
+.modalForm > input[type="checkbox"] {
+    grid-column: 2 / span 1;
+}
+
+.modalForm h3 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modalForm {
+    font-size: 18px;
 }
 
 /* Footer */

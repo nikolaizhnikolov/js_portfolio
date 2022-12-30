@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
+    <link rel="stylesheet" href="../meyer.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="../images/openBook.png">
     <script src="./library.js" defer></script>
@@ -30,27 +31,18 @@
                 +add
             </button>
         </div>
-        <div class="overlay"></div>
-        <div class="addBookContainer">
-            <form class="addBookForm" action="#" method="get">
-                <div class="inputField">
-                    <label for="title">Title</label>
-                    <input name="title" type="text" required >
-                </div>
-                <div class="inputField">
-                    <label for="author">Author</label>
-                    <input name="author" type="text" required>
-                </div>
-                <div class="inputField">
-                    <label for="pages">Pages</label>
-                    <input name="pages" type="number" required>
-                </div>
-                <div class="inputField">
-                    <label for="read">Read</label>
-                    <input name="read" type="checkbox" required>
-                </div>
+        <div class="modal">
+            <form class="modalForm" action="#" method="get">
+                <h3>Add new book:</h3>
+                <input class="form__title" name="title" type="text" required placeholder="Title">
+                <input class="form__author" name="author" type="text" required placeholder="Author">
+                <input class="form__pages" name="pages" type="number" required placeholder="Pages">
+                <label for="read">Has been read: </label>
+                <input class="form__read" name="read" type="checkbox">
+                <button class="modalSubmit" type="submit">Submit</button>
             </form>
         </div>
+        <div class="overlay"></div>
     </div>
     <footer class="footer">
         <p class="footer__text">Copyright © 2022 nikolaizhnikolov</p>

@@ -21,6 +21,43 @@ You will need to associate your DOM elements with the
 const library = (function () {
     let lib = [];
 
+    const addBookButton = document.querySelector(".addBookButton");
+    const modal = document.querySelector(".modal");
+    const modalForm = document.querySelector(".modalForm");
+    const overlay = document.querySelector(".overlay");
+    const modalSubmit = document.querySelector(".modalSubmit");
+
+    const showAddForm = function () {
+        modal.classList.add("visible");
+        overlay.classList.add("visible");
+    };
+
+    const closeAddForm = function () {
+        modal.classList.remove("visible");
+        overlay.classList.remove("visible");
+    };
+
+    addBookButton.addEventListener("click", showAddForm);
+    overlay.addEventListener("click", closeAddForm);
+    document.addEventListener("keydown", (e) => {
+        if (e.code === "Escape") closeAddForm();
+    });
+
+    modalSubmit.addEventListener("click", (e) => {
+        if (modalForm.checkValidity()) {
+            e.preventDefault();
+
+            const title = document.querySelector(".form__title").value;
+            const author = document.querySelector(".form__author").value;
+            const pages = document.querySelector(".form__pages").value;
+            const read = document.querySelector(".form__read").value;
+
+            const newBook = new Book(title, author, pages, read);
+            addBookCard(newBook);
+            closeAddForm();
+        }
+    });
+
     const Book = function (title, author, pages, read) {
         this.title = title;
         this.author = author;
@@ -37,8 +74,9 @@ const library = (function () {
         const books = document.querySelector(".books");
         books.removeChild(book);
         lib.forEach((b) => {
-            const title = book.getElementsByClassName("book__title")[0].textContent;
-            if ( b.title === title) {
+            const title =
+                book.getElementsByClassName("book__title")[0].textContent;
+            if (b.title === title) {
                 const index = lib.indexOf(b);
                 lib.splice(index, 1);
                 return;
@@ -73,7 +111,6 @@ const library = (function () {
         }
         bookCard.appendChild(createRemoveButton(book.title));
 
-        const addBookButton = document.querySelector(".addBookButton");
         const books = addBookButton.parentNode;
         books.insertBefore(bookCard, addBookButton);
     };
