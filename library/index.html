@@ -17,9 +17,38 @@
     </header>
     <div class="content">
         <div class="books">
+            <div class="book">
+                <div class="book__title"> Title </div>
+                <div class="book__author"> Author </div>
+                <div class="book__pages"> 250 </div>
+                <button class="removeBookButton">
+                    Remove
+                </button>
+            </div>
             <button class="addBookButton">
                 +add
             </button>
+        </div>
+        <div class="overlay"></div>
+        <div class="addBookContainer">
+            <form class="addBookForm" action="#" method="get">
+                <div class="inputField">
+                    <label for="title">Title</label>
+                    <input name="title" type="text" required >
+                </div>
+                <div class="inputField">
+                    <label for="author">Author</label>
+                    <input name="author" type="text" required>
+                </div>
+                <div class="inputField">
+                    <label for="pages">Pages</label>
+                    <input name="pages" type="number" required>
+                </div>
+                <div class="inputField">
+                    <label for="read">Read</label>
+                    <input name="read" type="checkbox" required>
+                </div>
+            </form>
         </div>
     </div>
     <footer class="footer">
