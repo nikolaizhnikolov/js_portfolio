@@ -1,8 +1,43 @@
-.gameGrid {
+:root {
+    --player1-color: rgba(1, 111, 185, 1);
+    --player2-color: rgba(230, 15, 76, 1);
+
+    --active-color: var(--player1-color);
+}
+
+body {
     display: grid;
-    grid-template: repeat(3, 100px) / repeat(3, 100px);
+    grid-template-rows: 100px 1fr 100px;
+    
+    height: 100vh;
+}
+
+.content {
+    width: 80%;
+    padding: 0 10%;
+}
+
+.gameGrid {
+    height: 100%;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
 
 .cell {
-    border: solid black;
+    border-top: solid black;
+    border-left: solid black;
+    box-sizing: border-box;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(-n + 3) {
+    border-top: none;
+}
+
+.cell:hover:after {
+    color: var(--active-color);
+    content: "X";
 }
