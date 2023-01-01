@@ -16,8 +16,9 @@ body {
     display: grid;
     grid-template-rows: 100px 1fr 100px;
     gap: 50px;
-    
     height: 100vh;
+    justify-items: center;
+    align-content: center;
 }
 
 /* ------------------------------------ */
@@ -26,7 +27,6 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
     font-size: 60px;
 }
 
@@ -46,8 +46,8 @@ header {
 /* --------------- Content ------------ */
 /* ------------------------------------ */
 .content {
-    width: 80%;
-    padding: 0 10%;
+    width: 500px;
+    padding: 0 50px;
 }
 
 .gameGrid {
@@ -97,7 +97,6 @@ header {
     gap: 12px;
     margin: 12px;
     font-size: 20px;
-    justify-content: center;
 }
 
 .footer__text {
