@@ -17,6 +17,26 @@ body {
     height: 100vh;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.word:nth-child(n+2) {
+    text-indent: 1rem;
+}
+
+.word:nth-child(odd):first-letter {
+    color: var(--player1-color);
+}
+
+.word:nth-child(even):first-letter {
+    color: var(--player2-color);
+}
+
 .content {
     width: 80%;
     padding: 0 10%;
@@ -38,7 +58,6 @@ body {
     justify-content: center;
     align-content: center;
 }
-
 
 .cell:nth-child(3n + 1) {
     border-left: none;
