@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 :root {
     --player1-color: rgba(1, 111, 185, 1);
     --player2-color: rgba(230, 15, 76, 1);
+    --player1-piece: "O";
+    --player2-piece: "X";
 
     --active-color: var(--player1-color);
+    --active-piece: var(--player1-piece);
 }
 
 body {
@@ -27,7 +32,13 @@ body {
     border-top: solid black;
     border-left: solid black;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }
+
 
 .cell:nth-child(3n + 1) {
     border-left: none;
@@ -37,7 +48,16 @@ body {
     border-top: none;
 }
 
-.cell:hover:after {
+.cell:hover {
     color: var(--active-color);
-    content: "X";
+    opacity: 0.5;
+}
+
+.cell:hover:after {
+    content: var(--active-piece);
+}
+
+.cell:active {
+    color: var(--active-color);
+    opacity: 1.0;
 }
