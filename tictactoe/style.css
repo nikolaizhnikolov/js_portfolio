@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 :root {
-    --player1-color: rgba(1, 111, 185, 1);
-    --player2-color: rgba(230, 15, 76, 1);
-    --player1-piece: "O";
-    --player2-piece: "X";
+    --p1-color: rgba(1, 111, 185, 1);
+    --p2-color: rgba(230, 15, 76, 1);
+    --p1-marker: "O";
+    --p2-marker: "X";
 
-    --active-color: var(--player1-color);
-    --active-piece: var(--player1-piece);
+    --active-color: var(--p1-color);
+    --active-marker: var(--p1-marker);
 
     font-family: 'Montserrat', sans-serif;
 }
@@ -35,11 +35,11 @@ header {
 }
 
 .word:nth-child(odd):first-letter {
-    color: var(--player1-color);
+    color: var(--p1-color);
 }
 
 .word:nth-child(even):first-letter {
-    color: var(--player2-color);
+    color: var(--p2-color);
 }
 
 /* ------------------------------------ */
@@ -75,16 +75,16 @@ header {
     border-top: none;
 }
 
-.cell:hover {
+.empty:hover {
     color: var(--active-color);
     opacity: 0.5;
 }
 
-.cell:hover:after {
-    content: var(--active-piece);
+.empty:hover:after {
+    content: var(--active-marker);
 }
 
-.cell:active {
+.empty:active {
     color: var(--active-color);
     opacity: 1.0;
 }
