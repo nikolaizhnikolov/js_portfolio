@@ -8,6 +8,8 @@
 
     --active-color: var(--player1-color);
     --active-piece: var(--player1-piece);
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -17,12 +19,14 @@ body {
     height: 100vh;
 }
 
+/* ------------------------------------ */
+/* --------------- Header ------------- */
+/* ------------------------------------ */
 header {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 60px;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .word:nth-child(n+2) {
@@ -37,6 +41,9 @@ header {
     color: var(--player2-color);
 }
 
+/* ------------------------------------ */
+/* --------------- Content ------------ */
+/* ------------------------------------ */
 .content {
     width: 80%;
     padding: 0 10%;
@@ -52,7 +59,6 @@ header {
     border-top: solid black;
     border-left: solid black;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
     font-size: 48px;
     display: grid;
     justify-content: center;
@@ -79,4 +85,30 @@ header {
 .cell:active {
     color: var(--active-color);
     opacity: 1.0;
+}
+
+/* ------------------------------------ */
+/* --------------- Footer ------------- */
+/* ------------------------------------ */
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image {
+    width: 32px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.footer__image:hover {
+    transform: rotate(360deg) scale(1.2);
 }
