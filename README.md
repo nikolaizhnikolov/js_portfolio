@@ -1,6 +1,6 @@
 # Javascript Projects for Portfolio and Practice.
 
-[Live Preview](https://nikolaizhnikolov.github.io/js_portfolio)
+[Live Preview](https://nikolaizhnikolov.github.io/top_js_portfolio/)
 
 ## List of Projects:
 ### The Odin Project
