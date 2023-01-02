@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root {
+    --p1-color: rgba(1, 111, 185, 1);
+    --p2-color: rgba(230, 15, 76, 1);
+    --p1-marker: "X";
+    --p2-marker: "O";
+
+    --active-color: var(--p1-color);
+    --active-marker: var(--p1-marker);
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 100px 1fr 100px;
+    gap: 50px;
+    height: 100vh;
+    justify-items: center;
+    align-content: center;
+}
+
+/* ------------------------------------ */
+/* --------------- Header ------------- */
+/* ------------------------------------ */
+header {
+    display: flex;
+    align-items: center;
+    font-size: 60px;
+}
+
+.word:nth-child(n+2) {
+    text-indent: 1rem;
+}
+
+.word:nth-child(odd):first-letter {
+    color: var(--p1-color);
+}
+
+.word:nth-child(even):first-letter {
+    color: var(--p2-color);
+}
+
+/* ------------------------------------ */
+/* --------------- Content ------------ */
+/* ------------------------------------ */
+.content {
+    padding: 0 50px;
+    display: grid;
+    grid-template: minmax(150px, 450px) / minmax(150px, 450px);
+}
+
+.gameGrid {
+    height: 100%;
+    display: grid;
+    grid-template: repeat(3, minmax(50px, 150px)) / repeat(3, minmax(50px, 150px));
+}
+
+.cell {
+    border-top: solid black;
+    border-left: solid black;
+    box-sizing: border-box;
+    font-size: 72px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(-n + 3) {
+    border-top: none;
+}
+
+.empty:hover {
+    color: var(--active-color);
+    opacity: 0.5;
+}
+
+.empty:hover:after {
+    content: var(--active-marker);
+}
+
+.empty:active {
+    color: var(--active-color);
+    opacity: 1.0;
+}
+
+.cell.p1 {
+    color: var(--p1-color);
+}
+
+.cell.p2 {
+    color: var(--p2-color);
+}
+
+/* ------------------------------------ */
+/* --------------- Footer ------------- */
+/* ------------------------------------ */
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px;
+    font-size: 20px;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__image {
+    width: 32px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.footer__image:hover {
+    transform: rotate(360deg) scale(1.2);
+}
