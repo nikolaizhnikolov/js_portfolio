@@ -3,8 +3,8 @@
 :root {
     --p1-color: rgba(1, 111, 185, 1);
     --p2-color: rgba(230, 15, 76, 1);
-    --p1-marker: "O";
-    --p2-marker: "X";
+    --p1-marker: "X";
+    --p2-marker: "O";
 
     --active-color: var(--p1-color);
     --active-marker: var(--p1-marker);
@@ -87,6 +87,14 @@ header {
 .empty:active {
     color: var(--active-color);
     opacity: 1.0;
+}
+
+.cell.p1 {
+    color: var(--p1-color);
+}
+
+.cell.p2 {
+    color: var(--p2-color);
 }
 
 /* ------------------------------------ */
