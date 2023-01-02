@@ -61,7 +61,7 @@ header {
     border-top: solid black;
     border-left: solid black;
     box-sizing: border-box;
-    font-size: 48px;
+    font-size: 72px;
     display: grid;
     justify-content: center;
     align-content: center;
