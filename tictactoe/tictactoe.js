@@ -27,31 +27,6 @@ const tictacttoe = (function () {
         return p;
     };
 
-    // /**
-    //  * Player marker controller.
-    //  * Automatically returns next marker to be used.
-    //  */
-    // const marker = (function (m1, m2) {
-
-    //     /**
-    //      * Consumes the marker as soon as it is called.
-    //      * If you need to call the same marker multiple times,
-    //      * store it on first call.
-    //      * @returns marker for next move
-    //      */
-    //     const next = function () {
-    //         if (p1turn) {
-    //             p1turn = false;
-    //             return m1;
-    //         } else {
-    //             p1turn = true;
-    //             return m2;
-    //         }
-    //     };
-
-    //     return { next };
-    // })(X, O);
-
     /**
      * Naive implementation of a cell factory.
      * Assumes a 3x3 grid.
