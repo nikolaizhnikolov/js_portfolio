@@ -14,6 +14,10 @@
 
     --img-size: 24px;
     --icon-size: 36px;
+
+    --primary: white;
+    --secondary: turquoise;
+    --accent: orange;
 }
 
 body {
@@ -21,7 +25,7 @@ body {
     width: 100vw;
 
     display: grid;
-    grid-template: 100px 4fr / minmax(200px, 1fr) 4fr;
+    grid-template: 100px 4fr / minmax(200px, 300px) 4fr;
 }
 
 .icon {
@@ -41,7 +45,7 @@ body {
 
 .iconButton:hover {
     cursor: pointer;
-    background: lightgray;
+    background: var(--accent);
     border-radius: calc(var(--icon-size)/2)
 }
 
@@ -52,7 +56,7 @@ body {
     grid-template-rows: 100px 1fr 1fr;
     align-items: center;
 
-    padding-left: 10px;    
+    padding: 0 10px;    
 }
 
 .navigation__main {
@@ -69,7 +73,10 @@ body {
     grid-template-columns: var(--icon-size) 1fr;
     align-items: center;
     cursor: pointer;
-    
+}
+
+.navElement:hover {
+    background: var(--accent);    
 }
 
 .navElement > p{
@@ -105,7 +112,7 @@ body {
 
 .searchform > input:hover,
 .searchform > input:focus{
-    background-color: lightgray;
+    background-color: var(--accent);
 }
 
 .profileInfo {
