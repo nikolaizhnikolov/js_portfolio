@@ -14,11 +14,14 @@
 
 body {
     display: grid;
-    grid-template-rows: 100px 1fr 100px;
+    grid-template: 100px minmax(300px, 500px) 100px / minmax(400px, 1fr);
     gap: 50px;
     height: 100vh;
-    justify-items: center;
+    width: 100vw;
+    min-height: 400px;
+    min-width: 700px;
     align-content: center;
+    justify-items: center;
 }
 
 /* ------------------------------------ */
@@ -46,15 +49,15 @@ header {
 /* --------------- Content ------------ */
 /* ------------------------------------ */
 .content {
-    padding: 0 50px;
     display: grid;
-    grid-template: minmax(150px, 450px) / minmax(150px, 450px);
+    grid-template: minmax(150px, 100%) / minmax(150px, 100%);
+    justify-items: center;
 }
 
 .gameGrid {
-    height: 100%;
     display: grid;
-    grid-template: repeat(3, minmax(50px, 150px)) / repeat(3, minmax(50px, 150px));
+    grid-template: repeat(3, minmax(50px, 1fr)) / repeat(3, minmax(50px, 1fr));
+    aspect-ratio: 1 / 1;
 }
 
 .cell {
@@ -104,11 +107,11 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 12px;
     font-size: 20px;
 }
 
 .footer__text {
+    text-align: center;
     margin: 0;
 }
 
