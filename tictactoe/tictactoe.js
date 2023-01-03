@@ -1,15 +1,14 @@
 const tictacttoe = (function () {
-
     /**
      * Expected CSS vars in :root
-     * 
+     *
      * --p1-color: ...;
      * --p2-color: ...;
      * --p1-marker: ...;
      * --p2-marker: ...;
-     * 
+     *
      * --active-color: var(--p1-color);
-     * --active-marker: var(--p1-marker);        
+     * --active-marker: var(--p1-marker);
      */
 
     const EMPTY = "";
@@ -22,8 +21,11 @@ const tictacttoe = (function () {
      * Player object
      */
     const player = function (marker, color) {
-        return { marker, color };
-    }
+        let p = Object.create(null);
+        p.marker = marker;
+        p.color = color;
+        return p;
+    };
 
     // /**
     //  * Player marker controller.
@@ -120,28 +122,38 @@ const tictacttoe = (function () {
             cell.textContent = player1.marker;
             cell.classList.remove("empty");
             cell.classList.add("p1");
-            document.documentElement.style.setProperty('--active-color', 'var(--p2-color)');  
-            document.documentElement.style.setProperty('--active-marker', 'var(--p2-marker)');            
-        }
+            document.documentElement.style.setProperty(
+                "--active-color",
+                "var(--p2-color)"
+            );
+            document.documentElement.style.setProperty(
+                "--active-marker",
+                "var(--p2-marker)"
+            );
+        };
 
         const setCellP2Props = function (cell) {
             cell.textContent = player2.marker;
             cell.classList.remove("empty");
             cell.classList.add("p2");
-            document.documentElement.style.setProperty('--active-color', 'var(--p1-color)');  
-            document.documentElement.style.setProperty('--active-marker', 'var(--p1-marker)');   
-        }
+            document.documentElement.style.setProperty(
+                "--active-color",
+                "var(--p1-color)"
+            );
+            document.documentElement.style.setProperty(
+                "--active-marker",
+                "var(--p1-marker)"
+            );
+        };
 
         const makeMove = function (cell) {
             if (cell.textContent !== EMPTY) return;
 
-            if(p1Turn) {
+            if (p1Turn) {
                 setCellP1Props(cell);
             } else {
                 setCellP2Props(cell);
             }
-
-
 
             // TODO let gameState = ...
             evaluateScore(cell.dataset.row, cell.dataset.col);
