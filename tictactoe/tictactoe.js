@@ -1,4 +1,4 @@
-const tictacttoe = (function () {
+const tictactoe = (function () {
     /**
      * Expected CSS vars in :root
      *
@@ -62,6 +62,10 @@ const tictacttoe = (function () {
         let p1Turn = true;
 
         let gameGrid = null;
+        let rows = [[],[],[]];
+        let cols = [[],[],[]];
+        let diag = [];
+        let adiag = [];
 
         const createGrid = function () {
             if (!gameGrid) {
@@ -77,12 +81,20 @@ const tictacttoe = (function () {
             gameGrid = document.createElement("div");
             gameGrid.classList.add("gameGrid");
 
-            for (let index = 0; index < 9; index++) {
-                const cell = cellFactory.createCell(index);
+            for (let i = 0; i < 9; i++) {
+                const cell = cellFactory.createCell(i);
 
                 cell.addEventListener("click", () => makeMove(cell));
 
                 gameGrid.appendChild(cell);
+
+                // Add to internal representation as well.
+                // This helps win evaluation later on
+                rows[parseInt(i / 3)].push(cell);                
+                cols[i % 3].push(cell);
+                if (i % (3 + 1) === 0) diag.push(cell);
+                if (i % (3 - 1) === 0 && i !== 0 && i !== 3 * 3 - 1)
+                    adiag.push(cell);
             }
         };
 
@@ -130,37 +142,66 @@ const tictacttoe = (function () {
                 setCellP2Props(cell);
             }
 
-            // TODO let gameState = ...
-            evaluateScore(cell.dataset.row, cell.dataset.col);
-            // checkTie();
+            let hasWon = evaluateScore(
+                cell.dataset.row,
+                cell.dataset.col,
+                cell.textContent
+            ); 
 
-            //TODO if gameState ... end game
-            //  output result
+            //TODO:
+            if(hasWon) {
+                console.log("you win");
+            }
+
+
 
             p1Turn = !p1Turn;
         };
 
-        const evaluateScore = function (row, col) {
-            console.log(`Evaluating change at row: ${row} col: ${col}`);
-            // check row
-            // check col
-            // if diag check diag
-            // return true or false
+        /**
+         * Called after a move has been made.
+         * Checks row, col and if applicable diag and anti-diag where the move was made.
+         *
+         * @param row
+         * @param col
+         * @returns whether the last move is a winning one
+         */
+        const evaluateScore = function (row, col, marker) {
+            row = Number(row);
+            col = Number(col);
+
+            const rowWin = (rows.every((c) => c.textContent === marker));
+            const colWin = (cols.every((c) => c.textContent === marker));
+            const diagWin = (row === col) ? (diag.every((c) => c.textContent === marker)) : false;
+            const adiagWin = (row + col === (3-1)) ? (adiag.every((c) => c.textContent === marker)) : false;
+            
+            let hasWon = rowWin || colWin || diagWin || adiagWin;
+
+            if(!hasWon) hasWon = isDraw();
+            return hasWon;
         };
+
+        /**
+         * Checks if all cells have a value when a winner is not present
+         */
+        const isDraw = function() {
+            return false;
+            // return gameGrid.every((c) => c.textContent !== EMPTY);
+        }
 
         return { createGrid };
     })(cellFactory);
 
-    const gameGrid = gameManager.createGrid();
-
-    const content = document.querySelector(".content");
-    if (content) {
-        content.appendChild(gameGrid);
-    } else {
-        throw ReferenceError(
-            "Container with class '.content' not found! \n Cannot append game grid."
-        );
-    }
-
-    return { gameGrid, cellFactory, gameManager };
+    return { createGrid: gameManager.createGrid };
 })();
+
+const gameGrid = tictactoe.createGrid();
+
+const content = document.querySelector(".content");
+if (content) {
+    content.appendChild(gameGrid);
+} else {
+    throw ReferenceError(
+        "Container with class '.content' not found! \n Cannot append game grid."
+    );
+}
