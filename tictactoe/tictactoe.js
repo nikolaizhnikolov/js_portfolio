@@ -170,8 +170,8 @@ const tictactoe = (function () {
             row = Number(row);
             col = Number(col);
 
-            const rowWin = (rows.every((c) => c.textContent === marker));
-            const colWin = (cols.every((c) => c.textContent === marker));
+            const rowWin = (rows[row].every((c) => c.textContent === marker));
+            const colWin = (cols[col].every((c) => c.textContent === marker));
             const diagWin = (row === col) ? (diag.every((c) => c.textContent === marker)) : false;
             const adiagWin = (row + col === (3-1)) ? (adiag.every((c) => c.textContent === marker)) : false;
             
