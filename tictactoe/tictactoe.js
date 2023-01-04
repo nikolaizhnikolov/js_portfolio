@@ -51,7 +51,7 @@ const tictactoe = (function () {
     /**
      * Manager for playing Tic Tac Toe.
      *
-     * Use createGrid() to return an Array of HTMLElements
+     * Use createBoard() to return an Array of HTMLElements
      * to attach to your container. The manager will automatically attach
      * onclick events to evalute game state whenever one of the cells is clicked.
      *
@@ -61,32 +61,32 @@ const tictactoe = (function () {
         const player2 = player(O, RED);
         let p1Turn = true;
 
-        let gameGrid = null;
+        let board = null;
         let rows = [[],[],[]];
         let cols = [[],[],[]];
         let diag = [];
         let adiag = [];
 
-        const createGrid = function () {
-            if (!gameGrid) {
+        const createBoard = function () {
+            if (!board) {
                 initGrid();
             } else {
                 resetGrid();
             }
 
-            return gameGrid;
+            return board;
         };
 
         const initGrid = function () {
-            gameGrid = document.createElement("div");
-            gameGrid.classList.add("gameGrid");
+            board = document.createElement("div");
+            board.classList.add("gameGrid");
 
             for (let i = 0; i < 9; i++) {
                 const cell = cellFactory.createCell(i);
 
                 cell.addEventListener("click", () => makeMove(cell));
 
-                gameGrid.appendChild(cell);
+                board.appendChild(cell);
 
                 // Add to internal representation as well.
                 // This helps win evaluation later on
@@ -99,7 +99,7 @@ const tictactoe = (function () {
         };
 
         const resetGrid = function () {
-            gameGrid.childNodes.forEach((cell) => {
+            board.childNodes.forEach((cell) => {
                 cell.textContent = EMPTY;
                 cell.classList.add("empty");
             });
@@ -189,17 +189,17 @@ const tictactoe = (function () {
             // return gameGrid.every((c) => c.textContent !== EMPTY);
         }
 
-        return { createGrid };
+        return { createBoard };
     })(cellFactory);
 
-    return { createGrid: gameManager.createGrid };
+    return { createBoard: gameManager.createBoard };
 })();
 
-const gameGrid = tictactoe.createGrid();
+const board = tictactoe.createBoard();
 
 const content = document.querySelector(".content");
 if (content) {
-    content.appendChild(gameGrid);
+    content.appendChild(board);
 } else {
     throw ReferenceError(
         "Container with class '.content' not found! \n Cannot append game grid."
