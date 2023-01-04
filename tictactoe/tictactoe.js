@@ -79,7 +79,7 @@ const tictactoe = (function () {
 
         const initGrid = function () {
             board = document.createElement("div");
-            board.classList.add("gameGrid");
+            board.classList.add("board");
 
             for (let i = 0; i < 9; i++) {
                 const cell = cellFactory.createCell(i);
@@ -186,7 +186,7 @@ const tictactoe = (function () {
          */
         const isDraw = function() {
             return false;
-            // return gameGrid.every((c) => c.textContent !== EMPTY);
+            // return board.every((c) => c.textContent !== EMPTY);
         }
 
         return { createBoard };

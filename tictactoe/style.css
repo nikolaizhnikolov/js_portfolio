@@ -54,7 +54,7 @@ header {
     justify-items: center;
 }
 
-.gameGrid {
+.board {
     display: grid;
     grid-template: repeat(3, minmax(50px, 1fr)) / repeat(3, minmax(50px, 1fr));
     aspect-ratio: 1 / 1;
