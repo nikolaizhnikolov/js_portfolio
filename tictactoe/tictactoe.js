@@ -62,12 +62,15 @@ const tictactoe = (function () {
         let p1Turn = true;
 
         let board = null;
-        let rows = [[],[],[]];
-        let cols = [[],[],[]];
+        let boardSize = 3;
+        let rows = [[], [], []];
+        let cols = [[], [], []];
         let diag = [];
         let adiag = [];
 
-        const createBoard = function () {
+        const createBoard = function (size) {
+            boardSize = size;
+
             if (!board) {
                 initGrid();
             } else {
@@ -81,7 +84,7 @@ const tictactoe = (function () {
             board = document.createElement("div");
             board.classList.add("board");
 
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < boardSize * boardSize; i++) {
                 const cell = cellFactory.createCell(i);
 
                 cell.addEventListener("click", () => makeMove(cell));
@@ -90,10 +93,10 @@ const tictactoe = (function () {
 
                 // Add to internal representation as well.
                 // This helps win evaluation later on
-                rows[parseInt(i / 3)].push(cell);                
-                cols[i % 3].push(cell);
-                if (i % (3 + 1) === 0) diag.push(cell);
-                if (i % (3 - 1) === 0 && i !== 0 && i !== 3 * 3 - 1)
+                rows[parseInt(i / boardSize)].push(cell);
+                cols[i % boardSize].push(cell);
+                if (i % (boardSize + 1) === 0) diag.push(cell);
+                if (i % (boardSize - 1) === 0 && i !== 0 && i !== (boardSize * boardSize) - 1)
                     adiag.push(cell);
             }
         };
@@ -142,18 +145,17 @@ const tictactoe = (function () {
                 setCellP2Props(cell);
             }
 
-            let hasWon = evaluateScore(
+            let gameState = evaluateScore(
                 cell.dataset.row,
                 cell.dataset.col,
                 cell.textContent
-            ); 
+            );
 
-            //TODO:
-            if(hasWon) {
-                console.log("you win");
-            }
-
-
+            if (gameState === 1) {
+                console.log(`${p1Turn ? player1.marker : player2.marker} has won!`);
+            } else if (gameState === -1){
+                console.log("draw");
+            } 
 
             p1Turn = !p1Turn;
         };
@@ -170,24 +172,34 @@ const tictactoe = (function () {
             row = Number(row);
             col = Number(col);
 
-            const rowWin = (rows[row].every((c) => c.textContent === marker));
-            const colWin = (cols[col].every((c) => c.textContent === marker));
-            const diagWin = (row === col) ? (diag.every((c) => c.textContent === marker)) : false;
-            const adiagWin = (row + col === (3-1)) ? (adiag.every((c) => c.textContent === marker)) : false;
-            
+            const rowWin = rows[row].every((c) => c.textContent === marker);
+            const colWin = cols[col].every((c) => c.textContent === marker);
+            const diagWin =
+                row === col
+                    ? diag.every((c) => c.textContent === marker)
+                    : false;
+            const adiagWin =
+                row + col === boardSize - 1
+                    ? adiag.every((c) => c.textContent === marker)
+                    : false;
+
             let hasWon = rowWin || colWin || diagWin || adiagWin;
 
-            if(!hasWon) hasWon = isDraw();
-            return hasWon;
+            if (hasWon) {
+                return 1;   
+            } else if(isDraw()) {
+                return -1;
+            } else {
+                return hasWon;
+            }
         };
 
         /**
          * Checks if all cells have a value when a winner is not present
          */
-        const isDraw = function() {
-            return false;
-            // return board.every((c) => c.textContent !== EMPTY);
-        }
+        const isDraw = function () {
+            return [...board.children].every((c) => c.textContent !== EMPTY);
+        };
 
         return { createBoard };
     })(cellFactory);
@@ -195,7 +207,7 @@ const tictactoe = (function () {
     return { createBoard: gameManager.createBoard };
 })();
 
-const board = tictactoe.createBoard();
+const board = tictactoe.createBoard(3);
 
 const content = document.querySelector(".content");
 if (content) {
