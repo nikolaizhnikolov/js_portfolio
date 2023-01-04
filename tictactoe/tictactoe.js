@@ -32,10 +32,14 @@ const tictactoe = (function () {
      * Assumes a 3x3 game board.
      */
     const cellFactory = (function () {
-        const createCell = function (index) {
+        const factory = Object.create(null);
+
+        factory.boardSize = 3;
+
+        factory.createCell = function (index) {
             const cell = document.createElement("div");
-            const row = parseInt(index / 3);
-            const col = index % 3;
+            const row = parseInt(index / factory.boardSize);
+            const col = index % factory.boardSize;
 
             cell.className = "cell empty";
             cell.textContent = EMPTY;
@@ -45,7 +49,11 @@ const tictactoe = (function () {
             return cell;
         };
 
-        return { createCell };
+        factory.setBoardSize = function (size) {
+            factory.boardSize = size;
+        };
+
+        return factory;
     })();
 
     /**
@@ -63,13 +71,20 @@ const tictactoe = (function () {
 
         let board = null;
         let boardSize = 3;
-        let rows = [[], [], []];
-        let cols = [[], [], []];
+        let rows = [];
+        let cols = [];
         let diag = [];
         let adiag = [];
 
         const createBoard = function (size) {
-            boardSize = size;
+            if (boardSize !== size) {
+                boardSize = size;
+                cellFactory.setBoardSize(boardSize);
+                document.documentElement.style.setProperty(
+                    "--board-size",
+                    boardSize
+                );
+            }
 
             if (!board) {
                 initBoard();
@@ -84,6 +99,11 @@ const tictactoe = (function () {
             board = document.createElement("div");
             board.classList.add("board");
 
+            for (let i = 0; i < boardSize; i++) {
+                rows.push([]);
+                cols.push([]);
+            }
+
             for (let i = 0; i < boardSize * boardSize; i++) {
                 const cell = cellFactory.createCell(i);
 
@@ -96,7 +116,11 @@ const tictactoe = (function () {
                 rows[parseInt(i / boardSize)].push(cell);
                 cols[i % boardSize].push(cell);
                 if (i % (boardSize + 1) === 0) diag.push(cell);
-                if (i % (boardSize - 1) === 0 && i !== 0 && i !== (boardSize * boardSize) - 1)
+                if (
+                    i % (boardSize - 1) === 0 &&
+                    i !== 0 &&
+                    i !== boardSize * boardSize - 1
+                )
                     adiag.push(cell);
             }
         };
@@ -152,10 +176,12 @@ const tictactoe = (function () {
             );
 
             if (gameState === 1) {
-                console.log(`${p1Turn ? player1.marker : player2.marker} has won!`);
-            } else if (gameState === -1){
+                console.log(
+                    `${p1Turn ? player1.marker : player2.marker} has won!`
+                );
+            } else if (gameState === -1) {
                 console.log("draw");
-            } 
+            }
 
             p1Turn = !p1Turn;
         };
@@ -186,8 +212,8 @@ const tictactoe = (function () {
             let hasWon = rowWin || colWin || diagWin || adiagWin;
 
             if (hasWon) {
-                return 1;   
-            } else if(isDraw()) {
+                return 1;
+            } else if (isDraw()) {
                 return -1;
             } else {
                 return hasWon;
