@@ -5,7 +5,7 @@
     --p2-color: rgba(230, 15, 76, 1);
     --p1-marker: "X";
     --p2-marker: "O";
-    --board-size: 4;
+    --board-size: 3;
 
     --active-color: var(--p1-color);
     --active-marker: var(--p1-marker);
