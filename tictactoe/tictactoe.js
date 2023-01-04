@@ -29,7 +29,7 @@ const tictactoe = (function () {
 
     /**
      * Naive implementation of a cell factory.
-     * Assumes a 3x3 grid.
+     * Assumes a 3x3 game board.
      */
     const cellFactory = (function () {
         const createCell = function (index) {
@@ -72,15 +72,15 @@ const tictactoe = (function () {
             boardSize = size;
 
             if (!board) {
-                initGrid();
+                initBoard();
             } else {
-                resetGrid();
+                resetBoard();
             }
 
             return board;
         };
 
-        const initGrid = function () {
+        const initBoard = function () {
             board = document.createElement("div");
             board.classList.add("board");
 
@@ -101,7 +101,7 @@ const tictactoe = (function () {
             }
         };
 
-        const resetGrid = function () {
+        const resetBoard = function () {
             board.childNodes.forEach((cell) => {
                 cell.textContent = EMPTY;
                 cell.classList.add("empty");
@@ -214,6 +214,6 @@ if (content) {
     content.appendChild(board);
 } else {
     throw ReferenceError(
-        "Container with class '.content' not found! \n Cannot append game grid."
+        "Container with class '.content' not found! \n Cannot append game board."
     );
 }
