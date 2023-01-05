@@ -25,6 +25,17 @@ body {
     justify-items: center;
 }
 
+.home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.home__image {
+    width: 50px;
+    transition: transform 0.2s;
+}
+
 /* ------------------------------------ */
 /* --------------- Header ------------- */
 /* ------------------------------------ */
