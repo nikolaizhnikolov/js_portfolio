@@ -6,6 +6,7 @@ const tictactoe = (function () {
      * --p2-color: ...;
      * --p1-marker: ...;
      * --p2-marker: ...;
+     * --board-size: ...;
      *
      * --active-color: var(--p1-color);
      * --active-marker: var(--p1-marker);
@@ -173,11 +174,13 @@ const tictactoe = (function () {
             );
 
             if (gameState === 1) {
-                const playerScore = document.querySelector(`.score__p${player.number}`);
+                const playerScore = document.querySelector(
+                    `.score__p${player.number}`
+                );
                 playerScore.textContent = Number(playerScore.textContent) + 1;
                 gameOver = true;
             } else if (gameState === -1) {
-                const draw = document.querySelector(".score__draw")
+                const draw = document.querySelector(".score__draw");
                 draw.textContent = Number(draw.textContent) + 1;
                 gameOver = true;
             }
@@ -226,10 +229,13 @@ const tictactoe = (function () {
             return [...board.children].every((c) => c.textContent !== EMPTY);
         };
 
-        return { createBoard, resetBoard};
+        return { createBoard, resetBoard };
     })(cellFactory);
 
-    return { createBoard: gameManager.createBoard, resetBoard: gameManager.resetBoard};
+    return {
+        createBoard: gameManager.createBoard,
+        resetBoard: gameManager.resetBoard,
+    };
 })();
 
 const board = tictactoe.createBoard(3);
