@@ -20,10 +20,11 @@ const tictactoe = (function () {
     /**
      * Player object
      */
-    const player = function (marker, color) {
+    const player = function (marker, color, number) {
         let p = Object.create(null);
         p.marker = marker;
         p.color = color;
+        p.number = number;
         return p;
     };
 
@@ -65,8 +66,8 @@ const tictactoe = (function () {
      *
      */
     const gameManager = (function (cellFactory) {
-        const player1 = player(X, BLUE);
-        const player2 = player(O, RED);
+        const player1 = player(X, BLUE, 1);
+        const player2 = player(O, RED, 2);
         let p1Turn = true;
 
         let board = null;
@@ -126,61 +127,55 @@ const tictactoe = (function () {
         };
 
         const resetBoard = function () {
+            p1Turn = true;
+
             board.childNodes.forEach((cell) => {
                 cell.textContent = EMPTY;
-                cell.classList.add("empty");
+                cell.className = "cell empty";
             });
-        };
 
-        const setCellP1Props = function (cell) {
-            cell.textContent = player1.marker;
-            cell.classList.remove("empty");
-            cell.classList.add("p1");
             document.documentElement.style.setProperty(
                 "--active-color",
-                "var(--p2-color)"
+                `var(--p1-color)`
             );
             document.documentElement.style.setProperty(
                 "--active-marker",
-                "var(--p2-marker)"
+                `var(--p1-marker)`
             );
         };
 
-        const setCellP2Props = function (cell) {
-            cell.textContent = player2.marker;
+        const setCellProps = function (cell, player) {
+            cell.textContent = player.marker;
             cell.classList.remove("empty");
-            cell.classList.add("p2");
+            cell.classList.add(`p${player.number}`);
             document.documentElement.style.setProperty(
                 "--active-color",
-                "var(--p1-color)"
+                `var(--p${player.number == 1 ? 2 : 1}-color)`
             );
             document.documentElement.style.setProperty(
                 "--active-marker",
-                "var(--p1-marker)"
+                `var(--p${player.number == 2 ? 1 : 2}-marker)`
             );
         };
 
         const makeMove = function (cell) {
             if (cell.textContent !== EMPTY) return;
 
-            if (p1Turn) {
-                setCellP1Props(cell);
-            } else {
-                setCellP2Props(cell);
-            }
+            const player = p1Turn ? player1 : player2;
+            setCellProps(cell, player);
 
             let gameState = evaluateScore(
                 cell.dataset.row,
                 cell.dataset.col,
-                cell.textContent
+                player.marker
             );
 
             if (gameState === 1) {
-                console.log(
-                    `${p1Turn ? player1.marker : player2.marker} has won!`
-                );
+                const playerScore = document.querySelector(`.score__p${player.number}`);
+                playerScore.textContent = Number(playerScore.textContent) + 1;
             } else if (gameState === -1) {
-                console.log("draw");
+                const draw = document.querySelector(".score__draw")
+                draw.textContent = Number(draw.textContent) + 1;
             }
 
             p1Turn = !p1Turn;
@@ -216,7 +211,7 @@ const tictactoe = (function () {
             } else if (isDraw()) {
                 return -1;
             } else {
-                return hasWon;
+                return 0;
             }
         };
 
