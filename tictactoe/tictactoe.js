@@ -1,15 +1,15 @@
-const tictacttoe = (function () {
-
+const tictactoe = (function () {
     /**
      * Expected CSS vars in :root
-     * 
+     *
      * --p1-color: ...;
      * --p2-color: ...;
      * --p1-marker: ...;
      * --p2-marker: ...;
-     * 
+     * --board-size: ...;
+     *
      * --active-color: var(--p1-color);
-     * --active-marker: var(--p1-marker);        
+     * --active-marker: var(--p1-marker);
      */
 
     const EMPTY = "";
@@ -21,44 +21,27 @@ const tictacttoe = (function () {
     /**
      * Player object
      */
-    const player = function (marker, color) {
-        return { marker, color };
-    }
-
-    // /**
-    //  * Player marker controller.
-    //  * Automatically returns next marker to be used.
-    //  */
-    // const marker = (function (m1, m2) {
-
-    //     /**
-    //      * Consumes the marker as soon as it is called.
-    //      * If you need to call the same marker multiple times,
-    //      * store it on first call.
-    //      * @returns marker for next move
-    //      */
-    //     const next = function () {
-    //         if (p1turn) {
-    //             p1turn = false;
-    //             return m1;
-    //         } else {
-    //             p1turn = true;
-    //             return m2;
-    //         }
-    //     };
-
-    //     return { next };
-    // })(X, O);
+    const player = function (marker, color, number) {
+        let p = Object.create(null);
+        p.marker = marker;
+        p.color = color;
+        p.number = number;
+        return p;
+    };
 
     /**
-     * Naive implementation of a cell factory.
-     * Assumes a 3x3 grid.
+     * Cell factory.
+     * Assumes a default 3x3 game board.
      */
     const cellFactory = (function () {
-        const createCell = function (index) {
+        const factory = Object.create(null);
+
+        factory.boardSize = 3;
+
+        factory.createCell = function (index) {
             const cell = document.createElement("div");
-            const row = parseInt(index / 3);
-            const col = index % 3;
+            const row = parseInt(index / factory.boardSize);
+            const col = index % factory.boardSize;
 
             cell.className = "cell empty";
             cell.textContent = EMPTY;
@@ -68,112 +51,198 @@ const tictacttoe = (function () {
             return cell;
         };
 
-        return { createCell };
+        factory.setBoardSize = function (size) {
+            factory.boardSize = size;
+        };
+
+        return factory;
     })();
 
     /**
      * Manager for playing Tic Tac Toe.
      *
-     * Use createGrid() to return an Array of HTMLElements
+     * Use createBoard() to return a full game board to
      * to attach to your container. The manager will automatically attach
      * onclick events to evalute game state whenever one of the cells is clicked.
      *
      */
     const gameManager = (function (cellFactory) {
-        const player1 = player(X, BLUE);
-        const player2 = player(O, RED);
+        const player1 = player(X, BLUE, 1);
+        const player2 = player(O, RED, 2);
         let p1Turn = true;
+        let gameOver = false;
 
-        let gameGrid = null;
+        let board = null;
+        let boardSize = 3;
+        let rows = [];
+        let cols = [];
+        let diag = [];
+        let adiag = [];
 
-        const createGrid = function () {
-            if (!gameGrid) {
-                initGrid();
-            } else {
-                resetGrid();
+        const createBoard = function (size) {
+            if (boardSize !== size) {
+                boardSize = size;
+                cellFactory.setBoardSize(boardSize);
+                document.documentElement.style.setProperty(
+                    "--board-size",
+                    boardSize
+                );
             }
 
-            return gameGrid;
+            if (!board) {
+                initBoard();
+            } else {
+                resetBoard();
+            }
+
+            return board;
         };
 
-        const initGrid = function () {
-            gameGrid = document.createElement("div");
-            gameGrid.classList.add("gameGrid");
+        const initBoard = function () {
+            board = document.createElement("div");
+            board.classList.add("board");
 
-            for (let index = 0; index < 9; index++) {
-                const cell = cellFactory.createCell(index);
+            for (let i = 0; i < boardSize; i++) {
+                rows.push([]);
+                cols.push([]);
+            }
+
+            for (let i = 0; i < boardSize * boardSize; i++) {
+                const cell = cellFactory.createCell(i);
 
                 cell.addEventListener("click", () => makeMove(cell));
 
-                gameGrid.appendChild(cell);
+                board.appendChild(cell);
+
+                // Add to internal representation as well.
+                // This helps win evaluation later on
+                rows[parseInt(i / boardSize)].push(cell);
+                cols[i % boardSize].push(cell);
+                if (i % (boardSize + 1) === 0) diag.push(cell);
+                if (
+                    i % (boardSize - 1) === 0 &&
+                    i !== 0 &&
+                    i !== boardSize * boardSize - 1
+                )
+                    adiag.push(cell);
             }
         };
 
-        const resetGrid = function () {
-            gameGrid.childNodes.forEach((cell) => {
+        const resetBoard = function () {
+            p1Turn = true;
+            gameOver = false;
+
+            board.childNodes.forEach((cell) => {
                 cell.textContent = EMPTY;
-                cell.classList.add("empty");
+                cell.className = "cell empty";
             });
+
+            document.documentElement.style.setProperty(
+                "--active-color",
+                `var(--p1-color)`
+            );
+            document.documentElement.style.setProperty(
+                "--active-marker",
+                `var(--p1-marker)`
+            );
         };
 
-        const setCellP1Props = function (cell) {
-            cell.textContent = player1.marker;
+        const setCellProps = function (cell, player) {
+            cell.textContent = player.marker;
             cell.classList.remove("empty");
-            cell.classList.add("p1");
-            document.documentElement.style.setProperty('--active-color', 'var(--p2-color)');  
-            document.documentElement.style.setProperty('--active-marker', 'var(--p2-marker)');            
-        }
-
-        const setCellP2Props = function (cell) {
-            cell.textContent = player2.marker;
-            cell.classList.remove("empty");
-            cell.classList.add("p2");
-            document.documentElement.style.setProperty('--active-color', 'var(--p1-color)');  
-            document.documentElement.style.setProperty('--active-marker', 'var(--p1-marker)');   
-        }
+            cell.classList.add(`p${player.number}`);
+            document.documentElement.style.setProperty(
+                "--active-color",
+                `var(--p${player.number == 1 ? 2 : 1}-color)`
+            );
+            document.documentElement.style.setProperty(
+                "--active-marker",
+                `var(--p${player.number == 2 ? 1 : 2}-marker)`
+            );
+        };
 
         const makeMove = function (cell) {
-            if (cell.textContent !== EMPTY) return;
+            if (cell.textContent !== EMPTY || gameOver) return;
 
-            if(p1Turn) {
-                setCellP1Props(cell);
-            } else {
-                setCellP2Props(cell);
+            const player = p1Turn ? player1 : player2;
+            setCellProps(cell, player);
+
+            let gameState = evaluateScore(
+                cell.dataset.row,
+                cell.dataset.col,
+                player.marker
+            );
+
+            if (gameState === 1) {
+                const playerScore = document.querySelector(
+                    `.score__p${player.number}`
+                );
+                playerScore.textContent = Number(playerScore.textContent) + 1;
+                gameOver = true;
+            } else if (gameState === -1) {
+                const draw = document.querySelector(".score__draw");
+                draw.textContent = Number(draw.textContent) + 1;
+                gameOver = true;
             }
-
-
-
-            // TODO let gameState = ...
-            evaluateScore(cell.dataset.row, cell.dataset.col);
-            // checkTie();
-
-            //TODO if gameState ... end game
-            //  output result
 
             p1Turn = !p1Turn;
         };
 
-        const evaluateScore = function (row, col) {
-            console.log(`Evaluating change at row: ${row} col: ${col}`);
-            // check row
-            // check col
-            // if diag check diag
-            // return true or false
+        /**
+         * Called after a move has been made.
+         * Checks row, col and if applicable diag and anti-diag where the move was made.
+         *
+         * @param row
+         * @param col
+         * @returns whether the last move is a winning one
+         */
+        const evaluateScore = function (row, col, marker) {
+            row = Number(row);
+            col = Number(col);
+
+            const rowWin = rows[row].every((c) => c.textContent === marker);
+            const colWin = cols[col].every((c) => c.textContent === marker);
+            const diagWin =
+                row === col
+                    ? diag.every((c) => c.textContent === marker)
+                    : false;
+            const adiagWin =
+                row + col === boardSize - 1
+                    ? adiag.every((c) => c.textContent === marker)
+                    : false;
+
+            let hasWon = rowWin || colWin || diagWin || adiagWin;
+
+            if (hasWon) {
+                return 1;
+            } else if (isDraw()) {
+                return -1;
+            } else {
+                return 0;
+            }
         };
 
-        return { createGrid };
+        /**
+         * Checks if all cells have a value when a winner is not present
+         */
+        const isDraw = function () {
+            return [...board.children].every((c) => c.textContent !== EMPTY);
+        };
+
+        return { createBoard, resetBoard };
     })(cellFactory);
 
-    const gameGrid = gameManager.createGrid();
-
-    const content = document.querySelector(".content");
-    if (content) {
-        content.appendChild(gameGrid);
-    } else {
-        throw ReferenceError(
-            "Container with class '.content' not found! \n Cannot append game grid."
-        );
-    }
-
-    return { gameGrid, cellFactory, gameManager };
+    return {
+        createBoard: gameManager.createBoard,
+        resetBoard: gameManager.resetBoard,
+    };
 })();
+
+const board = tictactoe.createBoard(3);
+
+const content = document.querySelector(".content");
+const scoreBoard = document.querySelector(".scoreBoard");
+content.insertBefore(board, scoreBoard);
+
+const resetButton = document.querySelector(".reset__button");
+resetButton.addEventListener("click", tictactoe.resetBoard);
