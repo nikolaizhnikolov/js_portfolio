@@ -227,15 +227,17 @@ const tictactoe = (function () {
             return [...board.children].every((c) => c.textContent !== EMPTY);
         };
 
-        return { createBoard };
+        return { createBoard, resetBoard};
     })(cellFactory);
 
-    return { createBoard: gameManager.createBoard };
+    return { createBoard: gameManager.createBoard, resetBoard: gameManager.resetBoard};
 })();
 
 const board = tictactoe.createBoard(3);
 
 const content = document.querySelector(".content");
 const scoreBoard = document.querySelector(".scoreBoard");
-
 content.insertBefore(board, scoreBoard);
+
+const resetButton = document.querySelector(".reset__button");
+resetButton.addEventListener("click", tictactoe.resetBoard);
