@@ -69,6 +69,7 @@ const tictactoe = (function () {
         const player1 = player(X, BLUE, 1);
         const player2 = player(O, RED, 2);
         let p1Turn = true;
+        let gameOver = false;
 
         let board = null;
         let boardSize = 3;
@@ -128,6 +129,7 @@ const tictactoe = (function () {
 
         const resetBoard = function () {
             p1Turn = true;
+            gameOver = false;
 
             board.childNodes.forEach((cell) => {
                 cell.textContent = EMPTY;
@@ -159,7 +161,7 @@ const tictactoe = (function () {
         };
 
         const makeMove = function (cell) {
-            if (cell.textContent !== EMPTY) return;
+            if (cell.textContent !== EMPTY || gameOver) return;
 
             const player = p1Turn ? player1 : player2;
             setCellProps(cell, player);
@@ -173,9 +175,11 @@ const tictactoe = (function () {
             if (gameState === 1) {
                 const playerScore = document.querySelector(`.score__p${player.number}`);
                 playerScore.textContent = Number(playerScore.textContent) + 1;
+                gameOver = true;
             } else if (gameState === -1) {
                 const draw = document.querySelector(".score__draw")
                 draw.textContent = Number(draw.textContent) + 1;
+                gameOver = true;
             }
 
             p1Turn = !p1Turn;
