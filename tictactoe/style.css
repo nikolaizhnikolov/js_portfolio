@@ -16,7 +16,7 @@
 body {
     display: grid;
     grid-template: 100px minmax(300px, 500px) 100px / minmax(400px, 1fr);
-    gap: 50px;
+    gap: 25px;
     height: 100vh;
     width: 100vw;
     min-height: 400px;
@@ -51,7 +51,8 @@ header {
 /* ------------------------------------ */
 .content {
     display: grid;
-    grid-template: minmax(150px, 100%) / minmax(150px, 100%);
+    grid-template: minmax(150px, 100%) / 150px 1fr 150px;
+    column-gap: 10px;
     justify-items: center;
 }
 
@@ -99,6 +100,47 @@ header {
 
 .cell.p2 {
     color: var(--p2-color);
+}
+
+.scoreBoard {
+    width: 100px;
+    align-self: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.scoreBoard__score {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 36px;
+}
+
+.score__p1 {
+    color: var(--p1-color);
+}
+
+.score__p2 {
+    color: var(--p2-color);
+}
+
+.reset__button {
+    background: none;
+    font-size: 20px;
+    border: solid black;
+    border-radius: 4px;
+    padding: 12px 18px;
+    cursor: pointer;
+    color:white;
+    background-color: #040F0F;
+    transition: transform 0.3s;
+}
+
+.reset__button:hover {
+    transform: scale(1.1);
 }
 
 /* ------------------------------------ */

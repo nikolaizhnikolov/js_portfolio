@@ -28,8 +28,8 @@ const tictactoe = (function () {
     };
 
     /**
-     * Naive implementation of a cell factory.
-     * Assumes a 3x3 game board.
+     * Cell factory.
+     * Assumes a default 3x3 game board.
      */
     const cellFactory = (function () {
         const factory = Object.create(null);
@@ -59,7 +59,7 @@ const tictactoe = (function () {
     /**
      * Manager for playing Tic Tac Toe.
      *
-     * Use createBoard() to return an Array of HTMLElements
+     * Use createBoard() to return a full game board to
      * to attach to your container. The manager will automatically attach
      * onclick events to evalute game state whenever one of the cells is clicked.
      *
@@ -236,10 +236,6 @@ const tictactoe = (function () {
 const board = tictactoe.createBoard(3);
 
 const content = document.querySelector(".content");
-if (content) {
-    content.appendChild(board);
-} else {
-    throw ReferenceError(
-        "Container with class '.content' not found! \n Cannot append game board."
-    );
-}
+const scoreBoard = document.querySelector(".scoreBoard");
+
+content.insertBefore(board, scoreBoard);
