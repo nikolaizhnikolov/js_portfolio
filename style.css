@@ -3,49 +3,61 @@
 body {
     display: flex;
     flex-direction: column;
+    /* gap: 20px; */
     align-items: center;
     font-family: 'Roboto', sans-serif;
+    /* width: 100vw; */
 }
 
-.header {
-    font-size: 24px;
-    font-weight: bold;
+header {
+    font-size: 40px;
+    text-decoration: underline;
+    text-underline-offset: 12px;
+    padding: 24px;
 }
 
 .content {
-    margin-top: 15px;
+    width: 100%;
 }
 
 .projects {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    column-gap: 50px;
+    justify-content: center;
+    align-items: center;
 }
 
 .project {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
 }
 
 .project__label {
-    font-size: 20px;
+    font-weight: normal;
 }
 
-.project > a {
+.project__link {
+    width: 250px;
+    height: 250px;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px -2px;
     
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
+
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .project__image {
-    width: 200px;
+    width: 100%;
 }
 
-.project > a:hover {
+.project__link:hover {
     transform: scale(1.05);
 }
 

@@ -6,3 +6,5 @@
 ### The Odin Project
  - Rock Paper Scissors
  - Etch-a-Sketch
+ - Calculator
+ - Tic Tac Toe
