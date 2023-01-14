@@ -1,22 +1,4 @@
-/*TODO:
-
-Paddings and margin
-BG color
-text alignment
-card gaps
-rounded edges
-book.read - add a tick/x to the card
-
-Add a “NEW BOOK” button that brings up a 
-    form allowing users to input the details for the new book
-Read up on the event.preventDefault documentation
-
-Add a button on each book to remove it from the library.
-You will need to associate your DOM elements with the 
-    actual book objects in some way. One easy solution is giving 
-    them a data-attribute that corresponds to the index of the library array.
-
-*/
+import { footer } from "../footer";
 
 const library = (function () {
     let lib = [];
@@ -124,3 +106,5 @@ const library = (function () {
         lib.forEach((book) => addBookCard(book));
     })();
 })();
+
+document.body.appendChild(footer);
