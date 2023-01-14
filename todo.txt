@@ -1,0 +1,1 @@
+move footer as a JS component for all projects
