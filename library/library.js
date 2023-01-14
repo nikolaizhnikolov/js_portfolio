@@ -1,4 +1,4 @@
-import { footer } from "../footer";
+// import { footer } from "../footer";
 
 const library = (function () {
     let lib = [];
@@ -107,4 +107,4 @@ const library = (function () {
     })();
 })();
 
-document.body.appendChild(footer);
+// document.body.appendChild(footer);
